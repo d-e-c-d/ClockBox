@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-gray-100 min-h-screen">
-    <div class="pt-6">
+  <div class="bg-gray-100 p-3">
+    <div class="pt-5">
       <header class="max-w-screen-2xl mx-auto flex items-center justify-between bg-white p-4 shadow-2xl rounded-3xl">
         <div class="flex items-center">
           <div class="text-4xl font-bold text-blue-700">ClockBox</div>
