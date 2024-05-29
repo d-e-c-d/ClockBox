@@ -26,14 +26,14 @@
         Export
       </button>
     </div>
-    <div ref="chart" class="flex justify-between">
+    <div ref="chartRef" class="flex justify-between">
       <Line :data="attendanceChartData" :options="chartOptions" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import {nextTick, ref} from 'vue';
 import { Line } from 'vue-chartjs';
 import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, PointElement, LinearScale, CategoryScale } from 'chart.js';
 import JsPDF from 'jspdf';
@@ -44,6 +44,7 @@ ChartJS.register(Title, Tooltip, Legend, LineElement, PointElement, LinearScale,
 const chartRef = ref(null);
 
 const exportChart = async () => {
+  await nextTick();
   const chartElement = chartRef.value;
   if (chartElement) {
     const canvas = await html2canvas(chartElement);

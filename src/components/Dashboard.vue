@@ -35,7 +35,7 @@
                               <path d='M4.72 6.676V6.412H10.36V6.676H4.72ZM7.672 9.496H7.408V3.7H7.672V9.496Z' fill='#43900C'/>
                               </svg>"
                     :title="'Total Employees'"
-                    :value="totalEmployees"
+                    :value="String(totalEmployees)"
                     :change="employeeChange" />
 
                 <StatCard
@@ -45,7 +45,7 @@
                               <path d='M3 10L5.5 7.5L7.5 9.5L10.75 6.25M11 9V6H8' stroke='#43910C'/>
                             </svg>"
                     :title="'On Time'"
-                    :value="onTime"
+                    :value="String(onTime)"
                     :change="onTimeChange" />
 
                 <StatCard
@@ -55,7 +55,7 @@
                               <path d='M12 6L9.5 8.5L7.5 6.5L4.25 9.75M4 7V10H7' stroke='#910C0C'/>
                               </svg>"
                     :title="'Absent'"
-                    :value="absent"
+                    :value="String(absent)"
                     :change="absentChange" />
 
               </div>
@@ -67,7 +67,7 @@
                               <path d='M12 6L9.5 8.5L7.5 6.5L4.25 9.75M4 7V10H7' stroke='#910C0C'/>
                               </svg>"
                     :title="'Late Arrival'"
-                    :value="lateArrival"
+                    :value="String(lateArrival)"
                     :change="lateArrivalChange" />
 
                 <StatCard
@@ -77,7 +77,7 @@
                               <path d='M3 10L5.5 7.5L7.5 9.5L10.75 6.25M11 9V6H8' stroke='#43910C'/>
                             </svg>"
                     :title="'Early Departures'"
-                    :value="earlyDepartures"
+                    :value="String(earlyDepartures)"
                     :change="earlyDeparturesChange" />
 
                 <StatCard
@@ -87,7 +87,7 @@
                               <path d='M3 10L5.5 7.5L7.5 9.5L10.75 6.25M11 9V6H8' stroke='#0054E8'/>
                             </svg>"
                     :title="'Time-off'"
-                    :value="timeOff"
+                    :value="String(timeOff)"
                     :change="timeOffChange" />
 
               </div>

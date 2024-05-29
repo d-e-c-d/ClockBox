@@ -27,7 +27,10 @@
       </button>
     </div>
 
-    <Bar :data="weeklyAttendanceChartData" :options="chartOptions"/>
+    <div ref="chartRef" class="flex justify-between">
+      <Bar :data="weeklyAttendanceChartData" :options="chartOptions"/>
+    </div>
+
   </div>
 </template>
 
