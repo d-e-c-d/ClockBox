@@ -23,6 +23,7 @@ const props = defineProps({
   title: String,
   img: String,
 });
+
 </script>
 
 <style scoped>
