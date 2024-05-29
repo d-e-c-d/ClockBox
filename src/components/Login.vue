@@ -56,12 +56,12 @@
             </div>
           </div>
           <div class="flex justify-center mb-3">
-            <button
+            <router-link to="/dashboard"
                 type="submit"
-                class="w-full md:w-52 bg-blue-700 text-white py-2 px-4 rounded-md hover:bg-blue-900"
+                class="w-full md:w-52 bg-blue-700 text-white py-2 px-4 text-center rounded-md hover:bg-blue-900"
             >
               Connexion
-            </button>
+            </router-link>
           </div>
           <div class="mt-4 text-center cursor-pointer">
             <a @click="openModal" class="text-blue-500 hover:underline">Mot de passe oublié ?</a>

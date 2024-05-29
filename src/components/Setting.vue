@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-100">
     <Header />
-    <div class="min-h-screen flex flex-col">
+    <div class="flex flex-col">
       <div class="flex flex-1">
         <div class="flex flex-col justify-center items-center">
           <Sidebar />
@@ -79,3 +79,12 @@ const openLogout = () => {
 };
 
 </script>
+
+<style>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+</style>

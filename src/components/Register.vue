@@ -87,12 +87,12 @@
           </div>
           <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-4">{{ error }}</p>
           <div class="flex justify-center mb-3">
-            <button
+            <router-link to="/dashboard"
                 type="submit"
-                class="w-full md:w-52 bg-blue-700 text-white py-2 px-4 rounded-md hover:bg-blue-900"
+                class="w-full md:w-52 bg-blue-700 text-white py-2 px-4 text-center rounded-md hover:bg-blue-900"
             >
               Inscription
-            </button>
+            </router-link>
           </div>
           <div class="mt-4 text-center text-xs">
             <p>
