@@ -1,6 +1,5 @@
 <template>
-  <div class="bg-gray-100 pt-24">
-    <div>
+  <div class="bg-gray-100 p-3 pt-24">
       <header class="fixed top-0 left-24 right-0 z-50 max-w-screen-2xl mx-auto flex items-center justify-between bg-white p-4 shadow-2xl rounded-3xl">
         <div class="flex items-center">
           <div class="text-4xl font-bold text-blue-700">ClockBox</div>
@@ -61,7 +60,7 @@
                 class="group inline-flex items-center rounded-full bg-gray-100 hover:bg-gray-200 p-2 focus:outline-none"
             >
               <img
-                  src="../components/icons/Profil.svg"
+                  src="@/components/icons/Profil.svg"
                   alt="Admin Profile"
                   class="w-10 h-10 rounded-full"
               />
@@ -79,11 +78,11 @@
               >
                 <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
                   <div class="relative grid gap-8 bg-white p-7 lg:grid-cols-">
-                    <router-link
+                    <a
                         @click.prevent="handleItemClick(item)"
                         v-for="item in profil"
                         :key="item.name"
-                        :to="item.href"
+                        :href="item.href"
                         class="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-blue-500/50"
                     >
                       <div
@@ -99,20 +98,19 @@
                           {{ item.description }}
                         </p>
                       </div>
-                    </router-link>
+                    </a>
                   </div>
                 </div>
               </PopoverPanel>
             </transition>
           </Popover>
           <div>
-            <span class="block text-gray-700">Admin</span>
-            <span class="block text-gray-400 text-sm">darrylk97@gmail.com</span>
+            <span class="block text-gray-700">User</span>
+            <span class="block text-gray-400 text-sm">charles.dikoume@2027.ucac-icam.com</span>
           </div>
         </div>
       </header>
     </div>
-  </div>
 
   <!-- LogOut -->
   <transition name="fade">
@@ -135,6 +133,7 @@
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import {ref} from "vue";
+import Header from "@/components/Header.vue";
 
 const isLogout = ref(false);
 
@@ -159,7 +158,7 @@ const profil = [
   {
     name: 'Leave requests',
     description: 'Manage the employee leave requests list.',
-    href: '',
+    href: '##',
     icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\n' +
         '<path d="M3 19.5V6C3 5.80109 3.07902 5.61032 3.21967 5.46967C3.36032 5.32902 3.55109 5.25 3.75 5.25H8.75C8.91228 5.25 9.07018 5.30263 9.2 5.4L11.8 7.35C11.9298 7.44737 12.0877 7.5 12.25 7.5H18.75C18.9489 7.5 19.1397 7.57902 19.2803 7.71967C19.421 7.86032 19.5 8.05109 19.5 8.25V10.5" stroke="#1E3A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>\n' +
         '<path d="M3 19.5L5.82906 11.0128C5.87884 10.8635 5.97434 10.7336 6.10204 10.6416C6.22974 10.5495 6.38316 10.5 6.54057 10.5H21.4594C21.5783 10.5 21.6954 10.5282 21.8012 10.5824C21.907 10.6365 21.9984 10.7151 22.0679 10.8115C22.1373 10.9079 22.1829 11.0194 22.2009 11.1369C22.2188 11.2544 22.2085 11.3744 22.1709 11.4872L19.5 19.5H3Z" stroke="#1E3A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>\n' +
@@ -169,7 +168,7 @@ const profil = [
   {
     name: 'Logout',
     description: 'Logout to leave us.',
-    href: '',
+    href: '##',
     icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\n' +
         '  <path d="M14.25 7.5C15.4926 7.5 16.5 6.49264 16.5 5.25C16.5 4.00736 15.4926 3 14.25 3C13.0074 3 12 4.00736 12 5.25C12 6.49264 13.0074 7.5 14.25 7.5Z" stroke="#1E3A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>\n' +
         '  <path d="M5.25 9.52027C5.25 9.52027 8.25 6.74987 12.75 10.2703C17.4814 13.9717 20.25 12.5203 20.25 12.5203" stroke="#1E3A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>\n' +

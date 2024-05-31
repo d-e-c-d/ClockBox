@@ -5,7 +5,7 @@
         Weekly Attendance
       </p>
       <button
-          class="bg-blue-700 hover:bg-blue-900 text-white px-2 rounded text-xs flex items-center"
+          class="bg-orange-400 hover:bg-orange-600 text-white px-2 rounded text-xs flex items-center"
           @click="exportChart"
       >
         <svg
@@ -65,12 +65,12 @@ const exportChart = async () => {
 };
 
 const weeklyAttendanceChartData = {
-  labels: ['Sales', 'IT', 'Marketing', 'Legal', 'HR',],
+  labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',],
   datasets: [
     {
-      label: 'Employer Rate',
-      data: [40, 60, 86, 60, 99,],
-      backgroundColor: '#0054E8',
+      label: 'Daily Work Time ',
+      data: [86, 80, 95, 55, 65,],
+      backgroundColor: '#FF8D06',
       borderWidth: 1,
       barThickness: 20,
       borderRadius: 8,

@@ -1,6 +1,6 @@
 <template>
-  <div class="max-w-40 mx-auto ml-5 relative">
-    <div class="bg-white rounded-3xl shadow-2xl p-6">
+  <div class="max-w-40 mx-auto mr-40 relative flex flex-col justify-center items-center">
+    <div class="bg-white rounded-3xl shadow-2xl p-6 fixed top-80 left-12">
       <header class="flex items-center justify-center mb-6">
         <button class="flex w-10 h-10 items-center justify-center bg-blue-600 rounded-3xl hover:bg-blue-900">
           <svg
