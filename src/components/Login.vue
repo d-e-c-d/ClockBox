@@ -55,13 +55,14 @@
               <img :src="showPassword ? 'public/unslash.png' : 'public/slash.png'" alt="Toggle Password Visibility" class="object-contain h-4 w-6">
             </div>
           </div>
+          <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-4">{{ error }}</p>
           <div class="flex justify-center mb-3">
-            <router-link to="/dashboard"
+            <button
                 type="submit"
                 class="w-full md:w-52 bg-blue-700 text-white py-2 px-4 text-center rounded-md hover:bg-blue-900"
             >
               Connexion
-            </router-link>
+            </button>
           </div>
           <div class="mt-4 text-center cursor-pointer">
             <a @click="openModal" class="text-blue-500 hover:underline">Mot de passe oublié ?</a>
@@ -141,16 +142,20 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import { useRouter } from "vue-router";
   import {
     Disclosure,
     DisclosureButton,
     DisclosurePanel
   } from '@headlessui/vue';
   import { ChevronUpIcon } from '@heroicons/vue/20/solid';
+  import users from '../../Simulation_Backend/identifiants.json';
 
+  const router = useRouter();
   const isOpen = ref(false);
   const email = ref('');
   const password = ref('');
+  const error = ref('');
 
   const closeModal = () => {
     isOpen.value = false;
@@ -185,29 +190,20 @@
     return email.charAt(0) + maskedPart + email.substring(atIndex); // Concatenate masked and unmasked parts
   };
 
-  const login = async () => {
-    console.log('Email:', email.value);
-    console.log('Password:', password.value);
+  const login = () => {
 
-    const payload = {
-      email: email.value,
-      password: password.value,
-    };
+      const user = users.find((u: { email: string }) => u.email === email.value);
 
-    try {
-      const response = await fetch('http://localhost:5000/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
+      if (!user) {
+        error.value = 'Aucun utilisateur trouvé !';
+        return false;
 
-      const data = await response.json();
-      console.log('%cRéponse du serveur:', 'color: green;', data);
-    } catch (error) {
-      console.error('%cErreur lors de la connexion:', 'color: red;', error);
-    }
+      } else if (user.password !== password.value) {
+        error.value = 'Mot de passe incorrect !';
+        return false;
+      } else {
+        router.push('/dashboard')
+      }
   };
 </script>
 
