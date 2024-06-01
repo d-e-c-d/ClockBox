@@ -95,7 +95,6 @@
         </div>
       </div>
     </transition>
-
     <!-- Terms and Conitions -->
     <transition name="fade">
       <div v-if="termsOpen" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
