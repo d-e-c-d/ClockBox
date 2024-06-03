@@ -7,7 +7,7 @@
           <Sidebar />
         </div>
 
-        <div class="p-12 ml-24 mt-4 space-y-10">
+        <div class="p-12 ml-28 mt-4 space-y-10">
           <div class="grid grid-cols-3 mr-36">
 
             <!-- Card containing time and date -->

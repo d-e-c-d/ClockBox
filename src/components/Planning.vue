@@ -7,6 +7,7 @@
           <Sidebar />
         </div>
 
+
       </div>
     </div>
   </div>
@@ -14,8 +15,7 @@
 
 
 <script setup lang="ts">
-import Sidebar from "@/components/Employee/E-Sidebar.vue";
-import Header from "../Header.vue";
-
+import Sidebar from "@/components/Sidebar.vue";
+import Header from "@/components/Header.vue";
 
 </script>

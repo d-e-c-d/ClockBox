@@ -33,7 +33,7 @@
         </div>
         <form @submit.prevent="register">
           <div class="mb-4">
-            <label for="user_nom" class="block text-gray-700">Nom</label>
+            <label for="user_nom" class="block text-gray-700">Nom<span class="text-red-600">*</span></label>
             <input
                 v-model="user_nom"
                 type="text"
@@ -53,7 +53,7 @@
             />
           </div>
           <div class="mb-4">
-            <label for="email" class="block text-gray-700">Email</label>
+            <label for="email" class="block text-gray-700">Email<span class="text-red-600">*</span></label>
             <input
                 v-model="email"
                 type="email"
@@ -63,7 +63,7 @@
             />
           </div>
           <div class="mb-6 relative">
-            <label for="password" class="block text-gray-700">Mot de passe</label>
+            <label for="password" class="block text-gray-700">Mot de passe<span class="text-red-600">*</span></label>
             <input
                 v-model="password"
                 :type="showPassword ? 'texte' : 'password'"
@@ -87,12 +87,12 @@
           </div>
           <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-4">{{ error }}</p>
           <div class="flex justify-center mb-3">
-            <router-link to="/dashboard"
-                type="submit"
-                class="w-full md:w-52 bg-blue-700 text-white py-2 px-4 text-center rounded-md hover:bg-blue-900"
+            <button
+                         type="submit"
+                         class="w-full md:w-52 bg-blue-700 text-white py-2 px-4 text-center rounded-md hover:bg-blue-900"
             >
               Inscription
-            </router-link>
+            </button>
           </div>
           <div class="mt-4 text-center text-xs">
             <p>
@@ -155,79 +155,62 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
-    import {
-      Disclosure,
-      DisclosureButton,
-      DisclosurePanel
-    } from '@headlessui/vue';
-    import {ChevronUpIcon} from "@heroicons/vue/20/solid";
+import { ref } from 'vue';
+import { useRouter } from "vue-router";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel
+} from '@headlessui/vue';
+import {ChevronUpIcon} from "@heroicons/vue/20/solid";
 
-      //Terms and conditions
-      const termsOpen = ref(false)
+//Terms and conditions
+const termsOpen = ref(false)
 
-      const openTerms = () => {
-        termsOpen.value = true;
-      }
-      const closeTerms = () => {
-        termsOpen.value = false;
-      };
+const openTerms = () => {
+  termsOpen.value = true;
+}
+const closeTerms = () => {
+  termsOpen.value = false;
+};
 
-      // Affichage mot de passe
-      const showPassword = ref(false);
-      const togglePassword = () => {
-        showPassword.value = !showPassword.value;
-      };
+// Affichage mot de passe
+const showPassword = ref(false);
+const togglePassword = () => {
+  showPassword.value = !showPassword.value;
+};
 
-      const user_nom = ref('');
-      const user_prenom = ref('');
-      const email = ref('');
-      const password = ref('');
-      const confirm_password = ref('');
-      const error = ref('');
+const router = useRouter();
+const user_nom = ref('');
+const user_prenom = ref('');
+const email = ref('');
+const password = ref('');
+const confirm_password = ref('');
+const error = ref('');
 
-      const register = async () => {
-        if (password.value !== confirm_password.value) {
-          error.value = 'Les mots de passe ne correspondent pas !';
-        } else if (!validatePassword(password.value)) {
-          error.value = 'Le mot de passe doit contenir au moins une majuscule, un chiffre et un caractère spécial !';
-        } else if (password.value.length < 8 || password.value.length > 25) {
-              error.value = 'Le mot de passe doit contenir 8-25 caractères !';
-        } else if (user_nom.value.length < 2 || user_prenom.value.length < 2) {
-              error.value = 'Nom ou Prenom trop court !';
-        } else {
-          error.value = '';
-          console.log('Nom:', user_nom.value);
-          console.log('Prenom:', user_prenom.value);
-          console.log('Email:', email.value);
-          console.log('Password:', password.value);
+const register = () => {
+  if (password.value !== confirm_password.value) {
+    error.value = 'Les mots de passe ne correspondent pas !';
+  } else if (!validatePassword(password.value)) {
+    error.value = 'Le mot de passe doit contenir au moins une majuscule, un chiffre et un caractère spécial !';
+  } else if (password.value.length < 8 || password.value.length > 25) {
+    error.value = 'Le mot de passe doit contenir 8-25 caractères !';
+  } else if (user_nom.value.length < 2 || user_prenom.value.length < 2) {
+    error.value = 'Nom ou Prenom trop court !';
+  } else {
+    const user1 = users.find((u: { email: string }) => u.email === email.value);
+    const user2 = empl.find((u: { email: string }) => u.email === email.value);
 
-          const payload = {
-            user_nom: user_nom.value,
-            user_prenom: user_prenom.value,
-            email: email.value,
-            password: password.value,
-          };
-
-          try {
-            const reponse = await fetch('http://localhost:5000/login', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(payload),
-            });
-
-            const data = await reponse.json();
-            console.log('%cRéponse du serveur:', 'color: green;', data);
-          } catch (error) {
-            console.error('%cErreur lors de la connexion:', 'color: red;', error);
-          }
-        }
-      };
-      // Fonction pour valider la complexité du mot de passe
-      const validatePassword = (password: string): boolean => {
-        // Vérifie la présence d'au moins une lettre, un chiffre et un caractère spécial
-        return /^(?=.*[A-Z])(?=.*\d)(?=.*[@/_|.#~=+*-]).*$/.test(password);
-      };
+    if (user1 || user2) {
+      error.value = 'Adresse déja utilisée. Connectez-vous !';
+    } else {
+      router.push('/dashboard')
+    }
+  }
+};
+// Fonction pour valider la complexité du mot de passe
+const validatePassword = (password: string): boolean => {
+  // Vérifie la présence d'au moins une lettre, un chiffre et un caractère spécial
+  return /^(?=.*[A-Z])(?=.*\d)(?=.*[@/_|.#~=+*-]).*$/.test(password);
+};
 </script>

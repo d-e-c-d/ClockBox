@@ -4,8 +4,8 @@ import Register from '../components/Register.vue';
 import Settings from "../components/Setting.vue";
 import Dashboard from "../components/Dashboard.vue";
 import Pointing from "../components/Pointing.vue";
-// import Employees from "../components/Employees.vue";
-// import Planning from "../components/Planning.vue";
+import Employees from "../components/Employees.vue";
+import Planning from "../components/Planning.vue";
 
 import EDashbord from "../components/Employee/E-Dashbord.vue";
 import EPointing from "@/components/Employee/E-Pointing.vue";
@@ -19,8 +19,8 @@ const routes = [
     { path: '/settings', component: Settings, name: 'ClockBox - AdminSettings' },
     { path: '/dashboard', component: Dashboard, name: 'ClockBox - AdminDashboard' },
     { path: '/pointing', component: Pointing, name: 'ClockBox - Pointing' },
-    // { path: '/employees', component: Employees, name: 'ClockBox - Employees' },
-    // { path: '/planning', component: Planning, name: 'ClockBox - Planning' },
+    { path: '/employees', component: Employees, name: 'ClockBox - Employees' },
+    { path: '/planning', component: Planning, name: 'ClockBox - Planning' },
 
     //Employee
     { path: '/edashboard', component: EDashbord, name: 'ClockBox - EDashbord' },

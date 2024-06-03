@@ -148,7 +148,6 @@
     DisclosurePanel
   } from '@headlessui/vue';
   import { ChevronUpIcon } from '@heroicons/vue/20/solid';
-  import users from '../../Simulation_Backend/identifiants.json';
 
   const router = useRouter();
   const isOpen = ref(false);
@@ -191,15 +190,13 @@
 
   const login = () => {
 
-      const user = users.find((u: { email: string }) => u.email === email.value);
+      const user1 = users.find((u: { email: string }) => u.email === email.value);
+      const user2 = empl.find((u: { email: string }) => u.email === email.value);
 
-      if (!user) {
+    if (!user1 || !user2) {
         error.value = 'Aucun utilisateur trouvé !';
-        return false;
-
-      } else if (user.password !== password.value) {
+      } else if (user1.password !== password.value || user2.password !== password.value) {
         error.value = 'Mot de passe incorrect !';
-        return false;
       } else {
         router.push('/dashboard')
       }
