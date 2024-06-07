@@ -51,7 +51,7 @@
   <transition name="fade">
     <div v-if="isGeneral" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div class="w-full px-4 pt-16">
-        <div class="mx-auto w-full max-w-md rounded-2xl bg-white p-8">
+        <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
           <div class="flex justify-between pb-6">
             <h3 class="text-2xl bold font-bold text-blue-900 "><strong>General</strong></h3>
             <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeGeneral">
@@ -72,16 +72,22 @@
               />
             </DisclosureButton>
             <DisclosurePanel class="px-4 pb-2 pt-4 text-sm text-gray-500">
-              <strong>Name :</strong>
-              <br>
-              <br>
-              <strong>Phone Number :</strong>
-              <br>
-              <br>
-              <strong>Email :</strong>
-              <br>
-              <br>
-              <strong>Password :</strong>
+              <div class="flex justify-between">
+                <div>
+                  <strong>Name :</strong>
+                  <br>
+                  <br>
+                  <strong>Phone Number :</strong>
+                  <br>
+                  <br>
+                </div>
+                <div class="mr-32">
+                  <strong>Email :</strong>
+                  <br>
+                  <br>
+                  <strong>Password :</strong>
+                </div>
+              </div>
             </DisclosurePanel>
           </Disclosure>
           <Disclosure as="div" class="mt-2" v-slot="{ open }">
@@ -94,26 +100,30 @@
                   class="h-5 w-5 text-purple-500"
               />
             </DisclosureButton>
-            <DisclosurePanel class="px-4 pb-2 pt-4 text-sm text-gray-500">
-              <strong>Entreprise Name :</strong>
-              <br>
-              <br>
-              <strong>Adress :</strong>
-              <br>
-              <br>
-              <strong>Employees :</strong>
-              <br>
-              <br>
-              <strong>Activity Area :</strong>
-              <br>
-              <br>
-              <strong>Work Days per Week :</strong>
-              <br>
-              <br>
-              <strong>Suscription :</strong>
+            <DisclosurePanel class="px-4 pb-5 pt-4 text-sm text-gray-500">
+              <div class="flex justify-between">
+                <div>
+                  <strong>Entreprise Name :</strong>
+                  <br>
+                  <br>
+                  <strong>Adress :</strong>
+                  <br>
+                  <br>
+                  <strong>Work Days per Week :</strong>
+                </div>
+                <div class="mr-28">
+                    <strong>Employees :</strong>
+                    <br>
+                    <br>
+                    <strong>Activity Area :</strong>
+                    <br>
+                    <br>
+                  <strong>Suscription :</strong>
+                </div>
+              </div>
             </DisclosurePanel>
           </Disclosure>
-            <button @click="closeGeneral" class="mt-4 inline-flex ml-40 justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+            <button @click="closeGeneral" class="mt-4 inline-flex ml-56 justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
               Edit
             </button>
         </div>
@@ -127,7 +137,7 @@
       <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full">
         <h3 class="text-2xl bold font-bold text-blue-900"><span>LogOut</span></h3>
         <p class="mt-2 text-sm text-gray-500">GoodBye!</p>
-        <router-link to="/index" class="mt-4 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+        <router-link to="/login" class="mt-4 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
           Exit
         </router-link>
         <button @click="closeLogout" class="mt-4 ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">

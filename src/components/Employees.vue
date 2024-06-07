@@ -11,12 +11,57 @@
             <div class="flex items-center justify-between mb-5 p-5">
               <h1 class="text-3xl font-light text-gray-800">Employees <br> Overview</h1>
               <div class="flex items-center">
-<!--                <button class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-xl mr-4 flex">-->
-<!--                  <svg width="20" height="27" viewBox="0 0 14 21" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-1">-->
-<!--                    <path d="M2.26097 3.90137H11.4925C11.5758 3.90137 11.6573 3.93796 11.727 4.00669C11.7968 4.07542 11.8519 4.17334 11.8856 4.28854C11.9193 4.40374 11.9301 4.53126 11.9168 4.6556C11.9035 4.77995 11.8666 4.89576 11.8105 4.98897L8.27791 10.8678C8.20599 10.9875 8.16614 11.1434 8.16614 11.3052V15.9075C8.16614 16.0146 8.14867 16.12 8.11528 16.2144C8.0819 16.3087 8.03362 16.3892 7.97475 16.4486L6.25557 18.1825C6.19084 18.2478 6.11561 18.2852 6.03791 18.2909C5.96021 18.2966 5.88294 18.2703 5.81435 18.2147C5.74577 18.1592 5.68843 18.0766 5.64845 17.9756C5.60847 17.8746 5.58736 17.7592 5.58736 17.6415V11.3052C5.58736 11.1434 5.54751 10.9875 5.47559 10.8678L1.94295 4.98897C1.88694 4.89576 1.85003 4.77995 1.83671 4.6556C1.82339 4.53126 1.83423 4.40374 1.86792 4.28854C1.9016 4.17334 1.95668 4.07542 2.02646 4.00669C2.09624 3.93796 2.17771 3.90137 2.26097 3.90137V3.90137Z" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>-->
-<!--                  </svg>-->
-<!--                  <p class="font-light">Filter</p>-->
-<!--                </button>-->
+                <Popover v-slot="{ open }" class="relative">
+                  <PopoverButton class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-xl mr-3 flex">
+                    <svg width="20" height="27" viewBox="0 0 14 21" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-1">
+                      <path d="M2.26097 3.90137H11.4925C11.5758 3.90137 11.6573 3.93796 11.727 4.00669C11.7968 4.07542 11.8519 4.17334 11.8856 4.28854C11.9193 4.40374 11.9301 4.53126 11.9168 4.6556C11.9035 4.77995 11.8666 4.89576 11.8105 4.98897L8.27791 10.8678C8.20599 10.9875 8.16614 11.1434 8.16614 11.3052V15.9075C8.16614 16.0146 8.14867 16.12 8.11528 16.2144C8.0819 16.3087 8.03362 16.3892 7.97475 16.4486L6.25557 18.1825C6.19084 18.2478 6.11561 18.2852 6.03791 18.2909C5.96021 18.2966 5.88294 18.2703 5.81435 18.2147C5.74577 18.1592 5.68843 18.0766 5.64845 17.9756C5.60847 17.8746 5.58736 17.7592 5.58736 17.6415V11.3052C5.58736 11.1434 5.54751 10.9875 5.47559 10.8678L1.94295 4.98897C1.88694 4.89576 1.85003 4.77995 1.83671 4.6556C1.82339 4.53126 1.83423 4.40374 1.86792 4.28854C1.9016 4.17334 1.95668 4.07542 2.02646 4.00669C2.09624 3.93796 2.17771 3.90137 2.26097 3.90137V3.90137Z" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="font-light">Filter</p>
+                  </PopoverButton>
+                  <transition
+                      enter-active-class="transition duration-200 ease-out"
+                      enter-from-class="translate-y-1 opacity-0"
+                      enter-to-class="translate-y-0 opacity-100"
+                      leave-active-class="transition duration-150 ease-in"
+                      leave-from-class="translate-y-0 opacity-100"
+                      leave-to-class="translate-y-1 opacity-0"
+                  >
+                    <PopoverPanel
+                        class="absolute right-0 z-50 mt-3 w-[200%] max-w-sm transform px-4 sm:px-0 lg:max-w-sm bg-white shadow-lg rounded-xl p-5"
+                    >
+                      <div class="flex">
+                        <div class="p-3">
+                          <input type="checkbox" id="logpom" v-model="logpom" class="mr-2" @click="filterCheckboxChange('logpom')">
+                          <label for="logpom" class="font-light">Logpom</label>
+                        </div>
+                        <div class="p-3">
+                          <input type="checkbox" id="bali" v-model="bali" class="mr-2" @click="filterCheckboxChange('bali')">
+                          <label for="bali" class="font-light">Bali</label>
+                        </div>
+                      </div>
+                      <div class="flex">
+                        <div class="p-3 mr-1">
+                          <input type="checkbox" id="yansoki" v-model="yansoki" class="mr-2" @click="filterCheckboxChange('yansoki')">
+                          <label for="yansoki" class="font-light">Yansoki</label>
+                        </div>
+                        <div class="p-3">
+                          <input type="checkbox" id="akwa" v-model="akwa" class="mr-2" @click="filterCheckboxChange('akwa')">
+                          <label for="akwa" class="font-light">Akwa</label>
+                        </div>
+                      </div>
+                      <div class="flex">
+                        <div class="p-3">
+                          <input type="checkbox" id="bonapriso" v-model="bonapriso" class="mr-2" @click="filterCheckboxChange('bonapriso')">
+                          <label for="bonapriso" class="font-light">Bonapriso</label>
+                        </div>
+                        <div class="p-3 -ml-3.5">
+                          <input type="checkbox" id="allsites" v-model="allsites" class="mr-2" @click="filterCheckboxChange">
+                          <label for="allsites" class="font-light">All sites</label>
+                        </div>
+                      </div>
+                    </PopoverPanel>
+                  </transition>
+                </Popover>
                 <div class="relative flex-1 max-w-md mx-auto mr-4">
                   <input
                       v-model="recherche"
@@ -104,7 +149,7 @@
                 </thead>
                 <tbody>
                 <tr
-                    class="border-b-gray-100 border-b-2 transform transition-transform duration-200 ease-in-out hover:scale-95 hover:shadow-3xl cursor-pointer"
+                    class="border-b-gray-100 border-b-2 hover:bg-blue-50 cursor-pointer"
                     v-for="employee in pageEmployees"
                     :key="employee.id">
                   <td class="text-gray-900 p-5">{{ employee.id }}</td>
@@ -298,11 +343,12 @@
 <script setup lang="ts">
 import Sidebar from "@/components/Sidebar.vue";
 import Header from "@/components/Header.vue";
-import {computed, ref} from "vue";
+import {computed, onBeforeMount, ref} from "vue";
 import {ChevronUpIcon} from "@heroicons/vue/20/solid";
 import {Disclosure, DisclosureButton, DisclosurePanel, Popover, PopoverButton, PopoverPanel} from "@headlessui/vue";
+import Employees from "@/components/Employees.vue";
 
-
+const recherche = ref('');
 const user_site = ref('');
 const user_role = ref('');
 const user_telephone= ref('');
@@ -314,9 +360,14 @@ const error = ref('');
 const thisPage = ref(false);
 const allPages = ref(false);
 const currentPage = ref(0);
+const bonapriso = ref(false);
+const logpom = ref(false);
+const akwa = ref(false);
+const bali = ref(false);
+const yansoki = ref(false);
+const allsites = ref(true);
 
-
-let employees = ([
+const employees = ref<Array>([
   {
     "id": 2341421,
     "employee": "Ahmed Rashdan",
@@ -787,24 +838,26 @@ let employees = ([
     "email": "Andnguy@nomdedomaine.com",
     "password": "AndJoh123#"
   }
-])
-localStorage.setItem('employees', JSON.stringify(employees));
-
+]);
+const saveEmployeesToLocalStorage = (employees: Employee[]) => {
+  localStorage.setItem('employees', JSON.stringify(employees));
+}
 
 // Search Employee
-const recherche = ref('');
 const searchemp = (query: String) => {
-  return employees.filter(employee => employee.employee.toLowerCase().includes(recherche.value.toLowerCase())
+  return employees.value.filter(employee =>
+      employee.employee.toLowerCase().includes(recherche.value.toLowerCase())
       || employee.role.toLowerCase().includes(recherche.value.toLowerCase())
       || employee.email.toLowerCase().includes(recherche.value.toLowerCase())
       || employee.site.toLowerCase().includes(recherche.value.toLowerCase())
       || employee.téléphone.toLowerCase().includes(recherche.value.toLowerCase()));
 }
 const employeesFiltres = computed(() => {
-  if (!recherche.value) {
-    return employees;
+  let filtered = employees.value;
+  if (recherche.value) {
+    filtered = searchemp(recherche.value);
   }
-  return searchemp(recherche.value);
+  return applyFilters(filtered);
 });
 const totalPages = computed(() => {
   return Math.ceil(employeesFiltres.value.length / 10);
@@ -829,14 +882,21 @@ const openNewemp = () => {
   isNewemp.value = true;
 };
 
-const employeesLocalStorage = localStorage.getItem('employees');
+const getEmployeesFromLocalStorage = () => {
+  if (localStorage.getItem('employees')){
+    employees.value = JSON.parse(localStorage.getItem('employees'))
+  }
+}
 
+onBeforeMount(()=>{
+  getEmployeesFromLocalStorage()
+})
 
+// Add Employee
 const addEmployee = () => {
-  let employeesArray = employeesLocalStorage ? JSON.parse(employeesLocalStorage) : [];
   let lastId = 0;
-  if (employees && employees.length > 0) {
-    lastId = employeesArray[employeesArray.length - 1].id;
+  if (employees.value && employees.value.length > 0) {
+    lastId = employees.value[employees.value.length - 1].id;
   }
 
   const newEmployee = {
@@ -850,8 +910,9 @@ const addEmployee = () => {
     password: password.value,
   };
 
-  employeesArray.push(newEmployee);
-  localStorage.setItem('employees', JSON.stringify(employeesArray));
+  employees.value.push(newEmployee);
+  saveEmployeesToLocalStorage(employees.value)
+  localStorage.setItem('employees', JSON.stringify(employees.value));
 
   closeNewemp();
   recherche.value = ('');
@@ -880,22 +941,19 @@ const generate = () => {
   email.value = generateEmail(user_name.value, matricule.value, '@nomdedomaine.com');
   password.value = generatePassword();
 };
-
 const generateMatricule = (site:string) => {
   let generatedMatricule = site.slice(0, 2) + generateRandomString(10);
-  if (employees && employees.some(emp => emp.matricule === generatedMatricule)) {
-    while (employees.some(emp => emp.matricule === generatedMatricule)) {
+  if (employees.value && employees.value.some(emp => emp.matricule === generatedMatricule)) {
+    while (employees.value.some(emp => emp.matricule === generatedMatricule)) {
       const randomNb = Math.floor(Math.random() * 1000);
       generatedMatricule = site.slice(0, 2) + randomNb.toString().padStart(4, '0');
     }
   }
   return generatedMatricule;
 };
-
 const generateEmail = (name:string, matricule:string, domain:string) => {
   return `${name.slice(0, 4)}${matricule.slice(-3)}${domain}`;
 };
-
 const generatePassword = () => {
   let password = '';
   const possibleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@/_|.#~=+*-';
@@ -910,7 +968,6 @@ const generatePassword = () => {
   }
   return password;
 };
-
 const generateRandomString = (length:number) => {
   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
@@ -949,11 +1006,10 @@ const downloadAllPagesCSV = async () => {
 };
 const getCurrentPageData = () => {
   const currentPage = 1;
-  const employees = JSON.parse(localStorage.getItem('employees') || '[]');
   const itemsPerPage = 10;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  return employees.slice(startIndex, endIndex);
+  return employees.value.slice(startIndex, endIndex);
 };
 const getAllPagesData = (): any[] => {
   return JSON.parse(localStorage.getItem('employees') || '[]');
@@ -976,6 +1032,60 @@ const downloadFile = (content: string, fileName: string) => {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+};
+
+// Filter
+const filterCheckboxChange = (selected: 'bonapriso' | 'yansoki' | 'bali' | 'akwa' | 'logpom' | 'allsites') => {
+  if (selected === 'logpom') {
+    allsites.value = false;
+    bonapriso.value = false;
+    yansoki.value = false;
+    bali.value = false;
+    akwa.value = false;
+  } else if ( selected === 'bonapriso') {
+    akwa.value = false;
+    logpom.value = false;
+    yansoki.value = false;
+    bali.value = false;
+    allsites.value = false;
+  } else if ( selected === 'akwa') {
+    bonapriso.value = false;
+    yansoki.value = false;
+    logpom.value = false;
+    bali.value = false;
+    allsites.value = false;
+  } else if (selected === 'bali') {
+    akwa.value = false;
+    logpom.value = false;
+    yansoki.value = false;
+    bonapriso.value = false;
+    allsites.value = false;
+  } else if (selected === 'yansoki') {
+    akwa.value = false;
+    logpom.value = false;
+    bali.value = false;
+    allsites.value = false;
+    bonapriso.value = false
+  } else {
+    akwa.value = false;
+    logpom.value = false;
+    bali.value = false;
+    bonapriso.value = false;
+    yansoki.value = false;
+  }
+};
+const applyFilters = (employees) => {
+  if (allsites.value) {
+    return employees;
+  }
+  return employees.filter(employee => {
+    if (bonapriso.value && employee.site === "Bonapriso") return true;
+    if (yansoki.value && employee.site === "Yansoki") return true;
+    if (bali.value && employee.site === "Bali") return true;
+    if (logpom.value && employee.site === "Logpom") return true;
+    if (akwa.value && employee.site === "Akwa") return true;
+    return false;
+  });
 };
 </script>
 
