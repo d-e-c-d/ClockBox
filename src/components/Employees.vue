@@ -164,7 +164,7 @@
                       {{ employee.matricule }}
                       <div class="mr-2"></div>
                       <div class="flex">
-                        <div class="transform transition-transform duration-200 ease-in-out hover:scale-105 hover:z-10" @click="openEditEmp">
+                        <div class="transform transition-transform duration-200 ease-in-out hover:scale-105 hover:z-10" @click="editEmployee(employee.id)">
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 15H9V12L18 3L21 6L12 15Z" stroke="#0842A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M15.75 5.25L18.75 8.25" stroke="#0842A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -497,7 +497,7 @@
           </Disclosure>
           <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
           <div class="mt-5 border-t-gray-100 border-t-2 mb-5"></div>
-          <button @click="addEmployee" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+          <button @click="saveEditedEmployee" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
             Save
           </button>
           <button @click="closeNewemp" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
@@ -536,6 +536,7 @@ const akwa = ref(false);
 const bali = ref(false);
 const yansoki = ref(false);
 const allsites = ref(true);
+const currentEditEmployee = ref('');
 
 const employees = ref<Array>([
   {
@@ -1129,9 +1130,42 @@ const delEmployee = (employeeId: number) => {
 
 // Edit Employee
 const editEmployee = (employeeId: number) => {
+  openEditEmp();
   const employeeIndex = employees.value.findIndex(employee => employee.id === employeeId);
-
+  if (employeeIndex !== -1) {
+    currentEditEmployee.value = employees.value[employeeIndex];
+    user_name.value = currentEditEmployee.value.employee;
+    user_role.value = currentEditEmployee.value.role;
+    user_telephone.value = currentEditEmployee.value.téléphone;
+    user_site.value = currentEditEmployee.value.site;
+    matricule.value = currentEditEmployee.value.matricule;
+    email.value = currentEditEmployee.value.email;
+    password.value = currentEditEmployee.value.password;
+  }
 }
+// Sauvegarder les modifications de l'employé édité
+const saveEditedEmployee = () => {
+  if (currentEditEmployee.value) {
+    currentEditEmployee.value.employee = user_name.value;
+    currentEditEmployee.value.role = user_role.value;
+    currentEditEmployee.value.téléphone = user_telephone.value;
+    currentEditEmployee.value.site = user_site.value;
+    currentEditEmployee.value.matricule = matricule.value;
+    currentEditEmployee.value.email = email.value;
+    currentEditEmployee.value.password = password.value;
+
+    saveEmployeesToLocalStorage(employees.value);
+    closeEditEmp();
+    recherche.value = ('');
+    error.value = ('');
+    user_name.value = '';
+    user_role.value = '';
+    user_telephone.value = '';
+    email.value = '';
+    user_site.value = '';
+    matricule.value = '';
+    password.value = '';  }
+};
 
 // Generate
 const generate = () => {
