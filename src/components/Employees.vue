@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <template>
   <div class="bg-gray-100 ">
     <Header />
@@ -76,7 +77,7 @@
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                       stroke-width="2"
-                      @click="searchemp(recherche)"
+                      @click="searchemp()"
                   >
                     <path
                         stroke-linecap="round"
@@ -1013,7 +1014,7 @@ const saveEmployeesToLocalStorage = (employees: Employee[]) => {
 }
 
 // Search Employee
-const searchemp = (query: String) => {
+const searchemp = () => {
   return employees.value.filter(employee =>
       employee.employee.toLowerCase().includes(recherche.value.toLowerCase())
       || employee.role.toLowerCase().includes(recherche.value.toLowerCase())
@@ -1024,7 +1025,7 @@ const searchemp = (query: String) => {
 const employeesFiltres = computed(() => {
   let filtered = employees.value;
   if (recherche.value) {
-    filtered = searchemp(recherche.value);
+    filtered = searchemp();
   }
   return applyFilters(filtered);
 });
