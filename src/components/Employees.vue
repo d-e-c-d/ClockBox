@@ -216,160 +216,14 @@
     </div>
   </div>
 
-<!--   Add Employee -->
-    <transition name="fade">
-      <div v-if="isNewemp" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-        <div class="w-full px-4">
-          <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
-            <div class="flex justify-between pb-6">
-              <h3 class="text-2xl bold font-bold text-blue-900 "><strong>Add Employee</strong></h3>
-              <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeNewemp">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18.75 5.25L5.25 18.75" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M18.75 18.75L5.25 5.25" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-            </div>
-            <Disclosure v-slot="{ open }">
-              <DisclosureButton
-                  class="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
-              >
-                <span>Personnal Informations</span>
-                <ChevronUpIcon
-                    :class="open ? 'rotate-180 transform' : ''"
-                    class="h-5 w-5 text-purple-500"
-                />
-              </DisclosureButton>
-              <DisclosurePanel class="px-4 pb-2 pt-4 text-sm text-gray-500">
-                <form @submit.prevent="Add">
-                  <div class="flex">
-                    <div class="mb-4 mr-10">
-                      <label for="user_nom" class="block text-gray-700">Name<span class="text-red-600">*</span></label>
-                      <input
-                          v-model="user_name"
-                          type="text"
-                          id="user_nom"
-                          class="mt-2 p-2 w-full border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
-                          required
-                      />
-                    </div>
-                    <div class="mb-4">
-                      <label for="user_telephone" class="block text-gray-700">Phone Number</label>
-                      <input
-                          v-model="user_telephone"
-                          type="tel"
-                          id="user_telephone"
-                          class="mt-2 p-2 w-full border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
-                          placeholder="+2376********"
-                      />
-                    </div>
-                  </div>
-                </form>
-              </DisclosurePanel>
-            </Disclosure>
-            <Disclosure as="div" class="mt-2" v-slot="{ open }">
-              <DisclosureButton
-                  class="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
-              >
-                <span>Professional Information</span>
-                <ChevronUpIcon
-                    :class="open ? 'rotate-180 transform' : ''"
-                    class="h-5 w-5 text-purple-500"
-                />
-              </DisclosureButton>
-              <DisclosurePanel class="px-4 pb-2 pt-4 text-sm text-gray-500">
-                <form @submit.prevent="add">
-                  <div class="flex">
-                    <div class="mb-4 mr-10">
-                      <label for="role" class="block text-gray-700">Role<span class="text-red-600">*</span></label>
-                      <input
-                          v-model="user_role"
-                          type="text"
-                          id="user_role"
-                          class="mt-2 p-2 w-full border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
-                          required
-                      />
-                    </div>
-                    <div class="mb-4">
-                      <label for="user_site" class="block text-gray-700">Site<span class="text-red-600">*</span></label>
-                      <input
-                          v-model="user_site"
-                          type="text"
-                          id="user_site"
-                          class="mt-2 p-2 w-full border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
-                          required
-                      />
-                    </div>
-                  </div>
-                  <div class="flex">
-                    <div class="mb-4 mr-10">
-                      <label for="matricule" class="block text-gray-700">Matricule<span class="text-red-600">*</span></label>
-                      <input
-                          v-model="matricule"
-                          type="text"
-                          id="matricule"
-                          class="mt-2 p-2 w-full border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom placeholder: "
-                      />
-                    </div>
-                    <div class="mb-4">
-                      <label for="email" class="block text-gray-700">Email<span class="text-red-600">*</span></label>
-                      <input
-                          v-model="email"
-                          type="email"
-                          id="email"
-                          class="mt-2 p-2 w-full border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
-                      />
-                    </div>
-                  </div>
-                  <div class="flex">
-                    <div class="mb-6 mr-8">
-                      <label for="password" class="block text-gray-700">Password<span class="text-red-600">*</span></label>
-                      <input
-                          v-model="password"
-                          type="text"
-                          id="password"
-                          class="mt-2 p-2 w-full border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
-                      />
-                    </div>
-                    <div class="ml-12">
-                      <button
-                          class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-xl flex  mt-7 w-full p-2"
-                          @click="generate"
-                      >
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                          <path d="M16.5156 9.34814H21.0156V4.84814" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M6.16602 6.16637C6.9321 5.40029 7.84157 4.7926 8.84251 4.37799C9.84344 3.96339 10.9162 3.75 11.9996 3.75C13.0831 3.75 14.1558 3.96339 15.1568 4.37799C16.1577 4.7926 17.0672 5.40029 17.8333 6.16637L21.0153 9.34835" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M7.48438 14.6519H2.98438V19.1519" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M17.8336 17.8338C17.0675 18.5999 16.1581 19.2076 15.1571 19.6222C14.1562 20.0368 13.0834 20.2502 12 20.2502C10.9166 20.2502 9.84378 20.0368 8.84285 19.6222C7.84191 19.2076 6.93244 18.5999 6.16635 17.8338L2.98438 14.6519" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <p class="font-light">Generate</p>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </DisclosurePanel>
-            </Disclosure>
-            <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
-            <div class="mt-5 border-t-gray-100 border-t-2 mb-5"></div>
-            <button @click="addEmployee" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-              Add
-            </button>
-            <button @click="closeNewemp" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-              Cancel
-            </button>
-          </div>
-        </div>
-      </div>
-    </transition>
-
-  <!-- Edit Employee -->
+  <!--   Add Employee -->
   <transition name="fade">
-    <div v-if="isEditEmp" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div v-if="isNewemp" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div class="w-full px-4">
         <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
           <div class="flex justify-between pb-6">
-            <h3 class="text-2xl bold font-bold text-blue-900 "><strong>Edit Employee</strong></h3>
-            <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeEditEmp">
+            <h3 class="text-2xl bold font-bold text-blue-900 "><strong>Add Employee</strong></h3>
+            <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeNewemp">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18.75 5.25L5.25 18.75" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M18.75 18.75L5.25 5.25" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -387,7 +241,7 @@
               />
             </DisclosureButton>
             <DisclosurePanel class="px-4 pb-2 pt-4 text-sm text-gray-500">
-              <form @submit.prevent="Add">
+              <form @submit.prevent="">&
                 <div class="flex">
                   <div class="mb-4 mr-10">
                     <label for="user_nom" class="block text-gray-700">Name<span class="text-red-600">*</span></label>
@@ -424,7 +278,153 @@
               />
             </DisclosureButton>
             <DisclosurePanel class="px-4 pb-2 pt-4 text-sm text-gray-500">
-              <form @submit.prevent="add">
+              <form @submit.prevent="">
+                <div class="flex">
+                  <div class="mb-4 mr-10">
+                    <label for="role" class="block text-gray-700">Role<span class="text-red-600">*</span></label>
+                    <input
+                        v-model="user_role"
+                        type="text"
+                        id="user_role"
+                        class="mt-2 p-2 w-full border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
+                        required
+                    />
+                  </div>
+                  <div class="mb-4">
+                    <label for="user_site" class="block text-gray-700">Site<span class="text-red-600">*</span></label>
+                    <input
+                        v-model="user_site"
+                        type="text"
+                        id="user_site"
+                        class="mt-2 p-2 w-full border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
+                        required
+                    />
+                  </div>
+                </div>
+                <div class="flex">
+                  <div class="mb-4 mr-10">
+                    <label for="matricule" class="block text-gray-700">Matricule<span class="text-red-600">*</span></label>
+                    <input
+                        v-model="matricule"
+                        type="text"
+                        id="matricule"
+                        class="mt-2 p-2 w-full border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom placeholder: "
+                    />
+                  </div>
+                  <div class="mb-4">
+                    <label for="email" class="block text-gray-700">Email<span class="text-red-600">*</span></label>
+                    <input
+                        v-model="email"
+                        type="email"
+                        id="email"
+                        class="mt-2 p-2 w-full border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
+                    />
+                  </div>
+                </div>
+                <div class="flex">
+                  <div class="mb-6 mr-8">
+                    <label for="password" class="block text-gray-700">Password<span class="text-red-600">*</span></label>
+                    <input
+                        v-model="password"
+                        type="text"
+                        id="password"
+                        class="mt-2 p-2 w-full border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
+                    />
+                  </div>
+                  <div class="ml-12">
+                    <button
+                        class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-xl flex  mt-7 w-full p-2"
+                        @click="generate"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                        <path d="M16.5156 9.34814H21.0156V4.84814" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6.16602 6.16637C6.9321 5.40029 7.84157 4.7926 8.84251 4.37799C9.84344 3.96339 10.9162 3.75 11.9996 3.75C13.0831 3.75 14.1558 3.96339 15.1568 4.37799C16.1577 4.7926 17.0672 5.40029 17.8333 6.16637L21.0153 9.34835" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7.48438 14.6519H2.98438V19.1519" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17.8336 17.8338C17.0675 18.5999 16.1581 19.2076 15.1571 19.6222C14.1562 20.0368 13.0834 20.2502 12 20.2502C10.9166 20.2502 9.84378 20.0368 8.84285 19.6222C7.84191 19.2076 6.93244 18.5999 6.16635 17.8338L2.98438 14.6519" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      <p class="font-light">Generate</p>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </DisclosurePanel>
+          </Disclosure>
+          <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
+          <div class="mt-5 border-t-gray-100 border-t-2 mb-5"></div>
+          <button @click="addEmployee" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+            Add
+          </button>
+          <button @click="closeNewemp" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </transition>
+
+  <!-- Edit Employee -->
+  <transition name="fade">
+    <div v-if="isEditEmp" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div class="w-full px-4">
+        <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
+          <div class="flex justify-between pb-6">
+            <h3 class="text-2xl bold font-bold text-blue-900 "><strong>Edit Employee</strong></h3>
+            <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeEditEmp">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.75 5.25L5.25 18.75" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18.75 18.75L5.25 5.25" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+          <Disclosure v-slot="{ open }">
+            <DisclosureButton
+                class="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
+            >
+              <span>Personnal Informations</span>
+              <ChevronUpIcon
+                  :class="open ? 'rotate-180 transform' : ''"
+                  class="h-5 w-5 text-purple-500"
+              />
+            </DisclosureButton>
+            <DisclosurePanel class="px-4 pb-2 pt-4 text-sm text-gray-500">
+              <form @submit.prevent="">
+                <div class="flex">
+                  <div class="mb-4 mr-10">
+                    <label for="user_nom" class="block text-gray-700">Name<span class="text-red-600">*</span></label>
+                    <input
+                        v-model="user_name"
+                        type="text"
+                        id="user_nom"
+                        class="mt-2 p-2 w-full border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
+                        required
+                    />
+                  </div>
+                  <div class="mb-4">
+                    <label for="user_telephone" class="block text-gray-700">Phone Number</label>
+                    <input
+                        v-model="user_telephone"
+                        type="tel"
+                        id="user_telephone"
+                        class="mt-2 p-2 w-full border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
+                        placeholder="+2376********"
+                    />
+                  </div>
+                </div>
+              </form>
+            </DisclosurePanel>
+          </Disclosure>
+          <Disclosure as="div" class="mt-2" v-slot="{ open }">
+            <DisclosureButton
+                class="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
+            >
+              <span>Professional Information</span>
+              <ChevronUpIcon
+                  :class="open ? 'rotate-180 transform' : ''"
+                  class="h-5 w-5 text-purple-500"
+              />
+            </DisclosureButton>
+            <DisclosurePanel class="px-4 pb-2 pt-4 text-sm text-gray-500">
+              <form @submit.prevent="">
                 <div class="flex">
                   <div class="mb-4 mr-10">
                     <label for="role" class="block text-gray-700">Role<span class="text-red-600">*</span></label>

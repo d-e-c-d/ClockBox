@@ -26,21 +26,23 @@
             />
           </svg>
         </div>
-        <div class="flex items-center space-x-4">
-          <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-8 w-8 text-blue-500 rounded-2xl hover:bg-gray-100"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-          >
-            <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 002-2v-7H3v7a2 2 0 002 2z"
-            />
-          </svg>
+          <div class="flex items-center space-x-4">
+            <router-link to="/planning">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-8 w-8 text-blue-500 rounded-2xl hover:bg-gray-100"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+            >
+              <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 002-2v-7H3v7a2 2 0 002 2z"
+              />
+            </svg>
+            </router-link>
           <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-8 w-8 text-blue-500 rounded-3xl hover:bg-gray-100"

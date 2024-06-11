@@ -17,6 +17,7 @@
     "@vue/runtime-dom": "^3.4.27",
     "@vue/server-renderer": "^3.4.27",
     "chart.js": "^4.4.3",
+    "date-fns": "^3.6.0",
     "html2canvas": "^1.4.1",
     "json2csv": "^6.0.0-alpha.2",
     "jspdf": "^2.5.1",
