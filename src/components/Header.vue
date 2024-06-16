@@ -122,9 +122,9 @@
       <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full">
         <h3 class="text-2xl bold font-bold text-blue-900"><span>LogOut</span></h3>
         <p class="mt-2 text-sm text-gray-500">GoodBye!</p>
-        <router-link to="/index" class="mt-4 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+        <button @click="logout" class="mt-4 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
           Exit
-        </router-link>
+        </button>
         <button @click="closeLogout" class="mt-4 ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
           Cancel
         </button>
@@ -137,6 +137,7 @@
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import {ref} from "vue";
+import router from "@/router/index.ts";
 
 const isLogout = ref(false);
 
@@ -145,6 +146,12 @@ const closeLogout = () => {
 };
 const openLogout = () => {
   isLogout.value = true;
+};
+const isAuthenticated = ref(!!localStorage.getItem('userToken'));
+const logout = () => {
+  localStorage.removeItem('userToken');
+  isAuthenticated.value = false;
+  router.push('/login');
 };
 
 const profil = [

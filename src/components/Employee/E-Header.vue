@@ -26,20 +26,22 @@
           </svg>
         </div>
         <div class="flex items-center space-x-4">
-          <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-8 w-8 text-blue-500 rounded-2xl hover:bg-gray-100"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-          >
+          <router-link to="/eplanning">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-8 w-8 text-blue-500 rounded-2xl hover:bg-gray-100"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+            >
             <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 002-2v-7H3v7a2 2 0 002 2z"
             />
           </svg>
+          </router-link>
           <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-8 w-8 text-blue-500 rounded-3xl hover:bg-gray-100"
@@ -105,8 +107,8 @@
             </transition>
           </Popover>
           <div>
-            <span class="block text-gray-700">User</span>
-            <span class="block text-gray-400 text-sm">charles.dikoume@2027.ucac-icam.com</span>
+            <span class="block text-gray-700">{{ user_name }}</span>
+            <span class="block text-gray-400 text-sm">{{ user_email }}</span>
           </div>
         </div>
       </header>
@@ -117,10 +119,10 @@
     <div v-if="isLogout" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full">
         <h3 class="text-2xl bold font-bold text-blue-900"><span>LogOut</span></h3>
-        <p class="mt-2 text-sm text-gray-500">Do you want to disconnect ?</p>
-        <router-link to="/index" class="mt-4 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+        <p class="mt-2 text-sm text-gray-500">GoodBye!</p>
+        <button @click="logout" class="mt-4 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
           Exit
-        </router-link>
+        </button>
         <button @click="closeLogout" class="mt-4 ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
           Cancel
         </button>
@@ -132,11 +134,14 @@
 
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import Header from "@/components/Header.vue";
+import {useStorage} from "@vueuse/core";
+import router from "@/router/index.ts";
+
+const user = useStorage('employees', [])
 
 const isLogout = ref(false);
-
 const closeLogout = () => {
   isLogout.value = false;
 };
@@ -144,17 +149,15 @@ const openLogout = () => {
   isLogout.value = true;
 };
 
+const isAuthenticated = ref(!!localStorage.getItem('userToken'));
+const logout = () => {
+  localStorage.removeItem('userToken');
+  isAuthenticated.value = false;
+  router.push('/login');
+};
+
+
 const profil = [
-  {
-    name: 'Settings',
-    description: 'Acess to your settings.',
-    href: '/settings',
-    icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\n' +
-        '<path d="M12 16.5C14.4853 16.5 16.5 14.4853 16.5 12C16.5 9.51472 14.4853 7.5 12 7.5C9.51472 7.5 7.5 9.51472 7.5 12C7.5 14.4853 9.51472 16.5 12 16.5Z" stroke="#1E3A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>\n' +
-        '<path d="M17.2181 6.10177C17.4583 6.31443 17.6854 6.54148 17.898 6.78166L20.4595 7.14743C20.8749 7.87075 21.1951 8.64467 21.4123 9.45001L19.8604 11.5192C19.8604 11.5192 19.8799 12.1604 19.8604 12.4806L21.413 14.5505C21.1953 15.3557 20.8745 16.1294 20.4586 16.8524L17.898 17.2182C17.898 17.2182 17.4584 17.6854 17.2183 17.898L16.8525 20.4595C16.1292 20.8749 15.3552 21.1951 14.5499 21.4123L12.4808 19.8604C12.1606 19.8799 11.8395 19.8799 11.5193 19.8604L9.44944 21.413C8.64425 21.1953 7.87054 20.8745 7.1475 20.4586L6.7818 17.8981C6.54162 17.6855 6.31457 17.4584 6.10191 17.2183L3.54044 16.8525C3.12505 16.1292 2.80479 15.3552 2.58759 14.5499L4.13957 12.4807C4.13957 12.4807 4.12005 11.8395 4.13951 11.5193L2.58691 9.44944C2.80466 8.64425 3.12545 7.87054 3.54132 7.1475L6.10177 6.7818C6.31443 6.54161 6.54148 6.31457 6.78166 6.10191L7.14743 3.54044C7.87075 3.12505 8.64467 2.80479 9.45001 2.58759L11.5191 4.13951C11.8393 4.12005 12.1604 4.12005 12.4806 4.13951L14.5505 2.58691C15.3557 2.80466 16.1294 3.12545 16.8524 3.54132L17.2181 6.10177Z" stroke="#1E3A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>\n' +
-        '</svg>\n' +
-        '\n',
-  },
   {
     name: 'Leave requests',
     description: 'Manage the employee leave requests list.',
@@ -180,7 +183,6 @@ const profil = [
         '</svg>\n',
   },
 ]
-
 const handleItemClick = (item) => {
   if (item.name === 'Logout') {
     openLogout();

@@ -112,6 +112,7 @@ import Sidebar from "@/components/Sidebar.vue";
 import Header from "@/components/Header.vue";
 import { ref, computed, onMounted } from 'vue';
 import { format, addDays, startOfWeek, addWeeks } from 'date-fns';
+import {useStorage} from "@vueuse/core";
 
 const eventName = ref('');
 const eventDay = ref('');
@@ -128,20 +129,7 @@ const openProgram = () => {
   isProgram.value = true;
 }
 
-const calendarDatas = ref<Array>([
-  { id: 1, day: "Mon", name: "Meeting", time: "10:00 - 11:00", color: "bg-yellow-100" },
-  { id: 2, day: "Mon", name: "Design Review", time: "10:00 - 11:00", color: "bg-pink-100" },
-  { id: 3, day: "Tue", name: "Weekly Report", time: "10:00 - 11:00", color: "bg-blue-100" },
-  { id: 4, day: "Tue", name: "Discussion", time: "10:00 - 11:00", color: "bg-purple-100" },
-  { id: 5, day: "Tue", name: "Weekly Report", time: "10:00 - 11:00", color: "bg-blue-100" },
-  { id: 6, day: "Tue", name: "Discussion", time: "10:00 - 11:00", color: "bg-purple-100" },
-]);
-
-const saveCalendarToLocalStorage = (calendarDatas: CalendarData[]) => {
-  if (!localStorage.getItem('calendarData')) {
-    localStorage.setItem('calendarData', JSON.stringify(calendarDatas));
-  }
-}
+const calendarDatas = useStorage('calendarDatas', [])
 
 const currentPage = ref(0);
 const totalPages = ref(4);
@@ -158,14 +146,6 @@ const daysWithDates = computed(() => {
   }));
 });
 
-
-const events = ref([]);
-onMounted(() => {
-  const storedEvents = localStorage.getItem('calendarData');
-  if (storedEvents) {
-    calendarDatas.value = JSON.parse(storedEvents);
-  }
-});
 // addEvent
 const addEvent = () => {
   let lastId = 0;

@@ -109,13 +109,14 @@
 
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import {ref, onMounted, onUnmounted, computed} from 'vue';
 import StatCard from '../components/StatCard.vue';
 import Chart from '../components/Chart.vue';
 import Bar from '../components/Bar.vue';
 import Header from "../components/Header.vue";
 import Sidebar from "../components/Sidebar.vue";
 import TimeBasedIcon from "../components/TimeBasedIcon.vue";
+import { useStorage } from '@vueuse/core'
 
 // Format Date with letters
 const formatDate = (date: Date) => {
@@ -137,7 +138,6 @@ const formatDate = (date: Date) => {
 
   return `${day}${suffix} ${month} ${year}`;
 };
-
 // Format time with AM/PM and include seconds
 const formatTime = (time: Date) => {
   const hours = time.getHours();
@@ -150,24 +150,30 @@ const formatTime = (time: Date) => {
 
   return `${formattedHours}:${formattedMinutes}:${formattedSeconds} ${ampm}`;
 };
-
 // Realtime data references
 const currentTime = ref(formatTime(new Date()));
 const currentDate = ref(formatDate(new Date()));
 
-// Sample real-time data
-const totalEmployees = ref(452);
+// Use the pointing data to update the statistics
+const pointing =  useStorage('pointing', []);
+const employees = useStorage('employees', []);
+
+const totalEmployees = computed(() => employees.value.length);
 const employeeChange = ref('2 new employees added!');
-const onTime = ref(360);
-const onTimeChange = ref('-10% Less than yesterday');
-const absent = ref(30);
-const absentChange = ref('+3% Increase than yesterday');
-const lateArrival = ref(62);
+const lateArrival = computed(() => pointing.value.filter((item) => item.status === 'Late arrival').length)
 const lateArrivalChange = ref('+5% Increase than yesterday');
-const earlyDepartures = ref(6);
+const onTime = computed(() => pointing.value.filter((item) => item.status === 'On time').length)
+const onTimeChange = ref('-10% Less than yesterday');
+const absent = computed(() => pointing.value.filter((item) => item.status === 'Absent').length)
+const absentChange = ref('+3% Increase than yesterday');
+const earlyDepartures = computed(() => pointing.value.filter((item) =>
+    item.checkOut === '17:30'
+    || item.checkOut === '17:00'
+    || item.checkOut === '17:45'
+    || item.checkOut === '17:15').length)
 const earlyDeparturesChange = ref('-10% Less than yesterday');
-const timeOff = ref(42);
-const timeOffChange = ref('+2% Increase than yesterday');
+const timeOff = ref(0);
+const timeOffChange = ref('+0% Increase than yesterday');
 
 // Update time every second
 const updateTime = () => {
@@ -175,33 +181,12 @@ const updateTime = () => {
   currentDate.value = formatDate(new Date());
 };
 
-// Simulate fetching real-time data
-const fetchData = () => {
-  // Simulate data update
-  totalEmployees.value = 452 + Math.floor(Math.random() * 10);
-  onTime.value = 360 + Math.floor(Math.random() * 10);
-  absent.value = 30 + Math.floor(Math.random() * 5);
-  lateArrival.value = 62 + Math.floor(Math.random() * 5);
-  earlyDepartures.value = 6 + Math.floor(Math.random() * 3);
-  timeOff.value = 42 + Math.floor(Math.random() * 5);
-
-  // Update change text
-  employeeChange.value = '2 new employees added!';
-  onTimeChange.value = '-10% Less than yesterday';
-  absentChange.value = '+3% Increase than yesterday';
-  lateArrivalChange.value = '+5% Increase than yesterday';
-  earlyDeparturesChange.value = '-10% Less than yesterday';
-  timeOffChange.value = '+2% Increase than yesterday';
-};
-
 // Set intervals for updating time and fetching data
 onMounted(() => {
   const timeInterval = setInterval(updateTime, 1000);
-  const dataInterval = setInterval(fetchData, 5000); // Fetch new data every 5 seconds
-
   onUnmounted(() => {
     clearInterval(timeInterval);
-    clearInterval(dataInterval);
   });
 });
+
 </script>

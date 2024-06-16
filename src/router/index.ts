@@ -11,9 +11,12 @@ import EDashbord from "../components/Employee/E-Dashbord.vue";
 import EPointing from "@/components/Employee/E-Pointing.vue";
 import EPlanning from "@/components/Employee/E-Planning.vue";
 
+function isAuthenticated() {
+    return !!localStorage.getItem('userToken');
+}
 
 const routes = [
-    //Admin
+    // Admin
     { path: '/login', component: Login, name: 'ClockBox - Connexion' },
     { path: '/register', component: Register, name: 'ClockBox - Inscription' },
     { path: '/settings', component: Settings, name: 'ClockBox - AdminSettings' },
@@ -22,16 +25,33 @@ const routes = [
     { path: '/employees', component: Employees, name: 'ClockBox - Employees' },
     { path: '/planning', component: Planning, name: 'ClockBox - Planning' },
 
-    //Employee
+    // Employee
     { path: '/edashboard', component: EDashbord, name: 'ClockBox - EDashbord' },
     { path: '/epointing', component: EPointing, name: 'ClockBox - EPointing' },
     { path: '/eplanning', component: EPlanning, name: 'ClockBox - EPlanning' },
 
+    { path: '/', redirect: '/login' }
 ];
 
 const router = createRouter({
     history: createWebHistory(),
     routes,
+});
+
+router.beforeEach((to, from, next) => {
+    const publicPages = ['/login', '/register'];
+    const authRequired = !publicPages.includes(to.path);
+    const loggedIn = isAuthenticated();
+
+    if (authRequired && !loggedIn) {
+        return next('/login');
+    }
+
+    if (loggedIn && publicPages.includes(to.path)) {
+        return next('/dashboard');
+    }
+
+    next();
 });
 
 export default router;
