@@ -75,7 +75,7 @@
                   <th scope="col" class="px-10 py-3">Explanation</th>
                   <th scope="col" class="px-16 py-3">Paid</th>
                   <th scope="col" class=" py-3">Status</th>
-                  <th scope="col" class=" py-3"></th>
+                  <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -87,7 +87,20 @@
                   <td class="px-10 py-3">{{ leave.reason }}</td>
                   <td :class="paidColor(leave)" class="px-16 py-3">{{ leave.Paid }}</td>
                   <td :class="statusColor(leave)" class="px-10 py-3 ">{{ leave.status }}</td>
-                  <td class="px-10 py-3">
+                  <td>
+                    <div class="flex">
+                      <div class="transform transition-transform duration-200 ease-in-out hover:scale-105 hover:z-10" @click="editRequest(leave.id)">
+                        <svg v-if="leave.status === 'Pending'"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 15H9V12L18 3L21 6L12 15Z" stroke="#FF0101" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" v-if="leave.status === 'Pending'"/>
+                          <path d="M15.75 5.25L18.75 8.25" stroke="#FF0101" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" v-if="leave.status === 'Pending'"/>
+                          <path d="M20.25 11.25V19.5C20.25 19.6989 20.171 19.8897 20.0303 20.0303C19.8897 20.171 19.6989 20.25 19.5 20.25H4.5C4.30109 20.25 4.11032 20.171 3.96967 20.0303C3.82902 19.8897 3.75 19.6989 3.75 19.5V4.5C3.75 4.30109 3.82902 4.11032 3.96967 3.96967C4.11032 3.82902 4.30109 3.75 4.5 3.75H12.75" stroke="#FF0101" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" v-if="leave.status === 'Pending'"/>
+                        </svg>
+                      </div>
                     <div class="ml-2.5 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:z-10" @click="delRequest(leave.id)">
                       <svg v-if="leave.status === 'Pending'"
                           width="18"
@@ -101,6 +114,7 @@
                         <path d="M18.75 5.25V19.5C18.75 19.6989 18.671 19.8897 18.5303 20.0303C18.3897 20.171 18.1989 20.25 18 20.25H6C5.80109 20.25 5.61032 20.171 5.46967 20.0303C5.32902 19.8897 5.25 19.6989 5.25 19.5V5.25" stroke="#FF0101" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" v-if="leave.status === 'Pending'"/>
                         <path d="M15.75 5.25V3.75C15.75 3.35218 15.592 2.97064 15.3107 2.68934C15.0294 2.40804 14.6478 2.25 14.25 2.25H9.75C9.35218 2.25 8.97064 2.40804 8.68934 2.68934C8.40804 2.97064 8.25 3.35218 8.25 3.75V5.25" stroke="#FF0101" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" v-if="leave.status === 'Pending'"/>
                       </svg>
+                    </div>
                     </div>
                   </td>
                 </tr>
@@ -147,7 +161,6 @@
                     </svg>
                   </div>
                 </div>
-
                 <form @submit.prevent="">
                   <div class="flex">
                     <div class="mb-4 mr-24">
@@ -194,13 +207,85 @@
                     </select>
                   </div>
                 </form>
-
                 <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
                 <div class="mt-5 border-t-gray-100 border-t-2 mb-5"></div>
                 <button @click="addRequest" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                   Submit request
                 </button>
                 <button @click="closeRequest" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </transition>
+
+        <!--   Edit a leave request -->
+        <transition name="fade">
+          <div v-if="isEditRequest" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div class="w-full px-4">
+              <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
+                <div class="flex justify-between pb-6">
+                  <h3 class="text-xl bold font-bold text-blue-900"
+                  >Leave requested</h3>
+                  <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeEditRequest">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18.75 5.25L5.25 18.75" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M18.75 18.75L5.25 5.25" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+                <form @submit.prevent="">
+                  <div class="flex">
+                    <div class="mb-4 mr-24">
+                      <label for="user_nom" class="block text-gray-700">Start-date<span class="text-red-600">*</span></label>
+                      <input
+                          v-model="start_date"
+                          type="date"
+                          id="start_date"
+                          class="mt-2 p-2 w-full text-gray-600 pl-5 border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
+                      />
+                    </div>
+                    <div class="mb-4">
+                      <label for="user_telephone" class="block text-gray-700">End-date<span class="text-red-600">*</span></label>
+                      <input
+                          v-model="end_date"
+                          type="date"
+                          id="end_date"
+                          class="mt-2 p-2 w-full pl-5 text-gray-600 border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
+                      />
+                    </div>
+                  </div>
+                  <div class="mt-4 mb-4">
+                    <label for="reason" class="block text-gray-700 mb-2">Reason<span class="text-red-600">*</span></label>
+                    <textarea
+                        id="reason"
+                        v-model="reason"
+                        class="mt-2 w-full p-2 text-sm border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom text-gray-900"
+                        rows="4"
+                        :style="{ minHeight: '50px', maxHeight: '200px', overflowY: 'auto' }"
+                    ></textarea>
+                  </div>
+                  <div class="mb-4 mt-4">
+                    <label for="type" class="block text-gray-700 mb-2">Type of leave<span class="text-red-600">*</span></label>
+                    <select
+                        id="type"
+                        v-model="type"
+                        class="mt-2 w-full p-2 bg-white text-gray-600 border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
+                    >
+                      <option value="annual">Annual leave</option>
+                      <option value="sick">Sick leave</option>
+                      <option value="family">Maternity or Paternity leave</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </form>
+                <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
+                <div class="mt-5 border-t-gray-100 border-t-2 mb-5"></div>
+                <button @click="saveEditRequest" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                  Save
+                </button>
+                <button @click="closeEditRequest" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                   Cancel
                 </button>
               </div>
@@ -237,6 +322,7 @@ const type = ref('');
 const author = localStorage.getItem('userName')
 const Paid = ref('No');
 const status = ref('Pending');
+const currentleave = ref('');
 
 const leave = useStorage('leave', []);
 
@@ -256,7 +342,7 @@ const leaveFiltres = computed(() => {
     filtered = searchleave(recherche.value);
   }
   filtered = applyFilters(filtered);
-  return filtered.sort((a, b) => b.start_date - a.start_date);
+  return filtered.sort((a, b) => b.id - a.id);
 });
 
 const totalPages = computed(() => {
@@ -367,6 +453,47 @@ const addRequest = () => {
   error.value = ('');
 }
 
+// Edit Leave Request
+const isEditRequest = ref(false);
+const closeEditRequest = () => {
+  isEditRequest.value = false;
+  error.value = '';
+};
+const openEditRequest = () => {
+  isEditRequest.value = true;
+};
+
+// Edit Leave request
+const editRequest = (leaveId: number) => {
+  openEditRequest();
+  const leaveIndex = leave.value.findIndex(leave => leave.id === leaveId);
+  if (leaveIndex !== -1) {
+    currentleave.value = leave.value[leaveIndex];
+    start_date.value = currentleave.value.start_date;
+    end_date.value = currentleave.value.end_date;
+    reason.value = currentleave.value.reason;
+    type.value = currentleave.value.type;
+    status.value = currentleave.value.status;
+  }
+}
+
+const saveEditRequest = () => {
+  if (currentleave.value) {
+    currentleave.value.start_date = start_date.value;
+    currentleave.value.end_date = end_date.value;
+    currentleave.value.reason = reason.value;
+    currentleave.value.type = type.value;
+    currentleave.value.status = status.value;
+
+    closeEditRequest();
+    recherche.value = ('');
+    error.value = ('');
+    start_date.value = ('');
+    end_date.value = ('');
+    reason.value = ('');
+    type.value = ('');
+  }
+}
 // Delete Leave request
 const delRequest = (leaveId: number) => {
   const leaveIndex = leave.value.findIndex(leave => leave.id === leaveId);

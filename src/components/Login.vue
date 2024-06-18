@@ -1666,7 +1666,7 @@ const leave = ref([
     "start_date": "2024-06-10",
     "end_date": "2024-06-16",
     "reason": "Pregnant wife and sick grandma",
-    "type": "other",
+    "type": "family",
     "status": "Allowed",
     "Paid": "Yes"
   },

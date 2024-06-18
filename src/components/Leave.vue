@@ -164,10 +164,7 @@
               <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
                 <div class="flex justify-between pb-6">
                   <h3 class="text-xl bold font-bold text-blue-900"
-                     >
-                    <strong>
-                      {{ leave.author }} had requested a leave
-                    </strong></h3>
+                     >Leave requested</h3>
                   <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeVanswer">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M18.75 5.25L5.25 18.75" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -175,8 +172,17 @@
                     </svg>
                   </div>
                 </div>
-
                 <form @submit.prevent="">
+                  <div class="mb-4 mr-24">
+                    <label for="author" class="block text-gray-700">Employee</label>
+                    <input
+                        v-model="author"
+                        type="text"
+                        id="author"
+                        class="mt-2 p-2 w-full text-gray-600 pl-5 border rounded-xl focus:outline-none"
+                        readonly
+                    />
+                  </div>
                   <div class="flex">
                     <div class="mb-4 mr-24">
                       <label for="user_nom" class="block text-gray-700">Start-date</label>
@@ -254,7 +260,7 @@
             <div class="w-full px-4">
               <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
                 <div class="flex justify-between pb-6">
-                  <h3 class="text-xl bold font-bold text-blue-900 "><strong>{{ leave.author }} is requesting a leave</strong></h3>
+                  <h3 class="text-xl bold font-bold text-blue-900 ">Leave currently being requested</h3>
                   <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeAnswer">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M18.75 5.25L5.25 18.75" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -262,8 +268,17 @@
                     </svg>
                   </div>
                 </div>
-
                 <form @submit.prevent="">
+                  <div class="mb-4 mr-24">
+                    <label for="author" class="block text-gray-700">Employee</label>
+                    <input
+                        v-model="author"
+                        type="text"
+                        id="author"
+                        class="mt-2 p-2 w-full text-gray-600 pl-5 border rounded-xl focus:outline-none"
+                        readonly
+                    />
+                  </div>
                   <div class="flex">
                     <div class="mb-4 mr-24">
                       <label for="user_nom" class="block text-gray-700">Start-date</label>
@@ -297,8 +312,8 @@
                         readonly
                     ></textarea>
                   </div>
-                  <div class="flex">
-                    <div class="mb-4 mt-4">
+                  <div class="flex justify-between">
+                    <div class="mb-4 mt-4 mr-10">
                       <label for="type" class="block text-gray-700 mb-2">Type of leave</label>
                       <input
                           id="type"
@@ -307,23 +322,24 @@
                           readonly
                       />
                     </div>
-                    <div class="mb-4 mt-4">
-                      <label for="type" class="block text-gray-700 mb-2">Pay leave</label>
+                    <div class="mb-4 mt-14 flex items-center">
+                      <label for="Paid" class="block text-xl text-gray-600 mr-3">Leave will be paid</label>
                       <input
                           id="Paid"
                           v-model="Paid"
                           type="checkbox"
-                          class="mt-2 w-full p-2 bg-white text-gray-600 border rounded-xl focus:outline-none"
+                          class="w-6 h-6 mr-2 bg-white text-gray-600 border rounded-xl focus:outline-none"
                       />
                     </div>
+
                   </div>
                 </form>
                 <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
                 <div class="mt-5 border-t-gray-100 border-t-2 mb-5"></div>
-                <button @click="saverequestAnswer" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                <button @click="saverequestAnswer('Allowed')" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                   Allow
                 </button>
-                <button @click="saverequestAnswer" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                <button @click="saverequestAnswer('Refused')" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                   Refuse
                 </button>
               </div>
@@ -465,39 +481,6 @@ const openVanswer = () => {
   isVanswer.value = true;
 };
 
-const addRequest = () => {
-  let lastId = 0;
-  if (leave.value && leave.value.length > 0) {
-    lastId = leave.value[leave.value.length - 1].id;
-  }
-
-  const newRequest =  {
-    id: lastId + 1,
-    start_date: start_date.value,
-    end_date: end_date.value,
-    reason: reason.value,
-    type: type.value,
-  }
-
-  leave.value.push(newRequest);
-
-  if (
-      !start_date.value
-      || !end_date.value
-      || !reason.value
-      || !type.value) {
-    error.value = 'Entrez les informations !';
-    return
-  }
-  error.value = '';
-  closeRequest();
-  start_date.value = ('');
-  end_date.value = ('');
-  reason.value = ('');
-  type.value = ('');
-  error.value = ('');
-}
-
 // View request answer
 const viewRequestAnswer = (leaveId: number) => {
   openVanswer();
@@ -510,11 +493,11 @@ const viewRequestAnswer = (leaveId: number) => {
     type.value = currentleave.value.type;
     Paid.value = currentleave.value.Paid;
     status.value = currentleave.value.status;
+    author.value = currentleave.value.author;
   }
 }
 
 // Answer resquest
-
 const requestAnswer = (leaveId: number) => {
   openAnswer();
   const leaveIndex = leave.value.findIndex(leave => leave.id === leaveId);
@@ -524,18 +507,22 @@ const requestAnswer = (leaveId: number) => {
     end_date.value = currentleave.value.end_date;
     reason.value = currentleave.value.reason;
     type.value = currentleave.value.type;
-    Paid.value = currentleave.value.Paid;
+    author.value = currentleave.value.author;
     status.value = currentleave.value.status;
   }
 }
-
-const saverequestAnswer = () => {
+const saverequestAnswer = (action) => {
   if (currentleave.value) {
-    currentleave.value = leave.value[leaveIndex];
+
+    const isPaid = (action === "Refused") ? "No" : (Paid.value ? "Yes" : "No");
+
+    author.value = currentleave.value.author;
     start_date.value = currentleave.value.start_date;
     end_date.value = currentleave.value.end_date;
     reason.value = currentleave.value.reason;
     type.value = currentleave.value.type;
+    currentleave.value.Paid = isPaid;
+    currentleave.value.status = action;
 
     closeAnswer();
     recherche.value = ('');
@@ -544,6 +531,8 @@ const saverequestAnswer = () => {
     end_date.value = ('');
     reason.value = ('');
     type.value = ('');
+    author.value = ('');
+    Paid.value = ('');
   }
 };
 </script>

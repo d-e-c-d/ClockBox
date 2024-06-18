@@ -107,7 +107,7 @@
             </transition>
           </Popover>
           <div>
-            <span class="block text-gray-700">{{ user_name }}</span>
+            <span class="block text-gray-700"><span class="font-light text-blue-700">Hi, </span>{{ user_name }}</span>
             <span class="block text-gray-400 text-sm">{{ user_email }}</span>
           </div>
         </div>
