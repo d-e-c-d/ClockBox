@@ -552,8 +552,8 @@ const employeesFiltres = computed(() => {
   if (recherche.value) {
     filtered = searchemp();
   }
-  return applyFilters(filtered);
-});
+  filtered = applyFilters(filtered);
+  return filtered.sort((a, b) => b.id - a.id);});
 const totalPages = computed(() => {
   return Math.ceil(employeesFiltres.value.length / 10);
 });
@@ -617,8 +617,8 @@ const addEmployee = () => {
     error.value = 'Entrez les informations !';
     return;
   }
-  error.value = '';
 
+  error.value = '';
   closeNewemp();
   recherche.value = ('');
   error.value = ('');
@@ -672,7 +672,8 @@ const saveEditedEmployee = () => {
     email.value = '';
     user_site.value = '';
     matricule.value = '';
-    password.value = '';  }
+    password.value = '';
+  }
 };
 
 // Generate

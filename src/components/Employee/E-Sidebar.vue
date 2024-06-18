@@ -46,8 +46,19 @@
               <path d="M0 0H5C7.76142 0 10 2.23858 10 5V25C10 27.7614 7.76142 30 5 30H0V0Z" fill="#0842A0"/>
             </svg>
           </div>
-          <router-link to="/eplanning" class="flex items-center justify-centerw-28 px-4 py-2 bg-blue-700 text-white rounded-2xl shadow mb-8 hover:bg-blue-900 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow-3xl hover:z-10" :class="{ 'bg-blue-800': isActive('/planning') }">
+          <router-link to="/eplanning" class="flex items-center justify-center w-28 px-4 py-2 bg-blue-700 text-white rounded-2xl shadow mb-8 hover:bg-blue-900 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow-3xl hover:z-10" :class="{ 'bg-blue-800': isActive('/planning') }">
             <span>Planning</span>
+          </router-link>
+        </div>
+
+        <div>
+          <div class="absolute left-0" v-if="isActive('/eleave')">
+            <svg width="10" height="30" viewBox="0 0 10 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0H5C7.76142 0 10 2.23858 10 5V25C10 27.7614 7.76142 30 5 30H0V0Z" fill="#0842A0"/>
+            </svg>
+          </div>
+          <router-link to="/eleave" class="flex items-center justify-center w-28 px-4 py-2 bg-blue-700 text-white rounded-2xl shadow mb-8 hover:bg-blue-900 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow-3xl hover:z-10" :class="{ 'bg-blue-800': isActive('/planning') }">
+            <span>Leave</span>
           </router-link>
         </div>
 

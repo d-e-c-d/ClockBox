@@ -1659,6 +1659,42 @@ if (!localStorage.getItem('epointing')) {
   localStorage.setItem('epointing', JSON.stringify(epointing.value));
 }
 
+const leave = ref([
+  {
+    id: 1,
+    "author": "Ahmed Rashdan",
+    "start_date": "2024-06-10",
+    "end_date": "2024-06-16",
+    "reason": "Pregnant wife and sick grandma",
+    "type": "other",
+    "status": "Allowed",
+    "Paid": "Yes"
+  },
+  {
+    id: 2,
+    "author": "Kadi Manela",
+    "start_date": "2023-12-22",
+    "end_date": "2024-01-01",
+    "reason": "Christmas holiday",
+    "type": "other",
+    "status": "Refused",
+    "Paid": "No"
+  },
+  {
+    id: 3,
+    "author": "Jane Smith",
+    "start_date": "2024-03-10",
+    "end_date": "2024-03-24",
+    "reason": "Easter holidays",
+    "type": "other",
+    "status": "Pending",
+    "Paid": "No"
+  }
+]);
+if (!localStorage.getItem('leave')) {
+  localStorage.setItem('leave', JSON.stringify(leave.value));
+}
+
 const ident = useStorage('identifiants', []);
 const emp = useStorage('employees', []);
 
@@ -1711,11 +1747,15 @@ const login = () => {
     if (Admin && Admin.password === password.value) {
       const token = Math.random().toString(36).substr(2);
       localStorage.setItem('userToken', token);
+      localStorage.setItem('adminName', Admin.user_prenom);
+      localStorage.setItem('adminEmail', Admin.email);
       isAuthenticated.value = true;
       router.push('/dashboard');
     } else if (Users && Users.password === password.value) {
       const token = Math.random().toString(36).substr(2);
       localStorage.setItem('userToken', token);
+      localStorage.setItem('userName', Users.employee);
+      localStorage.setItem('userEmail', Users.email);
       isAuthenticated.value = true;
       router.push('/edashboard');
     }

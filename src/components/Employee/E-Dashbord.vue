@@ -95,19 +95,6 @@ const formatTime = (time: Date) => {
 const currentTime = ref(formatTime(new Date()));
 const currentDate = ref(formatDate(new Date()));
 
-// Sample real-time data
-const totalEmployees = ref(452);
-const employeeChange = ref('2 new employees added!');
-const onTime = ref(360);
-const onTimeChange = ref('-10% Less than yesterday');
-const absent = ref(30);
-const absentChange = ref('+3% Increase than yesterday');
-const lateArrival = ref(62);
-const lateArrivalChange = ref('+5% Increase than yesterday');
-const earlyDepartures = ref(6);
-const earlyDeparturesChange = ref('-10% Less than yesterday');
-const timeOff = ref(42);
-const timeOffChange = ref('+2% Increase than yesterday');
 
 // Update time every second
 const updateTime = () => {
@@ -115,33 +102,11 @@ const updateTime = () => {
   currentDate.value = formatDate(new Date());
 };
 
-// Simulate fetching real-time data
-const fetchData = () => {
-  // Simulate data update
-  totalEmployees.value = 452 + Math.floor(Math.random() * 10);
-  onTime.value = 360 + Math.floor(Math.random() * 10);
-  absent.value = 30 + Math.floor(Math.random() * 5);
-  lateArrival.value = 62 + Math.floor(Math.random() * 5);
-  earlyDepartures.value = 6 + Math.floor(Math.random() * 3);
-  timeOff.value = 42 + Math.floor(Math.random() * 5);
-
-  // Update change text
-  employeeChange.value = '2 new employees added!';
-  onTimeChange.value = '-10% Less than yesterday';
-  absentChange.value = '+3% Increase than yesterday';
-  lateArrivalChange.value = '+5% Increase than yesterday';
-  earlyDeparturesChange.value = '-10% Less than yesterday';
-  timeOffChange.value = '+2% Increase than yesterday';
-};
-
 // Set intervals for updating time and fetching data
 onMounted(() => {
   const timeInterval = setInterval(updateTime, 1000);
-  const dataInterval = setInterval(fetchData, 5000);
-
   onUnmounted(() => {
     clearInterval(timeInterval);
-    clearInterval(dataInterval);
   });
 });
 
@@ -153,13 +118,19 @@ const generateRandomLeaveData = () => {
 
   return { remaining, used, total };
 };
+const paidLeave = () => {
+  const total = 0;
+  const used = Math.floor(Math.random() * total);
+  const remaining = total - used;
 
+  return { remaining, used, total };
+}
 const leaves = ref([
-  { title: 'Casual leave', ...generateRandomLeaveData() },
-  { title: 'Stick leave', ...generateRandomLeaveData() },
-  { title: 'Earned leave', ...generateRandomLeaveData() },
-  { title: 'Ajustment leave', ...generateRandomLeaveData() },
-  { title: 'Unpaid leave', ...generateRandomLeaveData() },
-  { title: 'Half leave', ...generateRandomLeaveData() }
+  { title: 'Justified leave', ...generateRandomLeaveData() },
+  { title: 'Unjustified leave', ...generateRandomLeaveData() },
+  { title: 'Refused leave', ...generateRandomLeaveData() },
+  { title: 'Paid leave', ...paidLeave() },
+  { title: 'Allowed leave', ...generateRandomLeaveData() },
+  { title: 'Total leave request', ...generateRandomLeaveData() }
 ]);
 </script>

@@ -108,8 +108,8 @@
             </transition>
           </Popover>
           <div>
-            <span class="block text-gray-700">Admin</span>
-            <span class="block text-gray-400 text-sm">darrylk97@gmail.com</span>
+            <span class="block text-gray-700">{{ user_name }}</span>
+            <span class="block text-gray-400 text-sm">{{ user_email }}</span>
           </div>
         </div>
       </header>
@@ -139,8 +139,10 @@ import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import {ref} from "vue";
 import router from "@/router/index.ts";
 
-const isLogout = ref(false);
+const user_name = localStorage.getItem('adminName');
+const user_email = localStorage.getItem('adminEmail');
 
+const isLogout = ref(false);
 const closeLogout = () => {
   isLogout.value = false;
 };
@@ -155,26 +157,6 @@ const logout = () => {
 };
 
 const profil = [
-  {
-    name: 'Settings',
-    description: 'Acess to your settings.',
-    href: '/settings',
-    icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\n' +
-        '<path d="M12 16.5C14.4853 16.5 16.5 14.4853 16.5 12C16.5 9.51472 14.4853 7.5 12 7.5C9.51472 7.5 7.5 9.51472 7.5 12C7.5 14.4853 9.51472 16.5 12 16.5Z" stroke="#1E3A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>\n' +
-        '<path d="M17.2181 6.10177C17.4583 6.31443 17.6854 6.54148 17.898 6.78166L20.4595 7.14743C20.8749 7.87075 21.1951 8.64467 21.4123 9.45001L19.8604 11.5192C19.8604 11.5192 19.8799 12.1604 19.8604 12.4806L21.413 14.5505C21.1953 15.3557 20.8745 16.1294 20.4586 16.8524L17.898 17.2182C17.898 17.2182 17.4584 17.6854 17.2183 17.898L16.8525 20.4595C16.1292 20.8749 15.3552 21.1951 14.5499 21.4123L12.4808 19.8604C12.1606 19.8799 11.8395 19.8799 11.5193 19.8604L9.44944 21.413C8.64425 21.1953 7.87054 20.8745 7.1475 20.4586L6.7818 17.8981C6.54162 17.6855 6.31457 17.4584 6.10191 17.2183L3.54044 16.8525C3.12505 16.1292 2.80479 15.3552 2.58759 14.5499L4.13957 12.4807C4.13957 12.4807 4.12005 11.8395 4.13951 11.5193L2.58691 9.44944C2.80466 8.64425 3.12545 7.87054 3.54132 7.1475L6.10177 6.7818C6.31443 6.54161 6.54148 6.31457 6.78166 6.10191L7.14743 3.54044C7.87075 3.12505 8.64467 2.80479 9.45001 2.58759L11.5191 4.13951C11.8393 4.12005 12.1604 4.12005 12.4806 4.13951L14.5505 2.58691C15.3557 2.80466 16.1294 3.12545 16.8524 3.54132L17.2181 6.10177Z" stroke="#1E3A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>\n' +
-        '</svg>\n' +
-        '\n',
-  },
-  {
-    name: 'Leave requests',
-    description: 'Manage the employee leave requests list.',
-    href: '',
-    icon: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\n' +
-        '<path d="M3 19.5V6C3 5.80109 3.07902 5.61032 3.21967 5.46967C3.36032 5.32902 3.55109 5.25 3.75 5.25H8.75C8.91228 5.25 9.07018 5.30263 9.2 5.4L11.8 7.35C11.9298 7.44737 12.0877 7.5 12.25 7.5H18.75C18.9489 7.5 19.1397 7.57902 19.2803 7.71967C19.421 7.86032 19.5 8.05109 19.5 8.25V10.5" stroke="#1E3A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>\n' +
-        '<path d="M3 19.5L5.82906 11.0128C5.87884 10.8635 5.97434 10.7336 6.10204 10.6416C6.22974 10.5495 6.38316 10.5 6.54057 10.5H21.4594C21.5783 10.5 21.6954 10.5282 21.8012 10.5824C21.907 10.6365 21.9984 10.7151 22.0679 10.8115C22.1373 10.9079 22.1829 11.0194 22.2009 11.1369C22.2188 11.2544 22.2085 11.3744 22.1709 11.4872L19.5 19.5H3Z" stroke="#1E3A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>\n' +
-        '</svg>\n' +
-        '\n',
-  },
   {
     name: 'Logout',
     description: 'Logout to leave us.',

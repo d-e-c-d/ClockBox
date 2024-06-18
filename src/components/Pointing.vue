@@ -132,9 +132,9 @@
                         <th scope="col" class="px-6 py-3">Role</th>
                         <th scope="col" class="px-6 py-3">Département</th>
                         <th scope="col" class="px-6 py-3">Date</th>
-                        <th scope="col" class="px-6 py-3">Status</th>
-                        <th scope="col" class="px-6 py-3">Check-in</th>
-                        <th scope="col" class="px-6 py-3">Check-out</th>
+                        <th scope="col" class="py-3">Status</th>
+                        <th scope="col" class="py-3">Check-in</th>
+                        <th scope="col" class="py-3">Check-out</th>
                         <th scope="col" class="px-6 py-3">Work hours</th>
                       </tr>
                       </thead>
@@ -143,12 +143,12 @@
                         <td class="text-gray-900 p-5">{{ employee.id }}</td>
                         <td class="text-gray-900">{{ employee.employee }}</td>
                         <td>{{ employee.role }}</td>
-                        <td>{{ employee.department }}</td>
+                        <td class="px-7">{{ employee.department }}</td>
                         <td>{{ employee.date }}</td>
-                        <td :class="statusColor(employee)">{{ employee.status }}</td>
-                        <td :class="checkinColor(employee)">{{ employee.checkIn }}</td>
-                        <td :class="checkoutColor(employee)">{{ employee.checkOut }}</td>
-                        <td :class="workhoursColor(employee)">{{ employee.workHours }}</td>
+                        <td :class="statusColor(employee)" class="px-10 py-3">{{ employee.status }}</td>
+                        <td :class="checkinColor(employee)" class="px-10">{{ employee.checkIn }}</td>
+                        <td :class="checkoutColor(employee)" class="px-10">{{ employee.checkOut }}</td>
+                        <td :class="workhoursColor(employee)" class="px-10">{{ employee.workHours }}</td>
                       </tr>
                       </tbody>
                     </table>
