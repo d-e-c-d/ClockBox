@@ -47,15 +47,15 @@
 
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import {ref, onMounted, onUnmounted, computed} from 'vue';
 import Sidebar from "@/components/Employee/E-Sidebar.vue";
 import Header from "@/components/Employee/E-Header.vue";
 import StatCard from "@/components/Employee/E-StatCard.vue";
 import Chart from "@/components/Employee/E-Chart.vue";
 import TimeBasedIcon from "@/components/Employee/E-TimeBasedIcon.vue";
 import Bar from "@/components/Employee/E-Bar.vue";
-
-
+import {useStorage} from "@vueuse/core";
+const leave = useStorage('leave', [])
 
 // Format Date with letters
 const formatDate = (date: Date) => {
@@ -110,27 +110,19 @@ onMounted(() => {
   });
 });
 
-// Generate random leave data
-const generateRandomLeaveData = () => {
-  const total = 7;
-  const used = Math.floor(Math.random() * total);
-  const remaining = total - used;
+const totalLeave = computed(() => leave.value.length);
+const leavePending = computed(() => leave.value.filter((item) => item.status === 'Pending').length)
+const refusedLeave = computed(() => leave.value.filter((item) => item.status === 'Refused').length)
+const justifiedLeave = computed(() => leave.value.filter((item) => item.reason && item.reason.trim() !== '').length);
+const unjustifiedLeave = computed(() => leave.value.filter((item) => !item.reason || item.reason.trim() === '').length);
+const allowedLeave = computed(() => leave.value.filter((item) => item.status === 'Allowed').length)
 
-  return { remaining, used, total };
-};
-const paidLeave = () => {
-  const total = 0;
-  const used = Math.floor(Math.random() * total);
-  const remaining = total - used;
-
-  return { remaining, used, total };
-}
 const leaves = ref([
-  { title: 'Justified leave', ...generateRandomLeaveData() },
-  { title: 'Unjustified leave', ...generateRandomLeaveData() },
-  { title: 'Refused leave', ...generateRandomLeaveData() },
-  { title: 'Paid leave', ...paidLeave() },
-  { title: 'Allowed leave', ...generateRandomLeaveData() },
-  { title: 'Total leave request', ...generateRandomLeaveData() }
+  { title: 'Justified leave', total: justifiedLeave.value},
+  { title: 'Unjustified leave', total: unjustifiedLeave.value},
+  { title: 'Refused leave', total: refusedLeave.value},
+  { title: 'Leave Request pending', total: leavePending.value},
+  { title: 'Allowed leave', total: allowedLeave.value},
+  { title: 'Total leave request', total: totalLeave.value }
 ]);
 </script>
