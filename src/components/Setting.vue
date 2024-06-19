@@ -73,19 +73,15 @@
             </DisclosureButton>
             <DisclosurePanel class="px-4 pb-2 pt-4 text-sm text-gray-500">
               <div class="flex justify-between">
-                <div>
-                  <strong>Name :</strong>
-                  <br>
-                  <br>
-                  <strong>Phone Number :</strong>
-                  <br>
-                  <br>
+                <div  class="pr-16">
+                  <strong>Name : <span class="text-blue-700">{{ user_name }}</span></strong>
+                  <br><br>
+                  <strong>Telephone : <span class="text-blue-700">+237-653-492-410</span></strong>
                 </div>
-                <div class="mr-32">
-                  <strong>Email :</strong>
-                  <br>
-                  <br>
-                  <strong>Password :</strong>
+                <div>
+                  <strong>Email : <span class="text-blue-700">{{ user_email }}</span></strong>
+                  <br><br>
+                  <strong>Password : <span class="text-blue-700">********</span></strong>
                 </div>
               </div>
             </DisclosurePanel>
@@ -103,27 +99,23 @@
             <DisclosurePanel class="px-4 pb-5 pt-4 text-sm text-gray-500">
               <div class="flex justify-between">
                 <div>
-                  <strong>Entreprise Name :</strong>
-                  <br>
-                  <br>
-                  <strong>Adress :</strong>
-                  <br>
-                  <br>
-                  <strong>Work Days per Week :</strong>
+                  <strong>Entreprise Name : <span class="text-blue-700">LAO SARL</span></strong>
+                  <br><br>
+                  <strong>Adress : <span class="text-blue-700">Logpom Bassong</span></strong>
+                  <br><br>
+                  <strong>Work Days per Week : <span class="text-blue-700">6</span></strong>
                 </div>
-                <div class="mr-28">
-                    <strong>Employees :</strong>
-                    <br>
-                    <br>
-                    <strong>Activity Area :</strong>
-                    <br>
-                    <br>
-                  <strong>Suscription :</strong>
+                <div>
+                  <strong>Employees : <span class="text-blue-700">{{ totalEmployees }}</span></strong>
+                  <br><br>
+                  <strong>Activity Area : <span class="text-blue-700">IT Service Provider</span></strong>
+                  <br><br>
+                  <strong>Suscription : <span class="text-blue-700">Standart</span></strong>
                 </div>
               </div>
             </DisclosurePanel>
           </Disclosure>
-            <button @click="closeGeneral" class="mt-4 inline-flex ml-56 justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+            <button @click="" class="mt-4 inline-flex ml-56 justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
               Edit
             </button>
         </div>
@@ -152,10 +144,16 @@
 import Card from '../components/Card.vue';
 import Header from '../components/Header.vue';
 import Sidebar from '../components/Sidebar.vue';
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 import {ChevronUpIcon} from "@heroicons/vue/20/solid";
 import router from "@/router";
+import {useStorage} from "@vueuse/core";
+const user_name = localStorage.getItem('adminName');
+const user_email = localStorage.getItem('adminEmail');
+const employees = useStorage('employees', []);
+
+const totalEmployees = computed(() => employees.value.length);
 
 // LogOut
 const isLogout = ref(false);

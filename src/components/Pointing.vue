@@ -220,7 +220,8 @@ const pointingFiltres = computed(() => {
   if (recherche.value) {
     filtered = searchpoint(recherche.value);
   }
-  return applyFilters(filtered);
+  filtered = applyFilters(filtered);
+  return filtered.sort((a, b) => b.id - a.id);
 });
 
 const totalPages = computed(() => {
