@@ -121,7 +121,7 @@
     <div v-if="isLogout" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full">
         <h3 class="text-2xl bold font-bold text-blue-900"><span>LogOut</span></h3>
-        <p class="mt-2 text-sm text-gray-500">GoodBye!</p>
+        <p class="mt-2 text-sm text-gray-500">Do you want to log out ?</p>
         <button @click="logout" class="mt-4 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
           Exit
         </button>

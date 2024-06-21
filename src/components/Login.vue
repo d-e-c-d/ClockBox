@@ -1661,7 +1661,7 @@ if (!localStorage.getItem('epointing')) {
 
 const leave = ref([
   {
-    id: 1,
+    "id": 1,
     "author": "Ahmed Rashdan",
     "start_date": "2024-06-10",
     "end_date": "2024-06-16",
@@ -1671,7 +1671,7 @@ const leave = ref([
     "Paid": "Yes"
   },
   {
-    id: 2,
+    "id": 2,
     "author": "Kadi Manela",
     "start_date": "2023-12-22",
     "end_date": "2024-01-01",
@@ -1681,7 +1681,7 @@ const leave = ref([
     "Paid": "No"
   },
   {
-    id: 3,
+    "id": 3,
     "author": "Jane Smith",
     "start_date": "2024-03-10",
     "end_date": "2024-03-24",

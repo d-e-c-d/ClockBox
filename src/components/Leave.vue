@@ -55,21 +55,21 @@
                     >
                       <div class="flex">
                         <div class="p-3">
-                          <input type="checkbox" id="allowed" v-model="Allowed" class="mr-2" @click="filterCheckboxChange('Allowed')">
+                          <input type="radio" id="allowed" value="Allowed" v-model="selectedFilter" class="mr-2">
                           <label for="allowed" class="font-light">Allowed</label>
                         </div>
                         <div class="p-3">
-                          <input type="checkbox" id="refused" v-model="Refused" class="mr-2" @click="filterCheckboxChange('Refused')">
+                          <input type="radio" id="refused" value="Refused" v-model="selectedFilter" class="mr-2">
                           <label for="refused" class="font-light">Refused</label>
                         </div>
                       </div>
                       <div class="flex">
                         <div class="p-3">
-                          <input type="checkbox" id="pending" v-model="Pending" class="mr-2" @click="filterCheckboxChange('Pending')">
+                          <input type="radio" id="pending" value="Pending" v-model="selectedFilter" class="mr-2">
                           <label for="pending" class="font-light">Pending</label>
                         </div>
                         <div class="p-3">
-                          <input type="checkbox" id="all_status" v-model="allstatus" class="mr-2" @click="filterCheckboxChange">
+                          <input type="radio" id="all_status" value="allstatus" v-model="selectedFilter" class="mr-2">
                           <label for="all_status" class="font-light">All</label>
                         </div>
                       </div>
@@ -396,7 +396,7 @@ const leaveFiltres = computed(() => {
     filtered = searchleave(recherche.value);
   }
   filtered = applyFilters(filtered);
-  return filtered.sort((a, b) => b.start_date - a.start_date);
+  return filtered;
 });
 
 const totalPages = computed(() => {
@@ -429,36 +429,12 @@ const paidColor = (leave) => {
   }
 }
 
-// Filter
-const filterCheckboxChange = (selected: 'Allowed' | 'Refused' | 'Pending' | 'allstatus') => {
-  if (selected === 'Allowed') {
-    Refused.value = false;
-    Pending.value = false;
-    allstatus.value = false;
-  } else if ( selected === 'Refused') {
-    Allowed.value = false;
-    Pending.value = false;
-    allstatus.value = false;
-  } else if ( selected === 'Pending') {
-    Refused.value = false;
-    Allowed.value = false;
-    allstatus.value = false;
-  } else {
-    Refused.value = false;
-    Allowed.value = false;
-    Pending.value = false;
+const selectedFilter = ref('allstatus');
+const applyFilters = (leaves) => {
+  if (selectedFilter.value === 'allstatus') {
+    return leaves;
   }
-};
-const applyFilters = (leave) => {
-  if (allstatus.value) {
-    return leave;
-  }
-  return leave.filter(leave => {
-    if (Allowed.value && leave.status === "Allowed") return true;
-    if (Refused.value && leave.status === "Refused") return true;
-    if (Pending.value && leave.status === "Pending") return true;
-    return false;
-  });
+  return leaves.filter((leave) => leave.status === selectedFilter.value);
 };
 
 // Request a leave

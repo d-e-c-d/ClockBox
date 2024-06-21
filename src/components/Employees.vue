@@ -94,6 +94,7 @@
                   </svg>
                   <p class="font-light">Add Employee</p>
                 </button>
+
                 <!-- Downoload csv file -->
                 <Popover v-slot="{ open }" class="relative">
                   <PopoverButton class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-xl mr-3 flex">
@@ -553,7 +554,8 @@ const employeesFiltres = computed(() => {
     filtered = searchemp();
   }
   filtered = applyFilters(filtered);
-  return filtered.sort((a, b) => b.id - a.id);});
+  return filtered;
+});
 const totalPages = computed(() => {
   return Math.ceil(employeesFiltres.value.length / 10);
 });

@@ -76,13 +76,24 @@
                           />
                         </svg>
                       </div>
-                      <button class="bg-gray-300 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-xl mr-3 flex" @click="openNewemp">
-                        <svg width="20" height="20" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                          <path d="M12.5724 2.70602H2.84528C2.07783 2.70602 1.45569 3.3898 1.45569 4.23329V14.9241C1.45569 15.7676 2.07783 16.4514 2.84528 16.4514H12.5724C13.3399 16.4514 13.962 15.7676 13.962 14.9241V4.23329C13.962 3.3898 13.3399 2.70602 12.5724 2.70602Z" stroke="#9295AB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M10.488 1.17876V4.23328M4.92967 1.17876V4.23328M1.45569 7.28781H13.962" stroke="#9295AB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <button class="bg-gray-300 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-xl mr-3 flex" @click="openPoint">
+                        <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            class="mr-2"
+                            xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#252C58" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M7.22746 16.773C6.59998 16.1466 6.10218 15.4026 5.76252 14.5836C5.42287 13.7646 5.24805 12.8867 5.24805 12C5.24805 11.1134 5.42287 10.2355 5.76252 9.41645C6.10218 8.59745 6.59998 7.85346 7.22746 7.22705" stroke="#252C58" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M16.7734 7.22705C17.4009 7.85346 17.8987 8.59745 18.2384 9.41645C18.578 10.2355 18.7529 11.1134 18.7529 12C18.7529 12.8867 18.578 13.7646 18.2384 14.5836C17.8987 15.4026 17.4009 16.1466 16.7734 16.773" stroke="#252C58" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M4.57519 19.4244C3.59911 18.45 2.82474 17.2927 2.29639 16.0187C1.76805 14.7447 1.49609 13.379 1.49609 11.9998C1.49609 10.6206 1.76805 9.25493 2.29639 7.98093C2.82474 6.70693 3.59911 5.54961 4.57519 4.5752" stroke="#252C58" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M19.4248 4.5752C20.4009 5.54961 21.1753 6.70693 21.7036 7.98093C22.2319 9.25493 22.5039 10.6206 22.5039 11.9998C22.5039 13.379 22.2319 14.7447 21.7036 16.0187C21.1753 17.2927 20.4009 18.45 19.4248 19.4244" stroke="#252C58" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        <p class="font-light">Calendar</p>
+
+                        <p class="font-light">Add Pointage</p>
                       </button>
+
                       <!-- Downoload csv file -->
                       <Popover v-slot="{ open }" class="relative">
                         <PopoverButton class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-xl mr-3 flex">
@@ -179,6 +190,124 @@
                 </div>
               </div>
 
+        <transition name="fade">
+          <div v-if="isPoint" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div class="w-full px-4">
+              <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
+                <div class="flex justify-between pb-6">
+                  <h3 class="text-2xl bold font-bold text-blue-900 "><strong>Add a pointage</strong></h3>
+                  <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closePoint">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18.75 5.25L5.25 18.75" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M18.75 18.75L5.25 5.25" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+                <form @submit.prevent="">
+                  <div class="flex">
+                    <div class="mb-4 mr-24">
+                      <label for="employee" class="block text-gray-700">Employee<span class="text-red-600">*</span></label>
+                      <input
+                          v-model="user_name"
+                          type="text"
+                          id="employee"
+                          class="mt-2 p-2 w-full text-gray-600 pl-5 border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
+                          required
+                      />
+                    </div>
+                    <div class="mb-4">
+                      <label for="date" class="block text-gray-700">Date<span class="text-red-600">*</span></label>
+                      <input
+                          v-model="date"
+                          type="text"
+                          id="date"
+                          class="mt-2 p-2 w-full pl-5 text-gray-600 border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
+                          required
+                          placeholder="ex: 19 june 2024"
+                      />
+                    </div>
+                  </div>
+                  <div class="mt-4 mb-10">
+                    <h2 class="block text-gray-700 mb-2">Status<span class="text-red-600">*</span></h2>
+                    <div class="flex flex-row">
+                      <div class="flex items-center bg-blue-100 hover:bg-blue-200 px-4 py-2 rounded-md text-blue-700 mt-3 mr-16">
+                        <label for="reason" class="block font-light mr-2">On time</label>
+                        <input
+                            id="status"
+                            name="status"
+                            value="on_time"
+                            type="radio"
+                            checked>
+                      </div>
+                      <div class="flex items-center bg-red-100 hover:bg-red-200 px-4 py-2 rounded-md text-red-700 mt-3 mr-18">
+                        <label for="reason" class="block font-light mr-2">Absent</label>
+                        <input
+                            id="status"
+                            name="status"
+                            value="absent"
+                            type="radio">
+                      </div>
+                      <div class="flex items-center bg-yellow-100 hover:bg-yellow-200 px-4 py-2 rounded-md text-yellow-700 mt-3 ml-16">
+                        <label for="reason" class="block font-light mr-2">Late arrival</label>
+                        <input
+                            id="status"
+                            name="status"
+                            value="late_arrival"
+                            type="radio">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex">
+                    <div class="mb-4 mr-24">
+                      <label for="checkIn" class="block text-gray-700">Check-In<span class="text-red-600">*</span></label>
+                      <input
+                          v-model="checkIn"
+                          type="text"
+                          id="checkIn"
+                          class="mt-2 p-2 w-full text-gray-600 pl-5 border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
+                          required
+                          placeholder="ex: 00:00"
+                      />
+                    </div>
+                    <div class="mb-4">
+                      <label for="checkOut" class="block text-gray-700">Check-Out<span class="text-red-600">*</span></label>
+                      <input
+                          v-model="checkOut"
+                          type="text"
+                          id="checkOut"
+                          class="mt-2 p-2 w-full pl-5 text-gray-600 border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
+                          required
+                          placeholder="ex: 00:00"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-4 mt-4">
+                    <label for="workHours" class="block text-gray-700 mb-2">Work Hours<span class="text-red-600">*</span></label>
+                    <input
+                        id="workHours"
+                        v-model="workHours"
+                        type="text"
+                        class="mt-2 w-full p-2 bg-white text-gray-600 border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
+                        required
+                        placeholder="ex: 0m or 12h or 12h00m"
+                    >
+
+                  </div>
+                </form>
+                <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
+                <div class="mt-5 border-t-gray-100 border-t-2 mb-5"></div>
+                <button @click="addPoint" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                  Add
+                </button>
+                <button @click="closePoint" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </transition>
+
+
       </div>
     </div>
   </div>
@@ -201,6 +330,13 @@ const allstatus = ref(true);
 const ontime = ref(false);
 const latearrival = ref(false);
 const absent = ref(false);
+const checkIn = ref('');
+const checkOut = ref('');
+const workHours = ref('');
+const date = ref('');
+const user_name = ref('');
+const role = ref('');
+const departement = ref('');
 
 const pointing = useStorage('pointing', []);
 
@@ -221,7 +357,7 @@ const pointingFiltres = computed(() => {
     filtered = searchpoint(recherche.value);
   }
   filtered = applyFilters(filtered);
-  return filtered.sort((a, b) => b.id - a.id);
+  return filtered;
 });
 
 const totalPages = computed(() => {
@@ -360,4 +496,53 @@ const applyFilters = (pointing) => {
     return false;
   });
 };
+
+// Add Point
+const isPoint = ref(false);
+const closePoint = () => {
+  isPoint.value = false;
+  error.value = '';
+};
+const openPoint = () => {
+  isPoint.value = true;
+};
+
+const addPoint = () => {
+  let lastId = 0;
+  if (pointing.value && pointing.value.length > 0) {
+    lastId = pointing.value[pointing.value.length - 1].id;
+  }
+
+  const newPointage = {
+    id: lastId + 1,
+    employee: user_name.value,
+    date: date.value,
+    status: statusChoiced.value,
+    checkIn: checkIn.value,
+    checkOut: checkIn.value,
+    workHours: workHours.value,
+  };
+
+  pointing.value.push(newPointage);
+
+  if (!user_name.value
+      || !date.value
+      || !statusChoiced.value
+      || !checkIn.value
+      || !checkIn.value
+      || !workHours.value) {
+    error.value = 'Entrez les informations !';
+    return;
+  }
+
+  error.value = '';
+  closePoint();
+  recherche = ('');
+  user_name.value = ('');
+  date.value = ('');
+  statusChoiced.value = ('');
+  checkIn.value = ('');
+  checkIn.value = ('');
+  workHours.value = ('');
+}
 </script>

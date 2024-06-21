@@ -8,7 +8,10 @@ module.exports = {
     extend: {
       boxShadow: {
         'custom': '0 0 0 3px rgba(24, 119, 242, 0.3)',
-}
+      }
+    },
+    backgroundImage: {
+      url: 'url',
     },
   },
   plugins: [],
