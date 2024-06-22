@@ -147,6 +147,7 @@
                         <th scope="col" class="py-3">Check-in</th>
                         <th scope="col" class="py-3">Check-out</th>
                         <th scope="col" class="px-6 py-3">Work hours</th>
+                        <th scope="col"></th>
                       </tr>
                       </thead>
                       <tbody>
@@ -160,6 +161,17 @@
                         <td :class="checkinColor(employee)" class="px-10">{{ employee.checkIn }}</td>
                         <td :class="checkoutColor(employee)" class="px-10">{{ employee.checkOut }}</td>
                         <td :class="workhoursColor(employee)" class="px-10">{{ employee.workHours }}</td>
+                        <td>
+                            <div class="ml-2.5 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:z-10" @click="delPointage(employee.id)">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.25 5.25L3.75 5.25001" stroke="#0842A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9.75 9.75V15.75" stroke="#0842A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14.25 9.75V15.75" stroke="#0842A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18.75 5.25V19.5C18.75 19.6989 18.671 19.8897 18.5303 20.0303C18.3897 20.171 18.1989 20.25 18 20.25H6C5.80109 20.25 5.61032 20.171 5.46967 20.0303C5.32902 19.8897 5.25 19.6989 5.25 19.5V5.25" stroke="#0842A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M15.75 5.25V3.75C15.75 3.35218 15.592 2.97064 15.3107 2.68934C15.0294 2.40804 14.6478 2.25 14.25 2.25H9.75C9.35218 2.25 8.97064 2.40804 8.68934 2.68934C8.40804 2.97064 8.25 3.35218 8.25 3.75V5.25" stroke="#0842A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                            </div>
+                        </td>
                       </tr>
                       </tbody>
                     </table>
@@ -336,7 +348,7 @@ const workHours = ref('');
 const date = ref('');
 const user_name = ref('');
 const role = ref('');
-const departement = ref('');
+const department = ref('');
 
 const pointing = useStorage('pointing', []);
 
@@ -513,21 +525,64 @@ const addPoint = () => {
     lastId = pointing.value[pointing.value.length - 1].id;
   }
 
+  const getRole = (user_name) => {
+    const pointing = localStorage.getItem('pointing');
+    if (!pointing) {
+      return undefined;
+    }
+    const employes = JSON.parse(pointing);
+    const employe = employes.find(e => e.employee === user_name);
+    return employe.role;
+  };
+  const Role = getRole(user_name.value);
+
+  const getDep = (user_name) => {
+    const pointing = localStorage.getItem('pointing');
+    if (!pointing) {
+      return undefined;
+    }
+    const employes = JSON.parse(pointing);
+    const employe = employes.find(e => e.employee === user_name);
+    return employe.department;
+  };
+  const Dep = getDep(user_name.value)
+
+  const statusChoiced = () => {
+    const statusInputs = document.getElementsByName('status');
+    for (const input of statusInputs) {
+      if (input.checked) {
+        switch (input.value) {
+          case 'on_time':
+            return 'On time';
+          case 'absent':
+            return 'Absent';
+          case 'late_arrival':
+            return 'Late arrival';
+          default:
+            return null;
+        }
+      }
+    }
+    return null;
+  };
+
   const newPointage = {
     id: lastId + 1,
     employee: user_name.value,
     date: date.value,
-    status: statusChoiced.value,
+    status: statusChoiced(),
     checkIn: checkIn.value,
     checkOut: checkIn.value,
     workHours: workHours.value,
+    role: Role,
+    department : Dep,
   };
 
   pointing.value.push(newPointage);
 
   if (!user_name.value
       || !date.value
-      || !statusChoiced.value
+      || !statusChoiced()
       || !checkIn.value
       || !checkIn.value
       || !workHours.value) {
@@ -537,12 +592,20 @@ const addPoint = () => {
 
   error.value = '';
   closePoint();
-  recherche = ('');
+  recherche.value = ('');
   user_name.value = ('');
   date.value = ('');
   statusChoiced.value = ('');
   checkIn.value = ('');
   checkIn.value = ('');
   workHours.value = ('');
+}
+
+// Delete Pointage
+const delPointage = (employeeId: number) => {
+  const employeeIndex = pointing.value.findIndex(employee => employee.id === employeeId);
+  if (employeeIndex !== -1) {
+    pointing.value.splice(employeeIndex, 1);
+  }
 }
 </script>
