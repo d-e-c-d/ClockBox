@@ -10,13 +10,13 @@
         <div class="flex flex-1 flex-col items-center overflow-hidden">
           <div class="lg:w-[90rem] md:w-[40rem]  sm:w-[25rem] bg-white rounded-2xl px-6 py-5 mt-16 shadow-2xl">
             <div class="flex items-center justify-between mb-5 p-5">
-              <h1 class="text-3xl font-light text-gray-800">Leave <br> Request</h1>
+              <h1 class="text-3xl font-light text-gray-800"><span v-html="$t('title') + '<br>' + $t('title2')"></span></h1>
               <div class="flex items-center">
                 <div class="relative flex-1 max-w-md mx-auto mr-4">
                   <input
                       v-model="recherche"
                       type="text"
-                      placeholder="Quick Search..."
+                      :placeholder="$t('employeesOverview.quickSearchPlaceholder')"
                       class="w-full p-2 pl-10 rounded-xl border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 px-40"
                   />
                   <svg
@@ -40,7 +40,7 @@
                     <svg width="20" height="27" viewBox="0 0 14 21" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-1">
                       <path d="M2.26097 3.90137H11.4925C11.5758 3.90137 11.6573 3.93796 11.727 4.00669C11.7968 4.07542 11.8519 4.17334 11.8856 4.28854C11.9193 4.40374 11.9301 4.53126 11.9168 4.6556C11.9035 4.77995 11.8666 4.89576 11.8105 4.98897L8.27791 10.8678C8.20599 10.9875 8.16614 11.1434 8.16614 11.3052V15.9075C8.16614 16.0146 8.14867 16.12 8.11528 16.2144C8.0819 16.3087 8.03362 16.3892 7.97475 16.4486L6.25557 18.1825C6.19084 18.2478 6.11561 18.2852 6.03791 18.2909C5.96021 18.2966 5.88294 18.2703 5.81435 18.2147C5.74577 18.1592 5.68843 18.0766 5.64845 17.9756C5.60847 17.8746 5.58736 17.7592 5.58736 17.6415V11.3052C5.58736 11.1434 5.54751 10.9875 5.47559 10.8678L1.94295 4.98897C1.88694 4.89576 1.85003 4.77995 1.83671 4.6556C1.82339 4.53126 1.83423 4.40374 1.86792 4.28854C1.9016 4.17334 1.95668 4.07542 2.02646 4.00669C2.09624 3.93796 2.17771 3.90137 2.26097 3.90137V3.90137Z" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <p class="font-light">Filter</p>
+                    <p class="font-light">{{ $t('employeesOverview.filter') }}</p>
                   </PopoverButton>
                   <transition
                       enter-active-class="transition duration-200 ease-out"
@@ -56,21 +56,21 @@
                       <div class="flex">
                         <div class="p-3">
                           <input type="radio" id="allowed" value="Allowed" v-model="selectedFilter" class="mr-2">
-                          <label for="allowed" class="font-light">Allowed</label>
+                          <label for="allowed" class="font-light">{{ $t('allowed') }}</label>
                         </div>
                         <div class="p-3">
                           <input type="radio" id="refused" value="Refused" v-model="selectedFilter" class="mr-2">
-                          <label for="refused" class="font-light">Refused</label>
+                          <label for="refused" class="font-light">{{ $t('refused') }}</label>
                         </div>
                       </div>
                       <div class="flex">
                         <div class="p-3">
                           <input type="radio" id="pending" value="Pending" v-model="selectedFilter" class="mr-2">
-                          <label for="pending" class="font-light">Pending</label>
+                          <label for="pending" class="font-light">{{ $t('pending') }}</label>
                         </div>
                         <div class="p-3">
                           <input type="radio" id="all_status" value="allstatus" v-model="selectedFilter" class="mr-2">
-                          <label for="all_status" class="font-light">All</label>
+                          <label for="all_status" class="font-light">{{ $t('allStatus') }}</label>
                         </div>
                       </div>
                     </PopoverPanel>
@@ -82,14 +82,14 @@
               <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-sm text-gray-700 uppercase dark:bg-gray-300 dark:text-gray-600">
                 <tr>
-                  <th scope="col" class="px-10 py-3">Employee</th>
-                  <th scope="col" class="px-10 py-3">Type</th>
-                  <th scope="col" class="px-10 py-3">Start-Date</th>
+                  <th scope="col" class="px-10 py-3">{{ $t('employee') }}</th>
+                  <th scope="col" class="px-10 py-3">{{ $t('type') }}</th>
+                  <th scope="col" class="px-10 py-3">{{ $t('startDate') }}</th>
                   <th scope="col" class="px-10 py-3"></th>
-                  <th scope="col" class="px-10 py-3">End-Date</th>
-                  <th scope="col" class="px-10 py-3">Explanation</th>
-                  <th scope="col" class="px-16 py-3">Paid</th>
-                  <th scope="col" class=" py-3">Status</th>
+                  <th scope="col" class="px-10 py-3">{{ $t('endDate') }}</th>
+                  <th scope="col" class="px-10 py-3">{{ $t('explanation') }}</th>
+                  <th scope="col" class="px-16 py-3">{{ $t('paid') }}</th>
+                  <th scope="col" class="py-3">{{ $t('status') }}</th>
                   <th scope="col" class="px-5 py-3"></th>
                 </tr>
                 </thead>
@@ -164,7 +164,7 @@
               <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
                 <div class="flex justify-between pb-6">
                   <h3 class="text-xl bold font-bold text-blue-900"
-                     >Leave requested</h3>
+                     >{{ $t('leaveRequested') }}</h3>
                   <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeVanswer">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M18.75 5.25L5.25 18.75" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -174,7 +174,7 @@
                 </div>
                 <form @submit.prevent="">
                   <div class="mb-4 mr-24">
-                    <label for="author" class="block text-gray-700">Employee</label>
+                    <label for="author" class="block text-gray-700">{{ $t('employee') }}</label>
                     <input
                         v-model="author"
                         type="text"
@@ -185,7 +185,7 @@
                   </div>
                   <div class="flex">
                     <div class="mb-4 mr-24">
-                      <label for="user_nom" class="block text-gray-700">Start-date</label>
+                      <label for="user_nom" class="block text-gray-700">{{ $t('startDate') }}</label>
                       <input
                           v-model="start_date"
                           type="date"
@@ -195,7 +195,7 @@
                       />
                     </div>
                     <div class="mb-4">
-                      <label for="user_telephone" class="block text-gray-700">End-date</label>
+                      <label for="user_telephone" class="block text-gray-700">{{ $t('endDate') }}</label>
                       <input
                           v-model="end_date"
                           type="date"
@@ -206,7 +206,7 @@
                     </div>
                   </div>
                   <div class="mt-4 mb-4">
-                    <label for="reason" class="block text-gray-700 mb-2">Reason</label>
+                    <label for="reason" class="block text-gray-700 mb-2">{{ $t('explanation') }}</label>
                     <textarea
                         id="reason"
                         v-model="reason"
@@ -217,7 +217,7 @@
                     ></textarea>
                   </div>
                   <div class="mb-4 mt-4">
-                    <label for="type" class="block text-gray-700 mb-2">Type of leave</label>
+                    <label for="type" class="block text-gray-700 mb-2">{{ $t('type') }}</label>
                     <input
                         id="type"
                         v-model="type"
@@ -227,7 +227,7 @@
                   </div>
                   <div class="flex">
                     <div class="mb-4 mt-4 mr-24">
-                      <label for="user_nom" class="block text-gray-700">Paid</label>
+                      <label for="user_nom" class="block text-gray-700">{{ $t('paid') }}</label>
                       <input
                           v-model="Paid"
                           type="text"
@@ -237,7 +237,7 @@
                       />
                     </div>
                     <div class="mb-4 mt-4">
-                      <label for="user_telephone" class="block text-gray-700">Status</label>
+                      <label for="user_telephone" class="block text-gray-700">{{ $t('status') }}</label>
                       <input
                           v-model="status"
                           type="text"
@@ -260,7 +260,7 @@
             <div class="w-full px-4">
               <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
                 <div class="flex justify-between pb-6">
-                  <h3 class="text-xl bold font-bold text-blue-900 ">Leave currently being requested</h3>
+                  <h3 class="text-xl bold font-bold text-blue-900 ">{{ $t('viewRequest') }}</h3>
                   <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeAnswer">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M18.75 5.25L5.25 18.75" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -270,7 +270,7 @@
                 </div>
                 <form @submit.prevent="">
                   <div class="mb-4 mr-24">
-                    <label for="author" class="block text-gray-700">Employee</label>
+                    <label for="author" class="block text-gray-700">{{ $t('employee') }}</label>
                     <input
                         v-model="author"
                         type="text"
@@ -281,7 +281,7 @@
                   </div>
                   <div class="flex">
                     <div class="mb-4 mr-24">
-                      <label for="user_nom" class="block text-gray-700">Start-date</label>
+                      <label for="user_nom" class="block text-gray-700">{{ $t('startDate') }}</label>
                       <input
                           v-model="start_date"
                           type="date"
@@ -291,7 +291,7 @@
                       />
                     </div>
                     <div class="mb-4">
-                      <label for="user_telephone" class="block text-gray-700">End-date</label>
+                      <label for="user_telephone" class="block text-gray-700">{{ $t('endDate') }}</label>
                       <input
                           v-model="end_date"
                           type="date"
@@ -302,7 +302,7 @@
                     </div>
                   </div>
                   <div class="mt-4 mb-4">
-                    <label for="reason" class="block text-gray-700 mb-2">Reason</label>
+                    <label for="reason" class="block text-gray-700 mb-2">{{ $t('explanation') }}</label>
                     <textarea
                         id="reason"
                         v-model="reason"
@@ -314,7 +314,7 @@
                   </div>
                   <div class="flex justify-between">
                     <div class="mb-4 mt-4 mr-10">
-                      <label for="type" class="block text-gray-700 mb-2">Type of leave</label>
+                      <label for="type" class="block text-gray-700 mb-2">{{ $t('type') }}</label>
                       <input
                           id="type"
                           v-model="type"
@@ -323,7 +323,7 @@
                       />
                     </div>
                     <div class="mb-4 mt-14 flex items-center">
-                      <label for="Paid" class="block text-xl text-gray-600 mr-3">Leave will be paid</label>
+                      <label for="Paid" class="block text-xs text-gray-600 mr-3">{{ $t('paidLeave') }}</label>
                       <input
                           id="Paid"
                           v-model="Paid"
@@ -337,10 +337,10 @@
                 <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
                 <div class="mt-5 border-t-gray-100 border-t-2 mb-5"></div>
                 <button @click="saverequestAnswer('Allowed')" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-                  Allow
+                  {{ $t('allow') }}
                 </button>
                 <button @click="saverequestAnswer('Refused')" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-                  Refuse
+                  {{ $t('refuse') }}
                 </button>
               </div>
             </div>

@@ -10,36 +10,36 @@
         <div class="flex-1 p-12 grid grid-cols-1 md:grid-cols-4 gap-10 mx-28 mr-36 mt-2">
           <Card
               @click="openGeneral"
-              title="General"
+              :title="$t('general')"
               img="src/components/icons/General.svg"
           />
           <Card
-              title="Leave Requests"
+              :title="$t('leave')"
               img="src/components/icons/Leave.svg"
           />
           <Card
-              title="View Subscription"
+              :title="$t('card')"
               img="src/components/icons/Card.svg"
           />
           <Card
-              title="Sites"
+              :title="$t('sites')"
               img="src/components/icons/Sites.svg"
           />
           <Card
-              title="Positions"
+              :title="$t('positions')"
               img="src/components/icons/Positions.svg"
           />
           <Card
-              title="Schedules"
+              :title="$t('schedules')"
               img="src/components/icons/Schedules.svg"
           />
           <Card
-              title="Contacts"
+              :title="$t('contacts')"
               img="src/components/icons/Contacts.svg"
           />
           <Card
               @click="openLogout"
-              title="LogOut"
+              :title="$t('logout')"
               img="src/components/icons/Logout.svg"
           />
         </div>
@@ -53,7 +53,7 @@
       <div class="w-full px-4 pt-16">
         <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
           <div class="flex justify-between pb-6">
-            <h3 class="text-2xl bold font-bold text-blue-900 "><strong>General</strong></h3>
+            <h3 class="text-2xl bold font-bold text-blue-900 "><strong>{{ $t('general') }}</strong></h3>
             <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeGeneral">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18.75 5.25L5.25 18.75" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -65,7 +65,7 @@
             <DisclosureButton
                 class="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
             >
-              <span>Personnal Informations</span>
+              <span>{{ $t('employeesOverview.infomationspersonnelles') }}</span>
               <ChevronUpIcon
                   :class="open ? 'rotate-180 transform' : ''"
                   class="h-5 w-5 text-purple-500"
@@ -74,14 +74,14 @@
             <DisclosurePanel class="px-4 pb-2 pt-4 text-sm text-gray-500">
               <div class="flex justify-between">
                 <div  class="pr-16">
-                  <strong>Name : <span class="text-blue-700">{{ user_name }}</span></strong>
+                  <strong>{{ $t('employeesOverview.name') }} : <span class="text-blue-700">{{ user_name }}</span></strong>
                   <br><br>
-                  <strong>Telephone : <span class="text-blue-700">+237-653-492-410</span></strong>
+                  <strong>{{ $t('employeesOverview.phoneNumber') }} : <span class="text-blue-700">+237-653-492-410</span></strong>
                 </div>
                 <div>
-                  <strong>Email : <span class="text-blue-700">{{ user_email }}</span></strong>
+                  <strong>{{ $t('employeesOverview.email') }} : <span class="text-blue-700">{{ user_email }}</span></strong>
                   <br><br>
-                  <strong>Password : <span class="text-blue-700">********</span></strong>
+                  <strong>{{ $t('employeesOverview.password') }} : <span class="text-blue-700">********</span></strong>
                 </div>
               </div>
             </DisclosurePanel>
@@ -90,7 +90,7 @@
             <DisclosureButton
                 class="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
             >
-              <span>Company Information</span>
+              <span>{{ $t('employeesOverview.compagny') }}</span>
               <ChevronUpIcon
                   :class="open ? 'rotate-180 transform' : ''"
                   class="h-5 w-5 text-purple-500"
@@ -99,24 +99,24 @@
             <DisclosurePanel class="px-4 pb-5 pt-4 text-sm text-gray-500">
               <div class="flex justify-between">
                 <div>
-                  <strong>Entreprise Name : <span class="text-blue-700">LAO SARL</span></strong>
+                  <strong>{{ $t('company_name') }} : <span class="text-blue-700">LAO SARL</span></strong>
                   <br><br>
-                  <strong>Adress : <span class="text-blue-700">Logpom Bassong</span></strong>
+                  <strong>{{ $t('address') }} : <span class="text-blue-700">Logpom Bassong</span></strong>
                   <br><br>
-                  <strong>Work Days per Week : <span class="text-blue-700">6</span></strong>
+                  <strong>{{ $t('work_days_per_week') }} : <span class="text-blue-700">6</span></strong>
                 </div>
                 <div>
-                  <strong>Employees : <span class="text-blue-700">{{ totalEmployees }}</span></strong>
+                  <strong>{{ $t('employees') }} : <span class="text-blue-700">{{ totalEmployees }}</span></strong>
                   <br><br>
-                  <strong>Activity Area : <span class="text-blue-700">IT Service Provider</span></strong>
+                  <strong>{{ $t('activity_area') }} : <span class="text-blue-700">IT Service Provider</span></strong>
                   <br><br>
-                  <strong>Suscription : <span class="text-blue-700">Standart</span></strong>
+                  <strong>{{ $t('subscription') }} : <span class="text-blue-700">Standart</span></strong>
                 </div>
               </div>
             </DisclosurePanel>
           </Disclosure>
-            <button @click="" class="mt-4 inline-flex ml-56 justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-              Edit
+            <button @click="" class="mt-4 inline-flex ml-52 justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+              {{ $t('edit') }}
             </button>
         </div>
       </div>
@@ -127,13 +127,13 @@
   <transition name="fade">
     <div v-if="isLogout" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full">
-        <h3 class="text-2xl bold font-bold text-blue-900"><span>LogOut</span></h3>
-        <p class="mt-2 text-sm text-gray-500">Do you want to log out ?</p>
+        <h3 class="text-2xl bold font-bold text-blue-900"><span>{{ $t('logout') }}</span></h3>
+        <p class="mt-2 text-sm text-gray-500">{{ $t('logout_message') }}</p>
         <button @click="logout" class="mt-4 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-          Exit
+          {{ $t('exit') }}
         </button>
         <button @click="closeLogout" class="mt-4 ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-          Cancel
+          {{ $t('cancel') }}
         </button>
       </div>
     </div>

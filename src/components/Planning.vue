@@ -11,7 +11,7 @@
               <path d="M12.5724 2.70602H2.84528C2.07783 2.70602 1.45569 3.3898 1.45569 4.23329V14.9241C1.45569 15.7676 2.07783 16.4514 2.84528 16.4514H12.5724C13.3399 16.4514 13.962 15.7676 13.962 14.9241V4.23329C13.962 3.3898 13.3399 2.70602 12.5724 2.70602Z" stroke="#9295AB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M10.488 1.17876V4.23328M4.92967 1.17876V4.23328M1.45569 7.28781H13.962" stroke="#9295AB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <p class="font-light">Program</p>
+            <p class="font-light">{{ $t('calendar.programButton') }}</p>
           </button>
         </div>
         <div class="overflow-x-auto rounded-xl w-full">
@@ -52,14 +52,14 @@
               :disabled="currentPage === 0"
               @click="goToPage(currentPage - 1)"
           >
-            Previous Week
+            {{ $t('calendar.previousWeek') }}
           </button>
           <button
               class="bg-gray-300 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded"
               :disabled="currentPage === totalPages - 1"
               @click="goToPage(currentPage + 1)"
           >
-            Next Week
+            {{ $t('calendar.nextWeek') }}
           </button>
         </div>
 
@@ -70,37 +70,38 @@
   <transition name="fade">
     <div v-if="isProgram" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div class="bg-white p-10 rounded-xl shadow-lg max-w-md w-full">
-        <h3 class="text-2xl bold font-bold text-blue-900 mb-5"><span>Calendar</span></h3>
+        <h3 class="text-2xl bold font-bold text-blue-900 mb-5"><span>{{ $t('calendar.calendar') }}</span></h3>
         <form @submit.prevent="add">
           <div class="mb-4">
-            <label class="block text-gray-700 mb-2">Event Name<span class="text-red-600">*</span></label>
+            <label class="block text-gray-700 mb-2">{{ $t('formLabels.eventName') }}<span class="text-red-600">*</span></label>
             <input v-model="eventName" type="text" class="w-full px-3 py-2 border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom" required />
           </div>
           <div class="mb-4">
-            <label class="block text-gray-700 mb-2">Day<span class="text-red-600">*</span></label>
+            <label class="block text-gray-700 mb-2">{{ $t('formLabels.day') }}<span class="text-red-600">*</span></label>
             <select v-model="eventDay" class="w-full px-3 py-2 border rounded-xl focus:outline-none bg-white" required>
               <option v-for="day in days" :key="day" :value="day">{{ day }}</option>
             </select>
           </div>
           <div class="mb-4">
-            <label class="block text-gray-700 mb-2">Schedules<span class="text-red-600">*</span></label>
-            <input v-model="eventTime" type="text" class="w-full px-3 py-2 border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom" required placeholder="ex: 8:00 - 18:00"/>
+            <label class="block text-gray-700 mb-2">{{ $t('formLabels.schedules') }}<span class="text-red-600">*</span></label>
+            <input v-model="eventTime" type="text" class="w-full px-3 py-2 border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom" required :placeholder="$t('placeholders.eventTime')"/>
           </div>
           <div class="mb-4">
-            <label class="block text-gray-700 mb-2">Color<span class="text-red-600">*</span></label>
+            <label class="block text-gray-700 mb-2">{{ $t('formLabels.color') }}<span class="text-red-600">*</span></label>
             <select v-model="eventColor" class="w-full px-3 py-2 border rounded-xl focus:outline-none bg-white" required>
-              <option value="bg-yellow-100">Yellow</option>
-              <option value="bg-pink-100">Pink</option>
-              <option value="bg-blue-100">Blue</option>
-              <option value="bg-purple-100">Purple</option>
+              <option value="bg-yellow-100">{{ $t('calendar.yellow') }}</option>
+              <option value="bg-pink-100">{{ $t('calendar.Pink') }}</option>
+              <option value="bg-blue-100">{{ $t('calendar.Blue') }}</option>
+              <option value="bg-purple-100">{{ $t('calendar.Purple') }}</option>
             </select>
           </div>
         </form>
+        <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
         <button class="mt-4 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" @click="addEvent">
-          Add
+          {{ $t('employeesOverview.add') }}
         </button>
         <button @click="closeProgram" class="mt-4 ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-          Cancel
+          {{ $t('employeesOverview.cancel') }}
         </button>
       </div>
     </div>
@@ -153,6 +154,11 @@ const addEvent = () => {
     lastId = calendarDatas.value[calendarDatas.value.length - 1].id;
   }
 
+  if (!eventDay.value || !eventTime.value || !eventColor.value || !eventName.value) {
+    error.value = 'Entrez les informations !';
+    return;
+  }
+
   const newEvent = {
     id: lastId + 1,
     day: eventDay.value,
@@ -162,15 +168,7 @@ const addEvent = () => {
   }
 
   calendarDatas.value.push(newEvent);
-  localStorage.setItem('calendarData', JSON.stringify(calendarDatas.value));
 
-  if (!eventDay.value
-      || !eventTime.value
-      || !eventColor.value
-      || !eventName.value) {
-    error.value = 'Entrez les informations !';
-    return;
-  }
   error.value = '';
   closeProgram();
   eventColor.value = '';
@@ -178,6 +176,7 @@ const addEvent = () => {
   eventName.value = '';
   eventTime.value = '';
 }
+
 // Delete Event
 const delEvent = (eventId: number) => {
   const eventIndex = calendarDatas.value.findIndex(event => event.id === eventId);

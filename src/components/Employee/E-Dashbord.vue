@@ -16,12 +16,12 @@
                 <TimeBasedIcon />
                 <div class="ml-5">
                   <p class="text-xl text-gray-500 font-light">{{ currentTime }}</p>
-                  <p class="text-gray-500 font-serif">Realtime Insight</p>
+                  <p class="text-gray-500 font-serif">{{ $t('real') }}</p>
                 </div>
               </div>
-              <p class="text-xl mt-10 font-mono mb-12">Today: <br>{{ currentDate }}</p>
+              <p class="text-xl mt-10 font-mono mb-12">{{ $t('auj') }}: <br>{{ currentDate }}</p>
               <router-link to="/epointing" class="bg-blue-700 text-white p-3 px-10 py-4 rounded-2xl hover:bg-blue-900">
-                View Attendance
+                {{ $t('dashboard.viewAttendance') }}
               </router-link>
             </div>
 

@@ -10,14 +10,14 @@
         <div class="flex flex-1 flex-col items-center overflow-hidden">
           <div class="lg:w-[90rem] md:w-[40rem]  sm:w-[25rem] bg-white rounded-2xl px-6 py-5 mt-16 shadow-2xl">
             <div class="flex items-center justify-between mb-5 p-5">
-              <h1 class="text-3xl font-light text-gray-800">Attendance <br> Overview</h1>
+              <h1 class="text-3xl font-light text-gray-800"><span v-html="$t('PointingOverview.title') + '<br>' + $t('PointingOverview.title2')"></span></h1>
               <div class="flex items-center">
                 <Popover v-slot="{ open }" class="relative">
                   <PopoverButton class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-xl mr-3 flex">
                     <svg width="20" height="27" viewBox="0 0 14 21" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-1">
                       <path d="M2.26097 3.90137H11.4925C11.5758 3.90137 11.6573 3.93796 11.727 4.00669C11.7968 4.07542 11.8519 4.17334 11.8856 4.28854C11.9193 4.40374 11.9301 4.53126 11.9168 4.6556C11.9035 4.77995 11.8666 4.89576 11.8105 4.98897L8.27791 10.8678C8.20599 10.9875 8.16614 11.1434 8.16614 11.3052V15.9075C8.16614 16.0146 8.14867 16.12 8.11528 16.2144C8.0819 16.3087 8.03362 16.3892 7.97475 16.4486L6.25557 18.1825C6.19084 18.2478 6.11561 18.2852 6.03791 18.2909C5.96021 18.2966 5.88294 18.2703 5.81435 18.2147C5.74577 18.1592 5.68843 18.0766 5.64845 17.9756C5.60847 17.8746 5.58736 17.7592 5.58736 17.6415V11.3052C5.58736 11.1434 5.54751 10.9875 5.47559 10.8678L1.94295 4.98897C1.88694 4.89576 1.85003 4.77995 1.83671 4.6556C1.82339 4.53126 1.83423 4.40374 1.86792 4.28854C1.9016 4.17334 1.95668 4.07542 2.02646 4.00669C2.09624 3.93796 2.17771 3.90137 2.26097 3.90137V3.90137Z" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <p class="font-light">Filter</p>
+                    <p class="font-light">{{ $t('employeesOverview.filter') }}</p>
                   </PopoverButton>
                   <transition
                       enter-active-class="transition duration-200 ease-out"
@@ -33,21 +33,21 @@
                       <div class="flex">
                         <div class="p-3">
                           <input type="checkbox" id="on_time" v-model="ontime" class="mr-2" @click="filterCheckboxChange('ontime')">
-                          <label for="on_time" class="font-light">On time</label>
+                          <label for="on_time" class="font-light">{{ $t('PointingOverview.ontime') }}</label>
                         </div>
                         <div class="p-3">
                           <input type="checkbox" id="absent" v-model="absent" class="mr-2" @click="filterCheckboxChange('absent')">
-                          <label for="Absent" class="font-light">Absent</label>
+                          <label for="Absent" class="font-light">{{ $t('PointingOverview.absent') }}</label>
                         </div>
                       </div>
                       <div class="flex">
                         <div class="p-3">
                           <input type="checkbox" id="late_arrival" v-model="latearrival" class="mr-2" @click="filterCheckboxChange('latearrival')">
-                          <label for="late_arrival" class="font-light">Late arrival</label>
+                          <label for="late_arrival" class="font-light">{{ $t('PointingOverview.late') }}</label>
                         </div>
                         <div class="p-3 -ml-4">
                           <input type="checkbox" id="all_status" v-model="allstatus" class="mr-2" @click="filterCheckboxChange">
-                          <label for="all_status" class="font-light">All Status</label>
+                          <label for="all_status" class="font-light">{{ $t('employeesOverview.sites') }}</label>
                         </div>
                       </div>
                     </PopoverPanel>
@@ -57,7 +57,7 @@
                   <input
                       v-model="recherche"
                       type="text"
-                      placeholder="Quick Search..."
+                      :placeholder="$t('employeesOverview.quickSearchPlaceholder')"
                       class="w-full p-2 pl-10 rounded-xl border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 px-40"
                   />
                   <svg
@@ -82,13 +82,13 @@
               <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-sm text-gray-700 uppercase dark:bg-gray-300 dark:text-gray-600">
                 <tr>
-                  <th scope="col" class="px-10 py-3">Date</th>
+                  <th scope="col" class="px-10 py-3">{{ $t('PointingOverview.date') }}</th>
                   <th scope="col" class="px-10 py-3">Day</th>
-                  <th scope="col" class="px-10 py-3">Check-in</th>
+                  <th scope="col" class="px-10 py-3">{{ $t('PointingOverview.checkIn') }}</th>
                   <th scope="col" class="px-10 py-3"></th>
-                  <th scope="col" class="px-10 py-3">Check-out</th>
-                  <th scope="col" class="px-8 py-3">Work hours</th>
-                  <th scope="col" class=" py-3">Status</th>
+                  <th scope="col" class="px-10 py-3">{{ $t('PointingOverview.checkOut') }}</th>
+                  <th scope="col" class="px-8 py-3">{{ $t('PointingOverview.workHours') }}</th>
+                  <th scope="col" class=" py-3">{{ $t('PointingOverview.status') }}</th>
                 </tr>
                 </thead>
                 <tbody>

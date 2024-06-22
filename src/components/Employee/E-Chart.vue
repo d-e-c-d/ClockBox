@@ -2,7 +2,7 @@
   <div class="bg-white p-5 rounded-2xl shadow-2xl w-[55rem]">
     <div class="flex justify-between items-center mb-4">
       <p class="font-light text-xl">
-        Attendance Comparison Chart
+        {{ $t('attendanceComparisonChart.title') }}
       </p>
     </div>
     <div ref="chartRef" class="flex justify-between">

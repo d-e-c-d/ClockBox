@@ -10,14 +10,14 @@
               <div class="flex flex-1 flex-col items-center overflow-hidden">
                 <div class="lg:w-[90rem] md:w-[40rem]  sm:w-[25rem] bg-white rounded-2xl px-6 py-5 mt-16 shadow-2xl">
                   <div class="flex items-center justify-between mb-5 p-5">
-                    <h1 class="text-3xl font-light text-gray-800">Pointing <br> Overview</h1>
+                    <h1 class="text-3xl font-light text-gray-800"><span v-html="$t('PointingOverview.title') + '<br>' + $t('PointingOverview.title2')"></span></h1>
                     <div class="flex items-center">
                       <Popover v-slot="{ open }" class="relative">
                         <PopoverButton class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-xl mr-3 flex">
                         <svg width="20" height="27" viewBox="0 0 14 21" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-1">
                           <path d="M2.26097 3.90137H11.4925C11.5758 3.90137 11.6573 3.93796 11.727 4.00669C11.7968 4.07542 11.8519 4.17334 11.8856 4.28854C11.9193 4.40374 11.9301 4.53126 11.9168 4.6556C11.9035 4.77995 11.8666 4.89576 11.8105 4.98897L8.27791 10.8678C8.20599 10.9875 8.16614 11.1434 8.16614 11.3052V15.9075C8.16614 16.0146 8.14867 16.12 8.11528 16.2144C8.0819 16.3087 8.03362 16.3892 7.97475 16.4486L6.25557 18.1825C6.19084 18.2478 6.11561 18.2852 6.03791 18.2909C5.96021 18.2966 5.88294 18.2703 5.81435 18.2147C5.74577 18.1592 5.68843 18.0766 5.64845 17.9756C5.60847 17.8746 5.58736 17.7592 5.58736 17.6415V11.3052C5.58736 11.1434 5.54751 10.9875 5.47559 10.8678L1.94295 4.98897C1.88694 4.89576 1.85003 4.77995 1.83671 4.6556C1.82339 4.53126 1.83423 4.40374 1.86792 4.28854C1.9016 4.17334 1.95668 4.07542 2.02646 4.00669C2.09624 3.93796 2.17771 3.90137 2.26097 3.90137V3.90137Z" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        <p class="font-light">Filter</p>
+                        <p class="font-light">{{ $t('employeesOverview.filter') }}</p>
                         </PopoverButton>
                         <transition
                             enter-active-class="transition duration-200 ease-out"
@@ -33,21 +33,21 @@
                             <div class="flex">
                               <div class="p-3">
                                 <input type="checkbox" id="on_time" v-model="ontime" class="mr-2" @click="filterCheckboxChange('ontime')">
-                                <label for="on_time" class="font-light">On time</label>
+                                <label for="on_time" class="font-light">{{ $t('PointingOverview.ontime') }}</label>
                               </div>
                               <div class="p-3">
                                 <input type="checkbox" id="absent" v-model="absent" class="mr-2" @click="filterCheckboxChange('absent')">
-                                <label for="Absent" class="font-light">Absent</label>
+                                <label for="Absent" class="font-light">{{ $t('PointingOverview.absent') }}</label>
                               </div>
                             </div>
                             <div class="flex">
                               <div class="p-3">
                                 <input type="checkbox" id="late_arrival" v-model="latearrival" class="mr-2" @click="filterCheckboxChange('latearrival')">
-                                <label for="late_arrival" class="font-light">Late arrival</label>
+                                <label for="late_arrival" class="font-light">{{ $t('PointingOverview.late') }}</label>
                               </div>
                               <div class="p-3 -ml-4">
                                 <input type="checkbox" id="all_status" v-model="allstatus" class="mr-2" @click="filterCheckboxChange">
-                                <label for="all_status" class="font-light">All Status</label>
+                                <label for="all_status" class="font-light">{{ $t('employeesOverview.sites') }}</label>
                               </div>
                             </div>
                           </PopoverPanel>
@@ -57,7 +57,7 @@
                         <input
                             v-model="recherche"
                             type="text"
-                            placeholder="Quick Search..."
+                            :placeholder="$t('employeesOverview.quickSearchPlaceholder')"
                             class="w-full p-2 pl-10 rounded-xl border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 px-40"
                         />
                         <svg
@@ -91,7 +91,7 @@
                           <path d="M19.4248 4.5752C20.4009 5.54961 21.1753 6.70693 21.7036 7.98093C22.2319 9.25493 22.5039 10.6206 22.5039 11.9998C22.5039 13.379 22.2319 14.7447 21.7036 16.0187C21.1753 17.2927 20.4009 18.45 19.4248 19.4244" stroke="#252C58" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
 
-                        <p class="font-light">Add Pointage</p>
+                        <p class="font-light">{{ $t('PointingOverview.addPoint') }}</p>
                       </button>
 
                       <!-- Downoload csv file -->
@@ -102,7 +102,7 @@
                             <path d="M5.25 10.4996L12 17.2496L18.75 10.4996" stroke="#D8D8D8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M3.75 20.2496H20.25" stroke="#D8D8D8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
-                          <p class="font-light">Export csv file</p>
+                          <p class="font-light">{{ $t('employeesOverview.exporter') }}</p>
                         </PopoverButton>
                         <transition
                             enter-active-class="transition duration-200 ease-out"
@@ -117,16 +117,16 @@
                           >
                             <div class="p-3">
                               <input type="checkbox" id="this_page" v-model="thisPage" class="mr-2" @click="handleCheckboxChange('thisPage')">
-                              <label for="this_page" class="font-light">This Page</label>
+                              <label for="this_page" class="font-light">{{ $t('employeesOverview.cettepage') }}</label>
                             </div>
                             <div class="p-3">
                               <input type="checkbox" id="all_page" v-model="allPages" class="mr-2" @click="handleCheckboxChange('allPages')">
-                              <label for="all_page" class="font-light">All Pages</label>
+                              <label for="all_page" class="font-light">{{ $t('employeesOverview.toutespages') }}</label>
                             </div>
                             <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
                             <div>
                               <button class="bg-blue-700 text-white font-bold py-1 px-10 rounded-xl ml-2 flex" @click="downloadCSV">
-                                <p class="font-light">Download</p>
+                                <p class="font-light">{{ $t('employeesOverview.telecharger') }}</p>
                               </button>
                             </div>
                           </PopoverPanel>
@@ -138,15 +138,15 @@
                     <table class="w-full text-sm text-left text-gray-500">
                       <thead class="text-sm text-gray-700 uppercase dark:bg-gray-300 dark:text-gray-600">
                       <tr>
-                        <th scope="col" class="px-6 py-3">ID</th>
-                        <th scope="col" class="px-6 py-3">Employee</th>
-                        <th scope="col" class="px-6 py-3">Role</th>
-                        <th scope="col" class="px-6 py-3">Département</th>
-                        <th scope="col" class="px-6 py-3">Date</th>
-                        <th scope="col" class="py-3">Status</th>
-                        <th scope="col" class="py-3">Check-in</th>
-                        <th scope="col" class="py-3">Check-out</th>
-                        <th scope="col" class="px-6 py-3">Work hours</th>
+                        <th scope="col" class="px-6 py-3">{{ $t('PointingOverview.id') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ $t('PointingOverview.employee') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ $t('PointingOverview.role') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ $t('PointingOverview.department') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ $t('PointingOverview.date') }}</th>
+                        <th scope="col" class="py-3">{{ $t('PointingOverview.status') }}</th>
+                        <th scope="col" class="py-3">{{ $t('PointingOverview.checkIn') }}</th>
+                        <th scope="col" class="py-3">{{ $t('PointingOverview.checkOut') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ $t('PointingOverview.workHours') }}</th>
                         <th scope="col"></th>
                       </tr>
                       </thead>
@@ -218,7 +218,7 @@
                 <form @submit.prevent="">
                   <div class="flex">
                     <div class="mb-4 mr-24">
-                      <label for="employee" class="block text-gray-700">Employee<span class="text-red-600">*</span></label>
+                      <label for="employee" class="block text-gray-700">{{ $t('PointingOverview.employee') }}<span class="text-red-600">*</span></label>
                       <input
                           v-model="user_name"
                           type="text"
@@ -228,7 +228,7 @@
                       />
                     </div>
                     <div class="mb-4">
-                      <label for="date" class="block text-gray-700">Date<span class="text-red-600">*</span></label>
+                      <label for="date" class="block text-gray-700">{{ $t('PointingOverview.date') }}<span class="text-red-600">*</span></label>
                       <input
                           v-model="date"
                           type="text"
@@ -243,7 +243,7 @@
                     <h2 class="block text-gray-700 mb-2">Status<span class="text-red-600">*</span></h2>
                     <div class="flex flex-row">
                       <div class="flex items-center bg-blue-100 hover:bg-blue-200 px-4 py-2 rounded-md text-blue-700 mt-3 mr-16">
-                        <label for="reason" class="block font-light mr-2">On time</label>
+                        <label for="reason" class="block font-light mr-2">{{ $t('PointingOverview.ontime') }}</label>
                         <input
                             id="status"
                             name="status"
@@ -252,7 +252,7 @@
                             checked>
                       </div>
                       <div class="flex items-center bg-red-100 hover:bg-red-200 px-4 py-2 rounded-md text-red-700 mt-3 mr-18">
-                        <label for="reason" class="block font-light mr-2">Absent</label>
+                        <label for="reason" class="block font-light mr-2">{{ $t('PointingOverview.absent') }}</label>
                         <input
                             id="status"
                             name="status"
@@ -260,7 +260,7 @@
                             type="radio">
                       </div>
                       <div class="flex items-center bg-yellow-100 hover:bg-yellow-200 px-4 py-2 rounded-md text-yellow-700 mt-3 ml-16">
-                        <label for="reason" class="block font-light mr-2">Late arrival</label>
+                        <label for="reason" class="block font-light mr-2">{{ $t('PointingOverview.late') }}</label>
                         <input
                             id="status"
                             name="status"
@@ -271,7 +271,7 @@
                   </div>
                   <div class="flex">
                     <div class="mb-4 mr-24">
-                      <label for="checkIn" class="block text-gray-700">Check-In<span class="text-red-600">*</span></label>
+                      <label for="checkIn" class="block text-gray-700">{{ $t('PointingOverview.checkIn') }}<span class="text-red-600">*</span></label>
                       <input
                           v-model="checkIn"
                           type="text"
@@ -282,7 +282,7 @@
                       />
                     </div>
                     <div class="mb-4">
-                      <label for="checkOut" class="block text-gray-700">Check-Out<span class="text-red-600">*</span></label>
+                      <label for="checkOut" class="block text-gray-700">{{ $t('PointingOverview.checkOut') }}<span class="text-red-600">*</span></label>
                       <input
                           v-model="checkOut"
                           type="text"
@@ -294,7 +294,7 @@
                     </div>
                   </div>
                   <div class="mb-4 mt-4">
-                    <label for="workHours" class="block text-gray-700 mb-2">Work Hours<span class="text-red-600">*</span></label>
+                    <label for="workHours" class="block text-gray-700 mb-2">{{ $t('PointingOverview.workHours') }}<span class="text-red-600">*</span></label>
                     <input
                         id="workHours"
                         v-model="workHours"
@@ -309,10 +309,10 @@
                 <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
                 <div class="mt-5 border-t-gray-100 border-t-2 mb-5"></div>
                 <button @click="addPoint" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-                  Add
+                  {{ $t('employeesOverview.add') }}
                 </button>
                 <button @click="closePoint" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-                  Cancel
+                  {{ $t('employeesOverview.cancel') }}
                 </button>
               </div>
             </div>
@@ -524,6 +524,34 @@ const addPoint = () => {
   if (pointing.value && pointing.value.length > 0) {
     lastId = pointing.value[pointing.value.length - 1].id;
   }
+  const statusChoiced = () => {
+    const statusInputs = document.getElementsByName('status');
+    for (const input of statusInputs) {
+      if (input.checked) {
+        switch (input.value) {
+          case 'on_time':
+            return 'On time';
+          case 'absent':
+            return 'Absent';
+          case 'late_arrival':
+            return 'Late arrival';
+          default:
+            return null;
+        }
+      }
+    }
+    return null;
+  };
+
+  if (!user_name.value
+      || !date.value
+      || !statusChoiced()
+      || !checkIn.value
+      || !checkIn.value
+      || !workHours.value) {
+    error.value = 'Entrez les informations !';
+    return;
+  }
 
   const getRole = (user_name) => {
     const pointing = localStorage.getItem('pointing');
@@ -547,25 +575,6 @@ const addPoint = () => {
   };
   const Dep = getDep(user_name.value)
 
-  const statusChoiced = () => {
-    const statusInputs = document.getElementsByName('status');
-    for (const input of statusInputs) {
-      if (input.checked) {
-        switch (input.value) {
-          case 'on_time':
-            return 'On time';
-          case 'absent':
-            return 'Absent';
-          case 'late_arrival':
-            return 'Late arrival';
-          default:
-            return null;
-        }
-      }
-    }
-    return null;
-  };
-
   const newPointage = {
     id: lastId + 1,
     employee: user_name.value,
@@ -580,15 +589,6 @@ const addPoint = () => {
 
   pointing.value.push(newPointage);
 
-  if (!user_name.value
-      || !date.value
-      || !statusChoiced()
-      || !checkIn.value
-      || !checkIn.value
-      || !workHours.value) {
-    error.value = 'Entrez les informations !';
-    return;
-  }
 
   error.value = '';
   closePoint();

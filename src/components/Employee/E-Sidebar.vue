@@ -25,7 +25,7 @@
             </svg>
           </div>
           <router-link to="/edashboard" class="flex items-center justify-center w-28 px-4 py-2 bg-blue-700 text-white rounded-2xl shadow mb-8 hover:bg-blue-900 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow-3xl hover:z-10" :class="{ 'bg-blue-800': isActive('/dashboard') }">
-            <span>Dashboard</span>
+            <span>{{ $t('sidebar.dashboard') }}</span>
           </router-link>
         </div>
 
@@ -36,7 +36,7 @@
             </svg>
           </div>
           <router-link to="/epointing" class="flex items-center justify-center w-28 px-4 py-2 bg-blue-700 text-white rounded-2xl shadow mb-8 hover:bg-blue-900 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow-3xl hover:z-10" :class="{ 'bg-blue-800': isActive('/pointing') }">
-            <span>Pointing</span>
+            <span>{{ $t('sidebar.pointing') }}</span>
           </router-link>
         </div>
 
@@ -47,7 +47,7 @@
             </svg>
           </div>
           <router-link to="/eplanning" class="flex items-center justify-center w-28 px-4 py-2 bg-blue-700 text-white rounded-2xl shadow mb-8 hover:bg-blue-900 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow-3xl hover:z-10" :class="{ 'bg-blue-800': isActive('/planning') }">
-            <span>Planning</span>
+            <span>{{ $t('sidebar.planning') }}</span>
           </router-link>
         </div>
 
@@ -58,7 +58,7 @@
             </svg>
           </div>
           <router-link to="/eleave" class="flex items-center justify-center w-28 px-4 py-2 bg-blue-700 text-white rounded-2xl shadow mb-8 hover:bg-blue-900 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow-3xl hover:z-10" :class="{ 'bg-blue-800': isActive('/planning') }">
-            <span>Leave</span>
+            <span>{{ $t('sidebar.leave') }}</span>
           </router-link>
         </div>
 

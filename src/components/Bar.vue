@@ -2,7 +2,7 @@
   <div class="bg-white p-5 rounded-2xl shadow-2xl">
     <div class="flex justify-between items-center mb-4 pb-24">
       <p class="font-light text-xl">
-        Weekly Attendance
+        {{ t('weeklyAttendance.title') }}
       </p>
       <button
           class="bg-blue-700 hover:bg-blue-900 text-white px-2 rounded text-xs flex items-center"
@@ -23,7 +23,7 @@
               d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1M4 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4zm3.5 10a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1z"
           />
         </svg>
-        Export
+        {{ t('weeklyAttendance.exportButton') }}
       </button>
     </div>
 
@@ -48,7 +48,11 @@ import {
 import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
 import {ref} from "vue";
-
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n({
+  useScope: "global",
+  inheritLocale: true,
+});
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 const chartRef = ref(null);

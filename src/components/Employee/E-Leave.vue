@@ -10,14 +10,14 @@
         <div class="flex flex-1 flex-col items-center overflow-hidden">
           <div class="lg:w-[90rem] md:w-[40rem]  sm:w-[25rem] bg-white rounded-2xl px-6 py-5 mt-16 shadow-2xl">
             <div class="flex items-center justify-between mb-5 p-5">
-              <h1 class="text-3xl font-light text-gray-800">Leave <br> Request</h1>
+              <h1 class="text-3xl font-light text-gray-800"><span v-html="$t('title') + '<br>' + $t('title2')"></span></h1>
               <div class="flex items-center">
                 <Popover v-slot="{ open }" class="relative">
                   <PopoverButton class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-xl mr-3 flex">
                     <svg width="20" height="27" viewBox="0 0 14 21" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-1">
                       <path d="M2.26097 3.90137H11.4925C11.5758 3.90137 11.6573 3.93796 11.727 4.00669C11.7968 4.07542 11.8519 4.17334 11.8856 4.28854C11.9193 4.40374 11.9301 4.53126 11.9168 4.6556C11.9035 4.77995 11.8666 4.89576 11.8105 4.98897L8.27791 10.8678C8.20599 10.9875 8.16614 11.1434 8.16614 11.3052V15.9075C8.16614 16.0146 8.14867 16.12 8.11528 16.2144C8.0819 16.3087 8.03362 16.3892 7.97475 16.4486L6.25557 18.1825C6.19084 18.2478 6.11561 18.2852 6.03791 18.2909C5.96021 18.2966 5.88294 18.2703 5.81435 18.2147C5.74577 18.1592 5.68843 18.0766 5.64845 17.9756C5.60847 17.8746 5.58736 17.7592 5.58736 17.6415V11.3052C5.58736 11.1434 5.54751 10.9875 5.47559 10.8678L1.94295 4.98897C1.88694 4.89576 1.85003 4.77995 1.83671 4.6556C1.82339 4.53126 1.83423 4.40374 1.86792 4.28854C1.9016 4.17334 1.95668 4.07542 2.02646 4.00669C2.09624 3.93796 2.17771 3.90137 2.26097 3.90137V3.90137Z" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <p class="font-light">Filter</p>
+                    <p class="font-light">{{ $t('employeesOverview.filter') }}</p>
                   </PopoverButton>
                   <transition
                       enter-active-class="transition duration-200 ease-out"
@@ -33,21 +33,21 @@
                       <div class="flex">
                         <div class="p-3">
                           <input type="radio" id="allowed" value="Allowed" v-model="selectedFilter" class="mr-2">
-                          <label for="allowed" class="font-light">Allowed</label>
+                          <label for="allowed" class="font-light">{{ $t('allowed') }}</label>
                         </div>
                         <div class="p-3">
                           <input type="radio" id="refused" value="Refused" v-model="selectedFilter" class="mr-2">
-                          <label for="refused" class="font-light">Refused</label>
+                          <label for="refused" class="font-light">{{ $t('refused') }}</label>
                         </div>
                       </div>
                       <div class="flex">
                         <div class="p-3">
                           <input type="radio" id="pending" value="Pending" v-model="selectedFilter" class="mr-2">
-                          <label for="pending" class="font-light">Pending</label>
+                          <label for="pending" class="font-light">{{ $t('pending') }}</label>
                         </div>
                         <div class="p-3">
                           <input type="radio" id="all_status" value="allstatus" v-model="selectedFilter" class="mr-2">
-                          <label for="all_status" class="font-light">All</label>
+                          <label for="all_status" class="font-light">{{ $t('allStatus') }}</label>
                         </div>
                       </div>
                     </PopoverPanel>
@@ -60,7 +60,7 @@
                     <path d="M8.25 10.5V3.375C8.25 2.87772 8.44754 2.40081 8.79917 2.04917C9.15081 1.69754 9.62772 1.5 10.125 1.5C10.6223 1.5 11.0992 1.69754 11.4508 2.04917C11.8025 2.40081 12 2.87772 12 3.375V9.75" stroke="#D8D8D8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M12 16.125C12 15.1304 12.3951 14.1766 13.0983 13.4733C13.8016 12.7701 14.7554 12.375 15.75 12.375V10.5C15.75 10.0027 15.9475 9.52581 16.2992 9.17417C16.6508 8.82254 17.1277 8.625 17.625 8.625C18.1223 8.625 18.5992 8.82254 18.9508 9.17417C19.3025 9.52581 19.5 10.0027 19.5 10.5V14.25C19.5 16.2391 18.7098 18.1468 17.3033 19.5533C15.8968 20.9598 13.9891 21.75 12 21.75C10.0109 21.75 8.10322 20.9598 6.6967 19.5533C5.29018 18.1468 4.5 16.2391 4.5 14.25V6.375C4.5 5.87772 4.69754 5.40081 5.04917 5.04917C5.40081 4.69754 5.87772 4.5 6.375 4.5C6.87228 4.5 7.34919 4.69754 7.70083 5.04917C8.05246 5.40081 8.25 5.87772 8.25 6.375V10.5" stroke="#D8D8D8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
-                  <p class="font-light">Request a leave</p>
+                  <p class="font-light">{{ $t('ask') }}</p>
                 </button>
               </div>
             </div>
@@ -68,13 +68,13 @@
               <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-sm text-gray-700 uppercase dark:bg-gray-300 dark:text-gray-600">
                 <tr>
-                  <th scope="col" class="px-10 py-3">Type</th>
-                  <th scope="col" class="px-10 py-3">Start-Date</th>
+                  <th scope="col" class="px-10 py-3">{{ $t('type') }}</th>
+                  <th scope="col" class="px-10 py-3">{{ $t('startDate') }}</th>
                   <th scope="col" class="px-10 py-3"></th>
-                  <th scope="col" class="px-10 py-3">End-Date</th>
-                  <th scope="col" class="px-10 py-3">Explanation</th>
-                  <th scope="col" class="px-16 py-3">Paid</th>
-                  <th scope="col" class=" py-3">Status</th>
+                  <th scope="col" class="px-10 py-3">{{ $t('endDate') }}</th>
+                  <th scope="col" class="px-10 py-3">{{ $t('explanation') }}</th>
+                  <th scope="col" class="px-16 py-3">{{ $t('paid') }}</th>
+                  <th scope="col" class="py-3">{{ $t('status') }}</th>
                   <th scope="col"></th>
                 </tr>
                 </thead>
@@ -153,7 +153,7 @@
             <div class="w-full px-4">
               <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
                 <div class="flex justify-between pb-6">
-                  <h3 class="text-2xl bold font-bold text-blue-900 "><strong>Request a leave</strong></h3>
+                  <h3 class="text-2xl bold font-bold text-blue-900 "><strong>{{ $t('ask') }}</strong></h3>
                   <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeRequest">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M18.75 5.25L5.25 18.75" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -164,17 +164,16 @@
                 <form @submit.prevent="">
                   <div class="flex">
                     <div class="mb-4 mr-24">
-                      <label for="user_nom" class="block text-gray-700">Start-date<span class="text-red-600">*</span></label>
+                      <label for="user_nom" class="block text-gray-700">{{ $t('startDate') }}<span class="text-red-600">*</span></label>
                       <input
                           v-model="start_date"
                           type="date"
                           id="start_date"
                           class="mt-2 p-2 w-full text-gray-600 pl-5 border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
-                          required
                       />
                     </div>
                     <div class="mb-4">
-                      <label for="user_telephone" class="block text-gray-700">End-date<span class="text-red-600">*</span></label>
+                      <label for="user_telephone" class="block text-gray-700">{{ $t('endDate') }}<span class="text-red-600">*</span></label>
                       <input
                           v-model="end_date"
                           type="date"
@@ -184,7 +183,7 @@
                     </div>
                   </div>
                   <div class="mt-4 mb-4">
-                    <label for="reason" class="block text-gray-700 mb-2">Reason<span class="text-red-600">*</span></label>
+                    <label for="reason" class="block text-gray-700 mb-2">{{ $t('explanation') }}<span class="text-red-600">*</span></label>
                     <textarea
                         id="reason"
                         v-model="reason"
@@ -194,26 +193,26 @@
                     ></textarea>
                   </div>
                   <div class="mb-4 mt-4">
-                    <label for="type" class="block text-gray-700 mb-2">Type of leave<span class="text-red-600">*</span></label>
+                    <label for="type" class="block text-gray-700 mb-2">{{ $t('type') }}<span class="text-red-600">*</span></label>
                     <select
                         id="type"
                         v-model="type"
                         class="mt-2 w-full p-2 bg-white text-gray-600 border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
                     >
-                      <option value="annual">Annual leave</option>
-                      <option value="sick">Sick leave</option>
-                      <option value="family">Maternity or Paternity leave</option>
-                      <option value="other">Other</option>
+                      <option value="annual">{{ $t('annual') }}</option>
+                      <option value="sick">{{ $t('sick') }}</option>
+                      <option value="family">{{ $t('mat_pat') }}</option>
+                      <option value="other">{{ $t('other') }}</option>
                     </select>
                   </div>
                 </form>
                 <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
                 <div class="mt-5 border-t-gray-100 border-t-2 mb-5"></div>
-                <button @click="addRequest" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-                  Submit request
+                <button @click="saveEditRequest" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                  {{ $t('save') }}
                 </button>
-                <button @click="closeRequest" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-                  Cancel
+                <button @click="closeEditRequest" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                  {{ $t('employeesOverview.cancel') }}
                 </button>
               </div>
             </div>
@@ -227,7 +226,7 @@
               <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
                 <div class="flex justify-between pb-6">
                   <h3 class="text-xl bold font-bold text-blue-900"
-                  >Leave requested</h3>
+                  >{{ $t('leaveRequested') }}</h3>
                   <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeEditRequest">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M18.75 5.25L5.25 18.75" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -238,7 +237,7 @@
                 <form @submit.prevent="">
                   <div class="flex">
                     <div class="mb-4 mr-24">
-                      <label for="user_nom" class="block text-gray-700">Start-date<span class="text-red-600">*</span></label>
+                      <label for="user_nom" class="block text-gray-700">{{ $t('startDate') }}<span class="text-red-600">*</span></label>
                       <input
                           v-model="start_date"
                           type="date"
@@ -247,7 +246,7 @@
                       />
                     </div>
                     <div class="mb-4">
-                      <label for="user_telephone" class="block text-gray-700">End-date<span class="text-red-600">*</span></label>
+                      <label for="user_telephone" class="block text-gray-700">{{ $t('endDate') }}<span class="text-red-600">*</span></label>
                       <input
                           v-model="end_date"
                           type="date"
@@ -257,7 +256,7 @@
                     </div>
                   </div>
                   <div class="mt-4 mb-4">
-                    <label for="reason" class="block text-gray-700 mb-2">Reason<span class="text-red-600">*</span></label>
+                    <label for="reason" class="block text-gray-700 mb-2">{{ $t('explanation') }}<span class="text-red-600">*</span></label>
                     <textarea
                         id="reason"
                         v-model="reason"
@@ -267,16 +266,16 @@
                     ></textarea>
                   </div>
                   <div class="mb-4 mt-4">
-                    <label for="type" class="block text-gray-700 mb-2">Type of leave<span class="text-red-600">*</span></label>
+                    <label for="type" class="block text-gray-700 mb-2">{{ $t('type') }}<span class="text-red-600">*</span></label>
                     <select
                         id="type"
                         v-model="type"
                         class="mt-2 w-full p-2 bg-white text-gray-600 border rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-custom"
                     >
-                      <option value="annual">Annual leave</option>
-                      <option value="sick">Sick leave</option>
-                      <option value="family">Maternity or Paternity leave</option>
-                      <option value="other">Other</option>
+                      <option value="annual">{{ $t('annual') }}</option>
+                      <option value="sick">{{ $t('sick') }}</option>
+                      <option value="family">{{ $t('mat_pat') }}</option>
+                      <option value="other">{{ $t('other') }}</option>
                     </select>
                   </div>
                 </form>

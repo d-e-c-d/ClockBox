@@ -16,12 +16,12 @@
                 <TimeBasedIcon />
                 <div class="ml-5">
                   <p class="text-xl text-gray-500 font-light">{{ currentTime }}</p>
-                  <p class="text-gray-500 font-serif">Realtime Insight</p>
+                  <p class="text-gray-500 font-serif">{{ t('real') }}</p>
                 </div>
               </div>
-              <p class="text-xl mt-10 font-mono mb-12">Today: <br>{{ currentDate }}</p>
+              <p class="text-xl mt-10 font-mono mb-12">{{ t('auj') }}: <br>{{ currentDate }}</p>
               <router-link to="/pointing" class="bg-blue-700 text-white p-3 px-10 py-4 rounded-2xl hover:bg-blue-900">
-                View Attendance
+                {{ t('dashboard.viewAttendance') }}
               </router-link>
             </div>
 
@@ -34,7 +34,7 @@
                               <circle opacity='0.3' cx='7.5' cy='7.5' r='7.5' fill='#97CE71'/>
                               <path d='M4.72 6.676V6.412H10.36V6.676H4.72ZM7.672 9.496H7.408V3.7H7.672V9.496Z' fill='#43900C'/>
                               </svg>"
-                    :title="'Total Employees'"
+                    :title="t('statistics.totalEmployees.title')"
                     :value="String(totalEmployees)"
                     :change="employeeChange" />
 
@@ -44,7 +44,7 @@
                               <circle opacity='0.3' cx='7.5' cy='7.5' r='7.5' fill='#97CE71'/>
                               <path d='M3 10L5.5 7.5L7.5 9.5L10.75 6.25M11 9V6H8' stroke='#43910C'/>
                             </svg>"
-                    :title="'On Time'"
+                    :title="t('statistics.onTime.title')"
                     :value="String(onTime)"
                     :change="onTimeChange" />
 
@@ -54,7 +54,7 @@
                               <circle opacity='0.3' cx='7.5' cy='7.5' r='7.5' fill='#CE7171'/>
                               <path d='M12 6L9.5 8.5L7.5 6.5L4.25 9.75M4 7V10H7' stroke='#910C0C'/>
                               </svg>"
-                    :title="'Absent'"
+                    :title="t('statistics.absent.title')"
                     :value="String(absent)"
                     :change="absentChange" />
 
@@ -66,7 +66,7 @@
                               <circle opacity='0.3' cx='7.5' cy='7.5' r='7.5' fill='#CE7171'/>
                               <path d='M12 6L9.5 8.5L7.5 6.5L4.25 9.75M4 7V10H7' stroke='#910C0C'/>
                               </svg>"
-                    :title="'Late Arrival'"
+                    :title="t('statistics.lateArrival.title')"
                     :value="String(lateArrival)"
                     :change="lateArrivalChange" />
 
@@ -76,7 +76,7 @@
                               <circle opacity='0.3' cx='7.5' cy='7.5' r='7.5' fill='#97CE71'/>
                               <path d='M3 10L5.5 7.5L7.5 9.5L10.75 6.25M11 9V6H8' stroke='#43910C'/>
                             </svg>"
-                    :title="'Early Departures'"
+                    :title="t('statistics.earlyDepartures.title')"
                     :value="String(earlyDepartures)"
                     :change="earlyDeparturesChange" />
 
@@ -86,7 +86,7 @@
                               <circle opacity='0.3' cx='7.5' cy='7.5' r='7.5' fill='#CCDDFA'/>
                               <path d='M3 10L5.5 7.5L7.5 9.5L10.75 6.25M11 9V6H8' stroke='#0054E8'/>
                             </svg>"
-                    :title="'Time-off'"
+                    :title="t('statistics.timeOff.title')"
                     :value="String(timeOff)"
                     :change="timeOffChange" />
 
@@ -117,6 +117,12 @@ import Header from "../components/Header.vue";
 import Sidebar from "../components/Sidebar.vue";
 import TimeBasedIcon from "../components/TimeBasedIcon.vue";
 import { useStorage } from '@vueuse/core'
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n({
+  useScope: "global",
+  inheritLocale: true,
+});
 
 // Format Date with letters
 const formatDate = (date: Date) => {
@@ -157,6 +163,7 @@ const currentDate = ref(formatDate(new Date()));
 // Use the pointing data to update the statistics
 const pointing =  useStorage('pointing', []);
 const employees = useStorage('employees', []);
+const leave = useStorage('leave', []);
 
 const totalEmployees = computed(() => employees.value.length);
 const employeeChange = ref('2 new employees added!');
@@ -172,7 +179,7 @@ const earlyDepartures = computed(() => pointing.value.filter((item) =>
     || item.checkOut === '17:45'
     || item.checkOut === '17:15').length)
 const earlyDeparturesChange = ref('-10% Less than yesterday');
-const timeOff = ref(0);
+const timeOff =  computed(() => leave.value.filter((item) => item.status === 'Allowed').length)
 const timeOffChange = ref('+0% Increase than yesterday');
 
 // Update time every second

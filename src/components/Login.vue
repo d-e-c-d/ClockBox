@@ -25,15 +25,15 @@
     <!-- Right side with login form -->
     <div class="flex-1 flex items-center justify-center p-4 md:p-0">
       <div class="bg-white drop-shadow-2xl rounded-[25px] p-8 md:p-20 max-w-xl w-full">
-        <h2 class="text-2xl font-bold mb-6 text-center text-blue-700">Connectez-vous</h2>
+        <h2 class="text-2xl font-bold mb-6 text-center text-blue-700">{{ t('login.title') }}</h2>
         <div class="-mt-4 mb-8 text-center text-[0.7rem]">
           <p>
-            Connectez-vous pour accéder à votre espace
+            {{ t('login.subtitle') }}
           </p>
         </div>
         <form @submit.prevent="login">
           <div class="mb-4">
-            <label for="email" class="block text-gray-700">Email</label>
+            <label for="email" class="block text-gray-700">{{ t('login.email') }}</label>
             <input
                 v-model="email"
                 type="email"
@@ -43,7 +43,7 @@
             />
           </div>
           <div class="mb-6 relative">
-            <label for="password" class="block text-gray-700">Mot de passe</label>
+            <label for="password" class="block text-gray-700">{{ t('login.password') }}</label>
             <input
                 v-model="password"
                 :type="showPassword ? 'text' : 'password'"
@@ -61,22 +61,22 @@
                 type="submit"
                 class="w-full md:w-52 bg-blue-700 text-white py-2 px-4 text-center rounded-md hover:bg-blue-900"
             >
-              Connexion
+              {{ t('login.submit') }}
             </button>
           </div>
           <div class="mt-4 text-center cursor-pointer">
-            <a @click="openModal" class="text-blue-500 hover:underline">Mot de passe oublié ?</a>
+            <a @click="openModal" class="text-blue-500 hover:underline">{{ t('login.forgot_password') }}</a>
           </div>
           <div class="mt-4 text-center text-xs">
             <p>
-              Vous n'avez pas de compte ?
-              <router-link to="/register" class="text-blue-500 ml-1 hover:underline">Créer un compte</router-link>
+              {{ t('login.no_account') }}
+              <router-link to="/register" class="text-blue-500 ml-1 hover:underline">{{ t('login.create_account') }}</router-link>
             </p>
           </div>
           <div class="mt-4 text-center text-xs text-gray-500">
             <p>
-              By signing up you are agreeing to our
-              <a @click="openTerms" class="text-blue-500 hover:underline cursor-pointer">Terms and Conditions</a>
+              {{ t('login.agree_to') }}
+              <a @click="openTerms" class="text-blue-500 hover:underline cursor-pointer">{{ t('login.terms_and_conditions') }}</a>
             </p>
           </div>
         </form>
@@ -87,10 +87,10 @@
     <transition name="fade">
       <div v-if="isOpen" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
         <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full">
-          <h3 class="text-lg font-medium text-gray-900">Mot de passe oublié</h3>
-          <p class="mt-2 text-sm text-gray-500">Un e-mail a été envoyé à votre adresse {{ maskEmail(email) }} pour réinitialiser votre mot de passe.</p>
+          <h3 class="text-lg font-medium text-gray-900">{{ t('forgot_password.title') }}</h3>
+          <p class="mt-2 text-sm text-gray-500">{{ t('forgot_password.message', { email: maskEmail(email) }) }}</p>
           <button @click="closeModal" class="mt-4 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-            J'ai compris, merci !
+            {{ t('forgot_password.confirmation') }}
           </button>
         </div>
       </div>
@@ -104,33 +104,32 @@
               <DisclosureButton
                   class="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
               >
-                <span>About our terms</span>
+                <span>{{ t('terms_and_conditions.about_terms') }}</span>
                 <ChevronUpIcon
                     :class="open ? 'rotate-180 transform' : ''"
                     class="h-5 w-5 text-purple-500"
                 />
               </DisclosureButton>
               <DisclosurePanel class="px-4 pb-2 pt-4 text-sm text-gray-500">
-                If you're unhappy with your purchase for any reason, email us within
-                90 days and we'll refund you in full, no questions asked.
+                {{ t('terms_and_conditions.about_terms_message') }}
               </DisclosurePanel>
             </Disclosure>
             <Disclosure as="div" class="mt-2" v-slot="{ open }">
               <DisclosureButton
                   class="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
               >
-                <span>About our conditions</span>
+                <span>{{ t('terms_and_conditions.about_conditions') }}</span>
                 <ChevronUpIcon
                     :class="open ? 'rotate-180 transform' : ''"
                     class="h-5 w-5 text-purple-500"
                 />
               </DisclosureButton>
               <DisclosurePanel class="px-4 pb-2 pt-4 text-sm text-gray-500">
-                No.
+                {{ t('terms_and_conditions.about_conditions_message') }}
               </DisclosurePanel>
             </Disclosure>
             <button @click="closeTerms" class="mt-4 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-              J'approuve avoir lu et accepté !
+              {{ t('terms_and_conditions.confirmation') }}
             </button>
           </div>
         </div>
@@ -149,6 +148,12 @@ import {computed, onBeforeMount, ref} from 'vue';
   } from '@headlessui/vue';
   import { ChevronUpIcon } from '@heroicons/vue/20/solid';
 import {useStorage} from "@vueuse/core";
+
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n({
+  useScope: "global",
+  inheritLocale: true,
+});
 
 const pointing = ref([
   {

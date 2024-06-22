@@ -9,14 +9,14 @@
         <div class="flex flex-1 flex-col items-center overflow-hidden">
           <div class="lg:w-[90rem] md:w-[40rem]  sm:w-[25rem] bg-white rounded-2xl px-6 py-5 mt-16 shadow-2xl">
             <div class="flex items-center justify-between mb-5 p-5">
-              <h1 class="text-3xl font-light text-gray-800">Employees <br> Overview</h1>
+              <h1 class="text-3xl font-light text-gray-800"><span v-html="$t('employeesOverview.title') + '<br>' + $t('employeesOverview.title2')"></span></h1>
               <div class="flex items-center">
                 <Popover v-slot="{ open }" class="relative">
                   <PopoverButton class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-xl mr-3 flex">
                     <svg width="20" height="27" viewBox="0 0 14 21" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-1">
                       <path d="M2.26097 3.90137H11.4925C11.5758 3.90137 11.6573 3.93796 11.727 4.00669C11.7968 4.07542 11.8519 4.17334 11.8856 4.28854C11.9193 4.40374 11.9301 4.53126 11.9168 4.6556C11.9035 4.77995 11.8666 4.89576 11.8105 4.98897L8.27791 10.8678C8.20599 10.9875 8.16614 11.1434 8.16614 11.3052V15.9075C8.16614 16.0146 8.14867 16.12 8.11528 16.2144C8.0819 16.3087 8.03362 16.3892 7.97475 16.4486L6.25557 18.1825C6.19084 18.2478 6.11561 18.2852 6.03791 18.2909C5.96021 18.2966 5.88294 18.2703 5.81435 18.2147C5.74577 18.1592 5.68843 18.0766 5.64845 17.9756C5.60847 17.8746 5.58736 17.7592 5.58736 17.6415V11.3052C5.58736 11.1434 5.54751 10.9875 5.47559 10.8678L1.94295 4.98897C1.88694 4.89576 1.85003 4.77995 1.83671 4.6556C1.82339 4.53126 1.83423 4.40374 1.86792 4.28854C1.9016 4.17334 1.95668 4.07542 2.02646 4.00669C2.09624 3.93796 2.17771 3.90137 2.26097 3.90137V3.90137Z" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <p class="font-light">Filter</p>
+                    <p class="font-light">{{ $t('employeesOverview.filter') }}</p>
                   </PopoverButton>
                   <transition
                       enter-active-class="transition duration-200 ease-out"
@@ -56,7 +56,7 @@
                         </div>
                         <div class="p-3 -ml-3.5">
                           <input type="checkbox" id="allsites" v-model="allsites" class="mr-2" @click="filterCheckboxChange">
-                          <label for="allsites" class="font-light">All sites</label>
+                          <label for="allsites" class="font-light">{{ $t('employeesOverview.sites') }}</label>
                         </div>
                       </div>
                     </PopoverPanel>
@@ -66,7 +66,7 @@
                   <input
                       v-model="recherche"
                       type="text"
-                      placeholder="Quick Search..."
+                      :placeholder="$t('employeesOverview.quickSearchPlaceholder')"
                       class="w-full p-2 pl-10 rounded-xl border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 px-40"
                   />
                   <svg
@@ -92,7 +92,7 @@
                       <path d="M12 20.25V3.75" stroke="#252C58" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </g>
                   </svg>
-                  <p class="font-light">Add Employee</p>
+                  <p class="font-light">{{ $t('employeesOverview.addEmployee') }}</p>
                 </button>
 
                 <!-- Downoload csv file -->
@@ -103,7 +103,7 @@
                       <path d="M5.25 10.4996L12 17.2496L18.75 10.4996" stroke="#D8D8D8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       <path d="M3.75 20.2496H20.25" stroke="#D8D8D8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <p class="font-light">Export csv file</p>
+                    <p class="font-light">{{ $t('employeesOverview.exporter') }}</p>
                   </PopoverButton>
                   <transition
                       enter-active-class="transition duration-200 ease-out"
@@ -118,16 +118,16 @@
                     >
                       <div class="p-3">
                         <input type="checkbox" id="this_page" v-model="thisPage" class="mr-2" @click="handleCheckboxChange('thisPage')">
-                        <label for="this_page" class="font-light">This Page</label>
+                        <label for="this_page" class="font-light">{{ $t('employeesOverview.cettepage') }}</label>
                       </div>
                       <div class="p-3">
                         <input type="checkbox" id="all_page" v-model="allPages" class="mr-2" @click="handleCheckboxChange('allPages')">
-                        <label for="all_page" class="font-light">All Pages</label>
+                        <label for="all_page" class="font-light">{{ $t('employeesOverview.toutespages') }}</label>
                       </div>
                       <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
                       <div>
                         <button class="bg-blue-700 text-white font-bold py-1 px-10 rounded-xl ml-2 flex" @click="downloadCSV">
-                          <p class="font-light">Download</p>
+                          <p class="font-light">{{ $t('employeesOverview.telecharger') }}</p>
                         </button>
                       </div>
                     </PopoverPanel>
@@ -141,7 +141,7 @@
                 <tr>
                   <th scope="col" class="px-6 py-3">ID</th>
                   <th scope="col" class="px-6 py-3">Employee</th>
-                  <th scope="col" class="px-6 py-3">Role</th>
+                  <th scope="col" class="px-6 py-3">Rôle</th>
                   <th scope="col" class="px-6 py-3">Téléphone</th>
                   <th scope="col" class="px-6 py-3">Email</th>
                   <th scope="col" class="px-6 py-3">Site</th>
@@ -222,7 +222,7 @@
       <div class="w-full px-4">
         <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
           <div class="flex justify-between pb-6">
-            <h3 class="text-2xl bold font-bold text-blue-900 "><strong>Add Employee</strong></h3>
+            <h3 class="text-2xl bold font-bold text-blue-900 "><strong>{{ $t('employeesOverview.ajouter') }}</strong></h3>
             <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeNewemp">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18.75 5.25L5.25 18.75" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -234,7 +234,7 @@
             <DisclosureButton
                 class="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
             >
-              <span>Personnal Informations</span>
+              <span>{{ $t('employeesOverview.infomationspersonnelles') }}</span>
               <ChevronUpIcon
                   :class="open ? 'rotate-180 transform' : ''"
                   class="h-5 w-5 text-purple-500"
@@ -244,7 +244,7 @@
               <form @submit.prevent="">
                 <div class="flex">
                   <div class="mb-4 mr-10">
-                    <label for="user_nom" class="block text-gray-700">Name<span class="text-red-600">*</span></label>
+                    <label for="user_nom" class="block text-gray-700">{{ $t('employeesOverview.name') }}<span class="text-red-600">*</span></label>
                     <input
                         v-model="user_name"
                         type="text"
@@ -254,7 +254,7 @@
                     />
                   </div>
                   <div class="mb-4">
-                    <label for="user_telephone" class="block text-gray-700">Phone Number</label>
+                    <label for="user_telephone" class="block text-gray-700">{{ $t('employeesOverview.phoneNumber') }}</label>
                     <input
                         v-model="user_telephone"
                         type="tel"
@@ -271,7 +271,7 @@
             <DisclosureButton
                 class="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
             >
-              <span>Professional Information</span>
+              <span>{{ $t('employeesOverview.infomationspro') }}</span>
               <ChevronUpIcon
                   :class="open ? 'rotate-180 transform' : ''"
                   class="h-5 w-5 text-purple-500"
@@ -281,7 +281,7 @@
               <form @submit.prevent="">
                 <div class="flex">
                   <div class="mb-4 mr-10">
-                    <label for="role" class="block text-gray-700">Role<span class="text-red-600">*</span></label>
+                    <label for="role" class="block text-gray-700">{{ $t('employeesOverview.role') }}<span class="text-red-600">*</span></label>
                     <input
                         v-model="user_role"
                         type="text"
@@ -291,7 +291,7 @@
                     />
                   </div>
                   <div class="mb-4">
-                    <label for="user_site" class="block text-gray-700">Site<span class="text-red-600">*</span></label>
+                    <label for="user_site" class="block text-gray-700">{{ $t('employeesOverview.site') }}<span class="text-red-600">*</span></label>
                     <input
                         v-model="user_site"
                         type="text"
@@ -303,7 +303,7 @@
                 </div>
                 <div class="flex">
                   <div class="mb-4 mr-10">
-                    <label for="matricule" class="block text-gray-700">Matricule<span class="text-red-600">*</span></label>
+                    <label for="matricule" class="block text-gray-700">{{ $t('employeesOverview.matricule') }}<span class="text-red-600">*</span></label>
                     <input
                         v-model="matricule"
                         type="text"
@@ -312,7 +312,7 @@
                     />
                   </div>
                   <div class="mb-4">
-                    <label for="email" class="block text-gray-700">Email<span class="text-red-600">*</span></label>
+                    <label for="email" class="block text-gray-700">{{ $t('employeesOverview.email') }}<span class="text-red-600">*</span></label>
                     <input
                         v-model="email"
                         type="email"
@@ -323,7 +323,7 @@
                 </div>
                 <div class="flex">
                   <div class="mb-6 mr-8">
-                    <label for="password" class="block text-gray-700">Password<span class="text-red-600">*</span></label>
+                    <label for="password" class="block text-gray-700">{{ $t('employeesOverview.password') }}<span class="text-red-600">*</span></label>
                     <input
                         v-model="password"
                         type="text"
@@ -342,7 +342,7 @@
                         <path d="M7.48438 14.6519H2.98438V19.1519" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M17.8336 17.8338C17.0675 18.5999 16.1581 19.2076 15.1571 19.6222C14.1562 20.0368 13.0834 20.2502 12 20.2502C10.9166 20.2502 9.84378 20.0368 8.84285 19.6222C7.84191 19.2076 6.93244 18.5999 6.16635 17.8338L2.98438 14.6519" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
-                      <p class="font-light">Generate</p>
+                      <p class="font-light">{{ $t('employeesOverview.generate') }}</p>
                     </button>
                   </div>
                 </div>
@@ -352,10 +352,10 @@
           <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
           <div class="mt-5 border-t-gray-100 border-t-2 mb-5"></div>
           <button @click="addEmployee" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-            Add
+            {{ $t('employeesOverview.add') }}
           </button>
           <button @click="closeNewemp" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-            Cancel
+            {{ $t('employeesOverview.cancel') }}
           </button>
         </div>
       </div>
@@ -368,7 +368,7 @@
       <div class="w-full px-4">
         <div class="mx-auto w-full max-w-xl rounded-2xl bg-white p-8">
           <div class="flex justify-between pb-6">
-            <h3 class="text-2xl bold font-bold text-blue-900 "><strong>Edit Employee</strong></h3>
+            <h3 class="text-2xl bold font-bold text-blue-900 "><strong>{{ $t('employeesOverview.editer') }}</strong></h3>
             <div class="bg-blue-100 rounded-lg h-8 p-1 hover:bg-blue-300" @click="closeEditEmp">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18.75 5.25L5.25 18.75" stroke="#252C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -380,7 +380,7 @@
             <DisclosureButton
                 class="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
             >
-              <span>Personnal Informations</span>
+              <span>{{ $t('employeesOverview.infomationspersonnelles') }}</span>
               <ChevronUpIcon
                   :class="open ? 'rotate-180 transform' : ''"
                   class="h-5 w-5 text-purple-500"
@@ -390,7 +390,7 @@
               <form @submit.prevent="">
                 <div class="flex">
                   <div class="mb-4 mr-10">
-                    <label for="user_nom" class="block text-gray-700">Name<span class="text-red-600">*</span></label>
+                    <label for="user_nom" class="block text-gray-700">{{ $t('employeesOverview.name') }}<span class="text-red-600">*</span></label>
                     <input
                         v-model="user_name"
                         type="text"
@@ -400,7 +400,7 @@
                     />
                   </div>
                   <div class="mb-4">
-                    <label for="user_telephone" class="block text-gray-700">Phone Number</label>
+                    <label for="user_telephone" class="block text-gray-700">{{ $t('employeesOverview.phoneNumber') }}</label>
                     <input
                         v-model="user_telephone"
                         type="tel"
@@ -417,7 +417,7 @@
             <DisclosureButton
                 class="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
             >
-              <span>Professional Information</span>
+              <span>{{ $t('employeesOverview.infomationspro') }}</span>
               <ChevronUpIcon
                   :class="open ? 'rotate-180 transform' : ''"
                   class="h-5 w-5 text-purple-500"
@@ -427,7 +427,7 @@
               <form @submit.prevent="">
                 <div class="flex">
                   <div class="mb-4 mr-10">
-                    <label for="role" class="block text-gray-700">Role<span class="text-red-600">*</span></label>
+                    <label for="role" class="block text-gray-700">{{ $t('employeesOverview.role') }}<span class="text-red-600">*</span></label>
                     <input
                         v-model="user_role"
                         type="text"
@@ -437,7 +437,7 @@
                     />
                   </div>
                   <div class="mb-4">
-                    <label for="user_site" class="block text-gray-700">Site<span class="text-red-600">*</span></label>
+                    <label for="user_site" class="block text-gray-700">{{ $t('employeesOverview.site') }}<span class="text-red-600">*</span></label>
                     <input
                         v-model="user_site"
                         type="text"
@@ -449,7 +449,7 @@
                 </div>
                 <div class="flex">
                   <div class="mb-4 mr-10">
-                    <label for="matricule" class="block text-gray-700">Matricule<span class="text-red-600">*</span></label>
+                    <label for="matricule" class="block text-gray-700">{{ $t('employeesOverview.matricule') }}<span class="text-red-600">*</span></label>
                     <input
                         v-model="matricule"
                         type="text"
@@ -458,7 +458,7 @@
                     />
                   </div>
                   <div class="mb-4">
-                    <label for="email" class="block text-gray-700">Email<span class="text-red-600">*</span></label>
+                    <label for="email" class="block text-gray-700">{{ $t('employeesOverview.email') }}<span class="text-red-600">*</span></label>
                     <input
                         v-model="email"
                         type="email"
@@ -469,7 +469,7 @@
                 </div>
                 <div class="flex">
                   <div class="mb-6 mr-8">
-                    <label for="password" class="block text-gray-700">Password<span class="text-red-600">*</span></label>
+                    <label for="password" class="block text-gray-700">{{ $t('employeesOverview.password') }}<span class="text-red-600">*</span></label>
                     <input
                         v-model="password"
                         type="text"
@@ -488,7 +488,7 @@
                         <path d="M7.48438 14.6519H2.98438V19.1519" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M17.8336 17.8338C17.0675 18.5999 16.1581 19.2076 15.1571 19.6222C14.1562 20.0368 13.0834 20.2502 12 20.2502C10.9166 20.2502 9.84378 20.0368 8.84285 19.6222C7.84191 19.2076 6.93244 18.5999 6.16635 17.8338L2.98438 14.6519" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
-                      <p class="font-light">Generate</p>
+                      <p class="font-light">{{ $t('employeesOverview.generate') }}</p>
                     </button>
                   </div>
                 </div>
@@ -498,10 +498,10 @@
           <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
           <div class="mt-5 border-t-gray-100 border-t-2 mb-5"></div>
           <button @click="saveEditedEmployee" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-            Save
+            {{ $t('employeesOverview.add') }}
           </button>
-          <button @click="closeNewemp" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-            Cancel
+          <button @click="closeEditEmp" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+            {{ $t('employeesOverview.cancel') }}
           </button>
         </div>
       </div>

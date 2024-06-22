@@ -25,7 +25,7 @@
             </svg>
           </div>
           <router-link to="/dashboard" class="flex items-center justify-center w-28 px-4 py-2 bg-blue-700 text-white rounded-2xl shadow mb-8 hover:bg-blue-900 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow-3xl hover:z-10" :class="{ 'bg-blue-800': isActive('/dashboard') }">
-            <span>Dashboard</span>
+            <span>{{ $t('sidebar.dashboard') }}</span>
           </router-link>
         </div>
 
@@ -36,7 +36,7 @@
             </svg>
           </div>
           <router-link to="/pointing" class="flex items-center justify-center w-28 px-4 py-2 bg-blue-700 text-white rounded-2xl shadow mb-8 hover:bg-blue-900 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow-3xl hover:z-10" :class="{ 'bg-blue-800': isActive('/pointing') }">
-            <span>Pointing</span>
+            <span>{{ $t('sidebar.pointing') }}</span>
           </router-link>
         </div>
 
@@ -47,7 +47,7 @@
             </svg>
           </div>
           <router-link to="/employees" class="flex items-center justify-center w-28 px-4 py-2 bg-blue-700 text-white rounded-2xl shadow mb-8 hover:bg-blue-900 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow-3xl hover:z-10" :class="{ 'bg-blue-800': isActive('/employees') }">
-            <span>Employees</span>
+            <span>{{ $t('sidebar.employees') }}</span>
           </router-link>
         </div>
 
@@ -58,7 +58,7 @@
             </svg>
           </div>
           <router-link to="/planning" class="flex items-center justify-center w-28 px-4 py-2 bg-blue-700 text-white rounded-2xl shadow mb-8 hover:bg-blue-900 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow-3xl hover:z-10" :class="{ 'bg-blue-800': isActive('/planning') }">
-            <span>Planning</span>
+            <span>{{ $t('sidebar.planning') }}</span>
           </router-link>
         </div>
 
@@ -69,7 +69,7 @@
             </svg>
           </div>
           <router-link to="/leave" class="flex items-center justify-center w-28 px-4 py-2 bg-blue-700 text-white rounded-2xl shadow mb-8 hover:bg-blue-900 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow-3xl hover:z-10" :class="{ 'bg-blue-800': isActive('/planning') }">
-            <span>Leave</span>
+            <span>{{ $t('sidebar.leave') }}</span>
           </router-link>
         </div>
 
@@ -80,7 +80,7 @@
               </svg>
             </div>
             <router-link to="/settings" class="flex items-center justify-center w-28 px-4 py-2 bg-blue-700 text-white rounded-2xl shadow mb-5 hover:bg-blue-900 transform transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow-3xl hover:z-10" :class="{ 'bg-blue-800': isActive('/settings') }">
-              <span>Settings</span>
+              <span>{{ $t('sidebar.settings') }}</span>
             </router-link>
           </div>
 

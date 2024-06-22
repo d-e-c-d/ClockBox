@@ -36,14 +36,14 @@
               :disabled="currentPage === 0"
               @click="goToPage(currentPage - 1)"
           >
-            Previous Week
+            {{ $t('calendar.previousWeek') }}
           </button>
           <button
               class="bg-gray-300 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded"
               :disabled="currentPage === totalPages - 1"
               @click="goToPage(currentPage + 1)"
           >
-            Next Week
+            {{ $t('calendar.nextWeek') }}
           </button>
         </div>
 

@@ -2,8 +2,7 @@
   <div class="bg-white p-5 rounded-2xl shadow-2xl">
     <div class="flex justify-between items-center mb-4 pb-24">
       <p class="font-light text-xl">
-        Weekly Attendance
-      </p>
+        {{ $t('weeklyAttendance.title') }}      </p>
     </div>
 
     <div ref="chartRef" class="flex justify-between">

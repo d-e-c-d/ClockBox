@@ -25,15 +25,15 @@
     <!-- Right side with login form -->
     <div class="flex-1 flex items-center justify-center p-4 md:p-0">
       <div class="bg-white drop-shadow-2xl rounded-[25px] p-8 md:p-20 max-w-xl w-full">
-        <h2 class="text-2xl font-bold mb-6 -mt-6 text-center text-blue-700">Inscrivez-vous</h2>
+        <h2 class="text-2xl font-bold mb-6 -mt-6 text-center text-blue-700">{{ $t('register') }}</h2>
         <div class="-mt-4 mb-5 text-center text-[0.7rem]">
           <p>
-            Inscrivez-vous pour accéder à un espace
+            {{ $t('sign_up_message') }}
           </p>
         </div>
         <form @submit.prevent="register">
           <div class="mb-4">
-            <label for="user_nom" class="block text-gray-700">Nom<span class="text-red-600">*</span></label>
+            <label for="user_nom" class="block text-gray-700">{{ $t('name') }}<span class="text-red-600">*</span></label>
             <input
                 v-model="user_nom"
                 type="text"
@@ -43,7 +43,7 @@
             />
           </div>
           <div class="mb-4">
-            <label for="user_prenom" class="block text-gray-700">Prenom</label>
+            <label for="user_prenom" class="block text-gray-700">{{ $t('first_name') }}</label>
             <input
                 v-model="user_prenom"
                 type="text"
@@ -53,7 +53,7 @@
             />
           </div>
           <div class="mb-4">
-            <label for="email" class="block text-gray-700">Email<span class="text-red-600">*</span></label>
+            <label for="email" class="block text-gray-700">{{ $t('email') }}<span class="text-red-600">*</span></label>
             <input
                 v-model="email"
                 type="email"
@@ -63,7 +63,7 @@
             />
           </div>
           <div class="mb-6 relative">
-            <label for="password" class="block text-gray-700">Mot de passe<span class="text-red-600">*</span></label>
+            <label for="password" class="block text-gray-700">{{ $t('password') }}<span class="text-red-600">*</span></label>
             <input
                 v-model="password"
                 :type="showPassword ? 'texte' : 'password'"
@@ -76,7 +76,7 @@
             </div>
           </div>
           <div class="mb-6">
-            <label for="confirm_password" class="block text-gray-700">Confirmer le mot de passe</label>
+            <label for="confirm_password" class="block text-gray-700">{{ $t('confirm_password') }}</label>
             <input
                 v-model="confirm_password"
                 :type="showPassword ? 'text' : 'password'"
@@ -96,14 +96,14 @@
           </div>
           <div class="mt-4 text-center text-xs">
             <p>
-              Vous avez déjà un compte ?
-              <router-link to="/login" class="text-blue-500 ml-1 hover:underline">Se connecter</router-link>
+              {{ $t('already_have_account') }}
+              <router-link to="/login" class="text-blue-500 ml-1 hover:underline">{{ $t('sign_in') }}</router-link>
             </p>
           </div>
           <div class="mt-5 -mb-6 text-center text-xs text-gray-500">
             <p>
-              By signing up you are agreeing to our
-              <a @click="openTerms" class="text-blue-500 hover:underline cursor-pointer">Terms and Conditions</a>
+              {{ $t('terms_conditions_message') }}
+              <a @click="openTerms" class="text-blue-500 hover:underline cursor-pointer">{{ $t('terms_conditions') }}</a>
             </p>
           </div>
         </form>
@@ -119,33 +119,32 @@
               <DisclosureButton
                   class="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
               >
-                <span>About our terms</span>
+                <span>{{ $t('terms_title') }}</span>
                 <ChevronUpIcon
                     :class="open ? 'rotate-180 transform' : ''"
                     class="h-5 w-5 text-purple-500"
                 />
               </DisclosureButton>
               <DisclosurePanel class="px-4 pb-2 pt-4 text-sm text-gray-500">
-                If you're unhappy with your purchase for any reason, email us within
-                90 days and we'll refund you in full, no questions asked.
+                {{ $t('terms_and_conditions.about_terms_message') }}
               </DisclosurePanel>
             </Disclosure>
             <Disclosure as="div" class="mt-2" v-slot="{ open }">
               <DisclosureButton
                   class="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
               >
-                <span>About our conditions</span>
+                <span>{{ $t('terms_about') }}</span>
                 <ChevronUpIcon
                     :class="open ? 'rotate-180 transform' : ''"
                     class="h-5 w-5 text-purple-500"
                 />
               </DisclosureButton>
               <DisclosurePanel class="px-4 pb-2 pt-4 text-sm text-gray-500">
-                No.
+                {{ $t('terms_and_conditions.about_conditions_message') }}
               </DisclosurePanel>
             </Disclosure>
             <button @click="closeTerms" class="mt-4 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-              J'approuve avoir lu et accepté !
+              {{ $t('terms_close_button') }}
             </button>
           </div>
         </div>
