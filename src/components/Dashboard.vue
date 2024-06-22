@@ -87,7 +87,7 @@
                               <path d='M3 10L5.5 7.5L7.5 9.5L10.75 6.25M11 9V6H8' stroke='#0054E8'/>
                             </svg>"
                     :title="t('statistics.timeOff.title')"
-                    :value="String(timeOff)"
+                    :value="String(pendingLeaveRequest)"
                     :change="timeOffChange" />
 
               </div>
@@ -179,7 +179,7 @@ const earlyDepartures = computed(() => pointing.value.filter((item) =>
     || item.checkOut === '17:45'
     || item.checkOut === '17:15').length)
 const earlyDeparturesChange = ref('-10% Less than yesterday');
-const timeOff =  computed(() => leave.value.filter((item) => item.status === 'Allowed').length)
+const pendingLeaveRequest =  computed(() => leave.value.filter((item) => item.status === 'Pending').length)
 const timeOffChange = ref('+0% Increase than yesterday');
 
 // Update time every second

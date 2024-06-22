@@ -208,10 +208,10 @@
                 </form>
                 <p v-if="error" class="text-red-500 text-xs font-bold text-center mb-2">{{ error }}</p>
                 <div class="mt-5 border-t-gray-100 border-t-2 mb-5"></div>
-                <button @click="saveEditRequest" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                <button @click="addRequest" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-950 hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                   {{ $t('save') }}
                 </button>
-                <button @click="closeEditRequest" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                <button @click="closeRequest" class="ml-5 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                   {{ $t('employeesOverview.cancel') }}
                 </button>
               </div>
