@@ -384,10 +384,11 @@ const leave = useStorage('leave', []);
 const searchleave = (query: String) => {
   return leave.value.filter( leave =>
       leave.type.toLowerCase().includes(recherche.value.toLowerCase())
+      || leave.author.toLowerCase().includes(recherche.value.toLowerCase())
       || leave.start_date.toLowerCase().includes(recherche.value.toLowerCase())
       || leave.end_date.toLowerCase().includes(recherche.value.toLowerCase())
       || leave.status.toLowerCase().includes(recherche.value.toLowerCase())
-      || leave.paid.toLowerCase().includes(recherche.value.toLowerCase())
+      || leave.Paid.toLowerCase().includes(recherche.value.toLowerCase())
       || leave.reason.toLowerCase().includes(recherche.value.toLowerCase()));
 };
 const leaveFiltres = computed(() => {

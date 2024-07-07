@@ -86,7 +86,7 @@
                               <circle opacity='0.3' cx='7.5' cy='7.5' r='7.5' fill='#CCDDFA'/>
                               <path d='M3 10L5.5 7.5L7.5 9.5L10.75 6.25M11 9V6H8' stroke='#0054E8'/>
                             </svg>"
-                    :title="t('statistics.timeOff.title')"
+                    :title="t('statistics.pendingRequest.title')"
                     :value="String(pendingLeaveRequest)"
                     :change="timeOffChange" />
 
